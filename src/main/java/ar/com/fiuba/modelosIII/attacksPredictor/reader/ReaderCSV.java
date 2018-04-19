@@ -4,52 +4,60 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
+import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksStore;
+
 public class ReaderCSV {
 	
-	private static String PATH = "../attacksPredictor/src/main/java/resources/files/ataquesTerroristas.xlsx";
+	private static String PATH = "./src/main/java/resources/files/";
 	private static String FILE_NAME = "ataquesTerroristas.xlsx";
+	private TerroristAttacksStore store = TerroristAttacksStore.getInstance();
 	
 	public void loadFile() {
 		
 		try {
+			
 			FileInputStream excelFile = new FileInputStream(new File(PATH + FILE_NAME));
 			Workbook workbook = new XSSFWorkbook(excelFile);
 			Sheet datatypeSheet = workbook.getSheetAt(0);
 			Iterator<Row> iterator = datatypeSheet.iterator();
+			int id = 1;
 			
 			while (iterator.hasNext()) {
 				
+				String key = String.valueOf(id);
 				Row currentRow = iterator.next();
-				Iterator<Cell> cellIterator = currentRow.iterator();
-				
-				while (cellIterator.hasNext()) {
+				if(id != 1) {
+					Iterator<Cell> cellIterator = currentRow.iterator();
+					List<Integer> values = new ArrayList<Integer>();
 					
-					Cell currentCell = cellIterator.next();
-					//getCellTypeEnum shown as deprecated for version 3.15
-					//getCellTypeEnum ill be renamed to getCellType starting from version 4.0
-					if (currentCell.getCellTypeEnum() == CellType.STRING) {
-						System.out.print(currentCell.getStringCellValue() + "--");
-					} else if (currentCell.getCellTypeEnum() == CellType.NUMERIC) {
-						System.out.print(currentCell.getNumericCellValue() + "--");
+					while (cellIterator.hasNext()) {
+						Cell currentCell = cellIterator.next();
+						Integer value = new Integer((int) currentCell.getNumericCellValue());
+						//System.out.println(value);
+						values.add(value);
 					}
-					
+					TerroristAttack terroristAttack = new TerroristAttack(key, values);
+					System.out.println("Guardando Ataque terrorista " + key);
+					store.save(key, terroristAttack);
 				}
-				System.out.println();
-			}		
+				id++;
+			}
+			excelFile.close();
 		}catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 	}
-
 }
