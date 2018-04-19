@@ -25,6 +25,10 @@ public class ReaderCSV {
 	
 	public void loadFile() {
 		
+		System.out.println("Comenzando el proceso de carga de datos...");
+		long time_start, time_end;
+		time_start = System.currentTimeMillis();
+		
 		try {
 			
 			FileInputStream excelFile = new FileInputStream(new File(PATH + FILE_NAME));
@@ -44,7 +48,6 @@ public class ReaderCSV {
 					while (cellIterator.hasNext()) {
 						Cell currentCell = cellIterator.next();
 						Integer value = new Integer((int) currentCell.getNumericCellValue());
-						//System.out.println(value);
 						values.add(value);
 					}
 					TerroristAttack terroristAttack = new TerroristAttack(key, values);
@@ -59,5 +62,7 @@ public class ReaderCSV {
         } catch (IOException e) {
             e.printStackTrace();
         }
+		time_end = System.currentTimeMillis();
+		System.out.println("Ha finalizado el proceso de carga de datos en "+ ( time_end - time_start ) / 1000.0 +" segundos");
 	}
 }
