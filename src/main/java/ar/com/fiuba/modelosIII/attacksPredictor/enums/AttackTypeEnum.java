@@ -21,6 +21,6 @@ public enum AttackTypeEnum {
 	}
 	
 	public static AttackTypeEnum getById(int id) {
-		return AttackTypeEnum.values()[id-1];
+		return AttackTypeEnum.values()[id];
 	}
 }

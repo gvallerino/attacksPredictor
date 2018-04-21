@@ -26,6 +26,6 @@ public enum RegionEnum {
 	
 	public static RegionEnum getById(int id) {
 		//System.out.println(id);
-		return RegionEnum.values()[id-1];
+		return RegionEnum.values()[id];
 	}
 }

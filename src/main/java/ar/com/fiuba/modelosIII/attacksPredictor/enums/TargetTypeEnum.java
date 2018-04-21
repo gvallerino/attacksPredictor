@@ -22,8 +22,9 @@ public enum TargetTypeEnum {
 	TERRORISTAS(17, "Terroristas"),
 	TURISTAS(18, "Turistas"),
 	TRANSPORTE(19, "Transporte"),
-	UTILIDADES(20, "Utilidades"),
-	GRUPOS_POLITICOS(21, "Grupos politicos");
+	EMPTY(20, ""),
+	UTILIDADES(21, "Utilidades"),
+	GRUPOS_POLITICOS(22, "Grupos politicos");
 
 	private int id;
 	private String description;
@@ -35,7 +36,7 @@ public enum TargetTypeEnum {
 	
 	public static TargetTypeEnum getById(int id) {
 		//System.out.println(id);
-		return TargetTypeEnum.values()[id-1];
+		return TargetTypeEnum.values()[id];
 	}
 
 }

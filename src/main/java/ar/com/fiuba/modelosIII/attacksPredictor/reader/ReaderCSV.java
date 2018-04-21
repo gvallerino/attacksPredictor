@@ -15,13 +15,13 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
-import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksStore;
+import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
 
 public class ReaderCSV {
 	
 	private static String PATH = "./src/main/java/resources/files/";
 	private static String FILE_NAME = "ataquesTerroristas.xlsx";
-	private TerroristAttacksStore store = TerroristAttacksStore.getInstance();
+	private TerroristAttacksDataSet store = TerroristAttacksDataSet.getInstance();
 	
 	public void loadFile() {
 		
@@ -35,13 +35,13 @@ public class ReaderCSV {
 			Workbook workbook = new XSSFWorkbook(excelFile);
 			Sheet datatypeSheet = workbook.getSheetAt(0);
 			Iterator<Row> iterator = datatypeSheet.iterator();
-			int id = 1;
+			int id = 0;
 			
 			while (iterator.hasNext()) {
 				
 				String key = String.valueOf(id);
 				Row currentRow = iterator.next();
-				if(id != 1) {
+				if(id != 0) {
 					Iterator<Cell> cellIterator = currentRow.iterator();
 					List<Integer> values = new ArrayList<Integer>();
 					
@@ -51,7 +51,7 @@ public class ReaderCSV {
 						values.add(value);
 					}
 					TerroristAttack terroristAttack = new TerroristAttack(key, values);
-					System.out.println("Guardando Ataque terrorista " + key);
+					//System.out.println("Guardando Ataque terrorista " + key);
 					store.save(key, terroristAttack);
 				}
 				id++;

@@ -25,6 +25,6 @@ public enum WeaponTypeEnum {
 	}
 	
 	public static WeaponTypeEnum getById(int id) {
-		return WeaponTypeEnum.values()[id-1];
+		return WeaponTypeEnum.values()[id];
 	}
 }
