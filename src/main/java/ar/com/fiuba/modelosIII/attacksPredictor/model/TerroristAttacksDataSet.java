@@ -13,6 +13,8 @@ public class TerroristAttacksDataSet {
 
 	private static TerroristAttacksDataSet INSTANCE;
 	private Map<String, TerroristAttack> store = new HashMap<String, TerroristAttack>();
+	private List<TerroristAttack> storeList = new ArrayList<TerroristAttack>();
+	private long size = 0L;
 	
 	private TerroristAttacksDataSet () {}
 	
@@ -27,6 +29,8 @@ public class TerroristAttacksDataSet {
 	
 	public void save(String id, TerroristAttack terroristAttack) {
 		store.put(id, terroristAttack);
+		storeList.add(terroristAttack);
+		size++;
 	}
 	
 	public TerroristAttack getById(String id) {
@@ -52,8 +56,12 @@ public class TerroristAttacksDataSet {
 		return terroristAttacksFiltered;
 	}
 	
-	public List<Object> getAll() {
-		return Arrays.asList(store.values().toArray());
+	public List<TerroristAttack> getAll() {
+		return this.storeList;
+	}
+	
+	public long getSize() {
+		return this.size;
 	}
 	
 }

@@ -9,7 +9,7 @@ public class GeneticAlgorithm {
 
 	public static void execute() {
 		TerroristAttacksDataSet dataSet = TerroristAttacksDataSet.getInstance();
-		List<Object> dataList = dataSet.getAll();
+		List<TerroristAttack> dataList = dataSet.getAll();
 		
 	}
 	
