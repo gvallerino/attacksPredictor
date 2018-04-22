@@ -21,8 +21,6 @@ public class DataSetTest {
 	private TerroristAttack filter1;
 	private TerroristAttack filter2;
 	private TerroristAttack filter3;
-	private TerroristAttack filter4;
-	private TerroristAttack filter5;
 	private List<TerroristAttack> filters;
 	
 	@Before
@@ -31,8 +29,6 @@ public class DataSetTest {
 		filter1 = new TerroristAttack();
 		filter2 = new TerroristAttack();
 		filter3 = new TerroristAttack();
-		filter4 = new TerroristAttack();
-		filter5 = new TerroristAttack();
 		filters = new ArrayList<TerroristAttack>();
 	}
 	
