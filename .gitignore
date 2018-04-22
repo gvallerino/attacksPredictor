@@ -1,1 +1,7 @@
 /target/
+
+# Additional Files
+*.classpath
+*.mvn
+*.project
+*.settings
