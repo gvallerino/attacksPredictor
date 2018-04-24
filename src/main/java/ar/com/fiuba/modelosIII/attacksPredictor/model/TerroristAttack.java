@@ -75,7 +75,7 @@ public class TerroristAttack {
 		boolean amountWound = other.getAmountWound() == null || this.amountWound.equals(other.getAmountWound());
 		return id && year && region && multiple && success && suicide && attackType && targetType && weaponType && amountKill && amountWound;
 	}
-	
+  
 	public void print() {
 		System.out.print("TA: " + this.getId() + " -> ");
 		System.out.print("[ ");
