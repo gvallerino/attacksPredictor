@@ -76,15 +76,7 @@ public class TerroristAttack {
 		return id && year && region && multiple && success && suicide && attackType && targetType && weaponType && amountKill && amountWound;
 	}
 	
-	/*
-	public int fitness() {
-		int fitness = 0;
-		for (Integer param : params) {
-			int paramInt = param.intValue();
-			
-		}
-	}
-*/
+
 	public void print() {
 		System.out.print("TA: " + this.getId() + " -> ");
 		System.out.print("[ ");
