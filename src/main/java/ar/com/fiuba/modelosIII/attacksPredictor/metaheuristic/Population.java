@@ -5,24 +5,38 @@ import java.util.List;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
 public class Population {
 
 	private TerroristAttacksDataSet dataSet = TerroristAttacksDataSet.getInstance();
 	
+	public List<TerroristAttack> populate(Object filter) {
+		if (filter == null) {
+			return this.populate(null);
+		}
+		List<TerroristAttack> list = new ArrayList<TerroristAttack>();
+		list.add((TerroristAttack) filter);
+		return this.populate(list);
+	}
+	
 	public List<TerroristAttack> populate(List<TerroristAttack> filter) {
+		List<TerroristAttack> dataSetFiltered = dataSet.filter(filter);
+		double proba = Constants.PROBABILITY_MAX;
+		double limitSup = dataSetFiltered.size() * Constants.PROBABILITY_MAX;
+		double limitInf = dataSetFiltered.size() * Constants.PROBABILITY_MIN;
+		
 		List<TerroristAttack> population = new ArrayList<TerroristAttack>();
-		List<TerroristAttack> dataSetFiltered = dataSet.getAll();
-		double proba = 0.5D;
-		if (filter != null) {
-			dataSetFiltered = dataSet.filter(filter);
-			proba = (double)dataSetFiltered.size() / (double)dataSet.getSize();
-		}	
-		for (TerroristAttack attack : dataSetFiltered) {
-			double random = Math.random() * 100.0;
-			boolean include = (proba > random);
-			if (include) {
-				population.add(attack);
+		while (limitInf > population.size()) {
+			for (TerroristAttack attack : dataSetFiltered) {
+				double random = Math.random();
+				boolean include = (proba >= random);
+				if (include) {
+					if ((population.size() + 1) > limitSup) {
+						return population;
+					}
+					population.add(attack);
+				}
 			}
 		}
 		return population;
