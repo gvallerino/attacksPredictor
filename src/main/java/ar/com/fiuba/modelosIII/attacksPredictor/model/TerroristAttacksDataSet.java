@@ -44,6 +44,10 @@ public class TerroristAttacksDataSet {
 	}
 	
 	public List<TerroristAttack> filter(List<TerroristAttack> filter) {
+		
+		if (filter == null) 
+			return storeList;
+		
 		List<TerroristAttack> terroristAttacksFiltered = new ArrayList<TerroristAttack>();
 		
 		for (TerroristAttack attack : store.values()) {
