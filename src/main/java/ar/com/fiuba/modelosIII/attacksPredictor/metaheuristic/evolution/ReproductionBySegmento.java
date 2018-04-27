@@ -6,7 +6,7 @@ import java.util.List;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
-public class ReproductionBySegmento implements Borneable {
+public class ReproductionBySegmento extends Reproduction implements Borneable {
 
 	public TerroristAttack beBorn (TerroristAttack father, TerroristAttack mother) {
 		
@@ -24,8 +24,7 @@ public class ReproductionBySegmento implements Borneable {
 		List<Integer> genSon = new ArrayList<Integer>();
 		genSon.addAll(genFather);
 		genSon.addAll(genMother);
-		String id = father.getId() + "-" + mother.getId();
-		TerroristAttack son = new TerroristAttack(id, genSon);
-		return son;
+		
+		return this.born(father, mother, genSon);
 	}
 }

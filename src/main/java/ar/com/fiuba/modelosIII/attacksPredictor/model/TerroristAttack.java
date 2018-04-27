@@ -25,6 +25,10 @@ public class TerroristAttack {
 	private List<Integer> values;
 	private int fitness;
 	
+	
+	//me quede en que tengo que elegir que, para cada atributo, que es lo mejor para el hijo. Por ejemplo, el año pondria un random. no me importa
+	//para los enums tengo que agregarle prioridad. para la cantidad de heridos y muertos elegiria el mayor (es mejor ataque).
+	//todas estas decisiones tengo que tomarlas
 	public TerroristAttack() {
 		
 	}
