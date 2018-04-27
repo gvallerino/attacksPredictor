@@ -1,4 +1,4 @@
-package ar.com.fiuba.modelosIII.attacksPredictor.geneticsAlgorithm;
+package ar.com.fiuba.modelosIII.attacksPredictor.evolution;
 
 import java.util.List;
 

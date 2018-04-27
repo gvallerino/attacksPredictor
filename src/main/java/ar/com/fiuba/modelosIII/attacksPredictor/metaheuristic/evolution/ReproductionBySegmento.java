@@ -6,7 +6,7 @@ import java.util.List;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
-public class Reproduction implements Borneable {
+public class ReproductionBySegmento implements Borneable {
 
 	public TerroristAttack beBorn (TerroristAttack father, TerroristAttack mother) {
 		
@@ -18,7 +18,7 @@ public class Reproduction implements Borneable {
 			genSup = mother.getFitness();
 		}
 		
-		genMax = (int) ((genSup / (father.getFitness() +  mother.getFitness())) * Constants.COUNT_DATA_TYPE);
+		genMax = (int) ((genSup / (father.getFitness() + mother.getFitness())) * Constants.COUNT_DATA_TYPE);
 		List<Integer> genFather = father.getValues().subList(0, genMax);
 		List<Integer> genMother = mother.getValues().subList(genMax, Constants.COUNT_DATA_TYPE);
 		List<Integer> genSon = new ArrayList<Integer>();
