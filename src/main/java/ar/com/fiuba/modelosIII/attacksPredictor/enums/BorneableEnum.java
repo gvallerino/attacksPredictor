@@ -1,11 +1,11 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.enums;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.Borneable;
-import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.Reproduction;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.ReproductionBySegmento;
 
 public enum BorneableEnum {
 	
-	REPRODUCTION (1, new Reproduction());
+	REPRODUCTION_SEGMENTO (1, new ReproductionBySegmento());
 	
 	private int id;
 	private Borneable born;
