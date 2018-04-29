@@ -16,9 +16,9 @@ public enum RegionEnum {
 	SUBSAHARA_AFRICA(11, "Sub-Sahara Africa", 11),
 	OCEANIA(12, "Oceanía", 12);
 	
-	private int id;
-	private String description;
-	private int important;
+	public int id;
+	public String description;
+	public int important;
 	
 	RegionEnum(int id, String description, int important) {
 		this.id = id;
@@ -33,5 +33,9 @@ public enum RegionEnum {
 	
 	public static int getImportantById(int id) {
 		return getById(id).important;
+	}
+	
+	public boolean isMoreImportant(RegionEnum other) {
+		return this.important > other.important;
 	}
 }

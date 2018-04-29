@@ -26,9 +26,9 @@ public enum TargetTypeEnum {
 	UTILIDADES(21, "Utilidades", 21),
 	GRUPOS_POLITICOS(22, "Grupos politicos", 22);
 
-	private int id;
-	private String description;
-	private int important;
+	public int id;
+	public String description;
+	public int important;
 	
 	TargetTypeEnum(int id, String description, int important) {
 		this.id = id;
@@ -42,6 +42,10 @@ public enum TargetTypeEnum {
 	
 	public static int getImportantById(int id) {
 		return getById(id).important;
+	}
+	
+	public boolean isMoreImportant(TargetTypeEnum other) {
+		return this.important > other.important;
 	}
 
 }

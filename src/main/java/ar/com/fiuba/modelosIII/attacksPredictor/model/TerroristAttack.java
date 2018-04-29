@@ -186,4 +186,8 @@ public class TerroristAttack {
 		return this.values;
 	}
 	
+	public int getFitnessByProperty(int propertyPosition) {
+		return this.fitnessValues[propertyPosition];
+	}
+	
 }

@@ -12,9 +12,9 @@ public enum AttackTypeEnum {
 	ATAQUE_INFRAESTRUCTURA(7, "Ataque Infraestructura", 7),
 	ASALTO_NO_ARMADO(8, "Asalto no armado", 8);
 
-	private int id;
-	private String description;
-	private int important;
+	public int id;
+	public String description;
+	public int important;
 	
 	AttackTypeEnum(int id, String description, int important) {
 		this.id = id;
@@ -29,4 +29,10 @@ public enum AttackTypeEnum {
 	public static int getImportantById(int id) {
 		return getById(id).important;
 	}
+	
+	
+	public boolean isMoreImportant(AttackTypeEnum other) {
+		return this.important > other.important;
+	}
+	
 }

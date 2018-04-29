@@ -16,9 +16,9 @@ public enum WeaponTypeEnum {
 	SABOTAJE(11, "Equipamento de sabotaje", 11),
 	OTROS(12, "Otros", 12);
 	
-	private int id;
-	private String description;
-	private int important;
+	public int id;
+	public String description;
+	public int important;
 	
 	WeaponTypeEnum(int id, String description, int important) {
 		this.id = id;
@@ -32,5 +32,9 @@ public enum WeaponTypeEnum {
 	
 	public static int getImportantById(int id) {
 		return getById(id).important;
+	}
+	
+	public boolean isMoreImportant(WeaponTypeEnum other) {
+		return this.important > other.important;
 	}
 }
