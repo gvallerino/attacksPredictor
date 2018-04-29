@@ -11,6 +11,7 @@ import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 public class TerroristAttack {
 
 	private String id;
+	
 	private Integer year;
 	private RegionEnum region;
 	private Boolean multiple;
@@ -21,10 +22,15 @@ public class TerroristAttack {
 	private WeaponTypeEnum weaponType;
 	private Integer amountKill;
 	private Integer amountWound;
-	private int[] gen = new int[Constants.COUNT_DATA_TYPE];
+	
+	private int[] fitnessValues = new int[Constants.COUNT_DATA_TYPE];
 	private List<Integer> values;
 	private int fitness;
 	
+	
+	//me quede en que tengo que elegir que, para cada atributo, que es lo mejor para el hijo. Por ejemplo, el año pondria un random. no me importa
+	//para los enums tengo que agregarle prioridad. para la cantidad de heridos y muertos elegiria el mayor (es mejor ataque).
+	//todas estas decisiones tengo que tomarlas
 	public TerroristAttack() {
 		
 	}
@@ -33,7 +39,7 @@ public class TerroristAttack {
 		this.id = id;
 		for (int i = 0; i < values.size(); i++) {
 			int value = values.get(i).intValue();
-			this.processGen(value,i);
+			this.processFitness(value,i);
 			switch (i) {
 				case 0: this.year = new Integer(value); break;
 				case 1: this.region = RegionEnum.getById(value); break;
@@ -50,10 +56,10 @@ public class TerroristAttack {
 		this.values = values;
 	}
 	
-	private void processGen(int value, int i) {
-		int genValue = value % 2;
-		fitness += genValue;
-		gen[i] = genValue;
+	private void processFitness(int value, int i) {
+		int fitnessValue = FitnessCalculator.calculate(value, i);
+		fitness += fitnessValue;
+		fitnessValues[i] = fitnessValue;
 	}
 	
 	public boolean equals(TerroristAttack other) {
@@ -178,6 +184,10 @@ public class TerroristAttack {
 	
 	public List<Integer> getValues() {
 		return this.values;
+	}
+	
+	public int getFitnessByProperty(int propertyPosition) {
+		return this.fitnessValues[propertyPosition];
 	}
 	
 }
