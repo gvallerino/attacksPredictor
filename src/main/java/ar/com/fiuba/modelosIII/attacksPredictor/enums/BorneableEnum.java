@@ -1,8 +1,8 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.enums;
 
-import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.Borneable;
-import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.CruzaBySegmento;
-import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.Cruza;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Borneable;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cruza;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.CruzaBySegmento;
 
 public enum BorneableEnum {
 	

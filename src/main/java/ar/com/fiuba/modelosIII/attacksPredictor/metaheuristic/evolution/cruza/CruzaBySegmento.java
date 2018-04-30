@@ -1,8 +1,9 @@
-package ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution;
+package ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.Reproduction;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 

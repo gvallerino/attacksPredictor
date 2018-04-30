@@ -2,6 +2,7 @@ package ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution;
 
 import java.util.List;
 
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Borneable;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 
 public abstract class Reproduction implements Borneable {
