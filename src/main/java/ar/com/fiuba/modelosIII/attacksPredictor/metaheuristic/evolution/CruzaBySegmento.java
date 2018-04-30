@@ -6,7 +6,16 @@ import java.util.List;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
-public class ReproductionBySegmento extends Reproduction implements Borneable {
+public class CruzaBySegmento extends Reproduction implements Borneable {
+	
+	private CruzaBySegmento() {}
+	
+	public static CruzaBySegmento getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new CruzaBySegmento();
+		}
+		return (CruzaBySegmento) INSTANCE;
+	}
 
 	public TerroristAttack beBorn (TerroristAttack father, TerroristAttack mother) {
 		

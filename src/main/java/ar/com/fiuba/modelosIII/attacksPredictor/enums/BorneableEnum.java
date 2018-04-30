@@ -1,13 +1,13 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.enums;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.Borneable;
-import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.ReproductionBySegmento;
-import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.ReproductionByProperty;;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.CruzaBySegmento;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.Cruza;
 
 public enum BorneableEnum {
 	
-	REPRODUCTION_SEGMENTO (1, new ReproductionBySegmento()),
-	REPRODUCTION_PROPERTY(2, new ReproductionByProperty());
+	CRUZA(1, Cruza.getInstance()),
+	CRUZA_SEGMENTO (2, CruzaBySegmento.getInstance());
 	
 	private int id;
 	private Borneable born;

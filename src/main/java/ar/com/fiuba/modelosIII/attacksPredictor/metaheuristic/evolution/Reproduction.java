@@ -5,7 +5,9 @@ import java.util.List;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 
 public abstract class Reproduction implements Borneable {
-
+	
+	protected static Reproduction INSTANCE = null;
+	
 	@Override
 	public TerroristAttack beBorn(TerroristAttack father, TerroristAttack mother) {
 		// TODO Auto-generated method stub

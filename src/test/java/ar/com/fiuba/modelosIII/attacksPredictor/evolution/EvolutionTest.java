@@ -18,7 +18,7 @@ public class EvolutionTest {
 	
 	private TerroristAttacksDataSet data = TerroristAttacksDataSet.getInstance();
 	private TerroristAttack filter;
-	private Borneable reproduction = BorneableEnum.REPRODUCTION_SEGMENTO.getBorn();
+	private Borneable reproduction = BorneableEnum.CRUZA_SEGMENTO.getBorn();
 	private Population population = new Population();
 	
 	@Before
