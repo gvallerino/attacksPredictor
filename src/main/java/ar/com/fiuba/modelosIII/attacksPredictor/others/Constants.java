@@ -7,4 +7,12 @@ public class Constants {
 	public static double PROBABILITY_MIN = 0.1D;
 	public static int YEAR_MAX = 2016;
 	public static int YEAR_MIN = 1970;
+	
+	public static int getRandom(int inf, int sup) {
+		double random = Math.random();
+		int diff = sup - inf;
+		int diffRandom = (int) (random * diff);
+		int valueReturned = inf + diffRandom;
+		return valueReturned;
+	}
 }

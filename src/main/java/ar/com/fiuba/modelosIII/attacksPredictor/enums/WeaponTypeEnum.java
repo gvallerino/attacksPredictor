@@ -37,4 +37,8 @@ public enum WeaponTypeEnum {
 	public boolean isMoreImportant(WeaponTypeEnum other) {
 		return this.important > other.important;
 	}
+	
+	public static int size() {
+		return WeaponTypeEnum.values().length;
+	}
 }

@@ -30,9 +30,12 @@ public enum AttackTypeEnum {
 		return getById(id).important;
 	}
 	
-	
 	public boolean isMoreImportant(AttackTypeEnum other) {
 		return this.important > other.important;
+	}
+	
+	public static int size() {
+		return AttackTypeEnum.values().length;
 	}
 	
 }

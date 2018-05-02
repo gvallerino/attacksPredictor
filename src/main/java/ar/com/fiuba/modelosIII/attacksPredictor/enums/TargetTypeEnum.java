@@ -47,5 +47,9 @@ public enum TargetTypeEnum {
 	public boolean isMoreImportant(TargetTypeEnum other) {
 		return this.important > other.important;
 	}
+	
+	public static int size() {
+		return TargetTypeEnum.values().length;
+	}
 
 }

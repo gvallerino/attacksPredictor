@@ -38,4 +38,8 @@ public enum RegionEnum {
 	public boolean isMoreImportant(RegionEnum other) {
 		return this.important > other.important;
 	}
+	
+	public static int size() {
+		return RegionEnum.values().length;
+	}
 }
