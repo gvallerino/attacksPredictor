@@ -7,6 +7,7 @@ public class Constants {
 	public static double PROBABILITY_MIN = 0.1D;
 	public static int YEAR_MAX = 2016;
 	public static int YEAR_MIN = 1970;
+	public static int COUNT_BINARY_DATA_TYPE = 132; //TODO: Falta ver como dividir los amounts
 	
 	public static int getRandom(int inf, int sup) {
 		double random = Math.random();

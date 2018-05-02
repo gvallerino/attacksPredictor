@@ -1,5 +1,6 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.model;
 
+import java.util.BitSet;
 import java.util.List;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.AttackTypeEnum;
@@ -27,6 +28,7 @@ public class TerroristAttack {
 	private List<Integer> values;
 	private int fitness;
 	
+	private Boolean[] valuesBinary = new Boolean[Constants.COUNT_BINARY_DATA_TYPE];
 	
 	//me quede en que tengo que elegir que, para cada atributo, que es lo mejor para el hijo. Por ejemplo, el año pondria un random. no me importa
 	//para los enums tengo que agregarle prioridad. para la cantidad de heridos y muertos elegiria el mayor (es mejor ataque).
