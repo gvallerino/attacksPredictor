@@ -9,7 +9,7 @@ import org.junit.Test;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.BorneableEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.RegionEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.Population;
-import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.Borneable;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Borneable;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
