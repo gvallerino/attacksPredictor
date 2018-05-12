@@ -11,15 +11,15 @@ import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.Reproduc
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
-public class Cruza extends Reproduction implements Borneable {
+public class CruzaByImportancia extends Reproduction implements Borneable {
 		
-	private Cruza() {}
+	private CruzaByImportancia() {}
 	
-	public static Cruza getInstance() {
+	public static CruzaByImportancia getInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new Cruza();
+			INSTANCE = new CruzaByImportancia();
 		}
-		return (Cruza) INSTANCE;
+		return (CruzaByImportancia) INSTANCE;
 	}
 
 	@Override

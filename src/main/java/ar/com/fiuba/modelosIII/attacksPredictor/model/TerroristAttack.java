@@ -1,7 +1,9 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.model;
 
 import java.util.BitSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.AttackTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.RegionEnum;
@@ -28,7 +30,8 @@ public class TerroristAttack {
 	private List<Integer> values;
 	private int fitness;
 	
-	private Boolean[] valuesBinary = new Boolean[Constants.COUNT_BINARY_DATA_TYPE];
+	private BitSet valuesBinary = new BitSet(Constants.COUNT_BINARY_DATA_TYPE);
+	private Map<Integer, Integer> firstPositionsBinary = new HashMap<Integer, Integer>();
 	
 	//me quede en que tengo que elegir que, para cada atributo, que es lo mejor para el hijo. Por ejemplo, el año pondria un random. no me importa
 	//para los enums tengo que agregarle prioridad. para la cantidad de heridos y muertos elegiria el mayor (es mejor ataque).
@@ -43,19 +46,20 @@ public class TerroristAttack {
 			int value = values.get(i).intValue();
 			this.processFitness(value,i);
 			switch (i) {
-				case 0: this.year = new Integer(value); break;
-				case 1: this.region = RegionEnum.getById(value); break;
-				case 2: this.multiple = new Boolean(value == 1);break;
-				case 3: this.success = new Boolean(value == 1);break;
-				case 4: this.suicide = new Boolean(value == 1);break;
-				case 5: this.attackType = AttackTypeEnum.getById(value); break;
-				case 6: this.targetType = TargetTypeEnum.getById(value); break;
-				case 7: this.weaponType = WeaponTypeEnum.getById(value); break;
-				case 8: this.amountKill = new Integer(value); break;
+				case 0: this.year = new Integer(value); this.yearToBinary(value); break;
+				case 1: this.region = RegionEnum.getById(value); firstPositionsBinary.put(1, 9); this.regionToBinary(value); break;
+				case 2: this.multiple = new Boolean(value == 1); firstPositionsBinary.put(2, 21); break;
+				case 3: this.success = new Boolean(value == 1); firstPositionsBinary.put(3, 22); break;
+				case 4: this.suicide = new Boolean(value == 1); firstPositionsBinary.put(4, 23); break;
+				case 5: this.attackType = AttackTypeEnum.getById(value); firstPositionsBinary.put(5, 31) ;break;
+				case 6: this.targetType = TargetTypeEnum.getById(value); firstPositionsBinary.put(6, 53); break;
+				case 7: this.weaponType = WeaponTypeEnum.getById(value); firstPositionsBinary.put(7, 65); break;
+				case 8: this.amountKill = new Integer(value); firstPositionsBinary.put(8, 75); break;
 				case 9: this.amountWound = new Integer(value); break;
 			}
 		}
 		this.values = values;
+		printBinary();
 	}
 	
 	private void processFitness(int value, int i) {
@@ -64,26 +68,6 @@ public class TerroristAttack {
 		fitnessValues[i] = fitnessValue;
 	}
 	
-	public boolean equals(TerroristAttack other) {
-		return this.id.equalsIgnoreCase(other.getId());
-	}
-	
-	public boolean match(TerroristAttack other) {
-		
-		boolean id = other.getId() == null || this.id.equalsIgnoreCase(other.getId());
-		boolean year = other.getYear() == null || this.year.equals(other.getYear());
-		boolean region = other.getRegion() == null || this.region.equals(other.getRegion());
-		boolean multiple = other.isMultiple() == null || this.multiple.equals(other.isMultiple());
-		boolean success = other.isSuccess() == null || this.success.equals(other.isSuccess());
-		boolean suicide = other.isSuicide() == null || this.suicide.equals(other.isSuicide());
-		boolean attackType = other.getAttackType() == null || this.attackType.equals(other.getAttackType());
-		boolean targetType = other.getTargetType() == null || this.targetType.equals(other.getTargetType());
-		boolean weaponType = other.getWeaponType() == null || this.weaponType.equals(other.getWeaponType());
-		boolean amountKill = other.getAmountKill() == null || this.amountKill.equals(other.getAmountKill());
-		boolean amountWound = other.getAmountWound() == null || this.amountWound.equals(other.getAmountWound());
-		return id && year && region && multiple && success && suicide && attackType && targetType && weaponType && amountKill && amountWound;
-	}
-  
 	public void print() {
 		System.out.print("TA: " + this.getId() + " -> ");
 		System.out.print("[ ");
@@ -92,6 +76,31 @@ public class TerroristAttack {
 		}
 		System.out.println("]");
 	}
+	
+	private void printBinary() {
+		System.out.print("[");
+//		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < valuesBinary.size(); i++) {
+			System.out.print(valuesBinary.get(i) + " ");
+		}
+		System.out.println("]");
+	}
+	
+	private void yearToBinary(int year) {
+		int position = year % 9;
+		valuesBinary.flip(position);
+	}
+	
+	private void regionToBinary(int value) {
+		int initial = firstPositionsBinary.get(1);
+		int position = initial + value - 1;
+		valuesBinary.flip(position);
+	}
+	
+	public int getFitnessByProperty(int propertyPosition) {
+		return this.fitnessValues[propertyPosition];
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -188,8 +197,25 @@ public class TerroristAttack {
 		return this.values;
 	}
 	
-	public int getFitnessByProperty(int propertyPosition) {
-		return this.fitnessValues[propertyPosition];
+	public boolean equals(TerroristAttack other) {
+		return this.id.equalsIgnoreCase(other.getId());
 	}
+	
+	public boolean match(TerroristAttack other) {
+		
+		boolean id = other.getId() == null || this.id.equalsIgnoreCase(other.getId());
+		boolean year = other.getYear() == null || this.year.equals(other.getYear());
+		boolean region = other.getRegion() == null || this.region.equals(other.getRegion());
+		boolean multiple = other.isMultiple() == null || this.multiple.equals(other.isMultiple());
+		boolean success = other.isSuccess() == null || this.success.equals(other.isSuccess());
+		boolean suicide = other.isSuicide() == null || this.suicide.equals(other.isSuicide());
+		boolean attackType = other.getAttackType() == null || this.attackType.equals(other.getAttackType());
+		boolean targetType = other.getTargetType() == null || this.targetType.equals(other.getTargetType());
+		boolean weaponType = other.getWeaponType() == null || this.weaponType.equals(other.getWeaponType());
+		boolean amountKill = other.getAmountKill() == null || this.amountKill.equals(other.getAmountKill());
+		boolean amountWound = other.getAmountWound() == null || this.amountWound.equals(other.getAmountWound());
+		return id && year && region && multiple && success && suicide && attackType && targetType && weaponType && amountKill && amountWound;
+	}
+  
 	
 }

@@ -1,7 +1,5 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.model;
 
-import java.lang.annotation.Target;
-
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.AttackTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.RegionEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.TargetTypeEnum;

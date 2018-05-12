@@ -1,8 +1,6 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +10,14 @@ import ar.com.fiuba.modelosIII.attacksPredictor.reader.ReaderCSV;
 public class TerroristAttacksDataSet {
 
 	private static TerroristAttacksDataSet INSTANCE;
+	
 	private Map<String, TerroristAttack> store = new HashMap<String, TerroristAttack>();
 	private List<TerroristAttack> storeList = new ArrayList<TerroristAttack>();
 	private long size = 0L;
+	
+	//private Map<Integer, Integer> storeAmountKill = new HashMap<Integer, Integer>();
+	private int maxAmountKill = 0;
+	private int maxAmountWound = 0;
 	
 	private TerroristAttacksDataSet () {}
 	
@@ -31,6 +34,12 @@ public class TerroristAttacksDataSet {
 		store.put(id, terroristAttack);
 		storeList.add(terroristAttack);
 		size++;
+		
+		int amountKill = terroristAttack.getAmountKill();
+		int amountWound = terroristAttack.getAmountWound();
+		
+		maxAmountKill = this.getMax(maxAmountKill, amountKill);
+		maxAmountWound = this.getMax(maxAmountWound, amountWound);
 	}
 	
 	public TerroristAttack getById(String id) {
@@ -66,6 +75,10 @@ public class TerroristAttacksDataSet {
 	
 	public long getSize() {
 		return this.size;
+	}
+	
+	private int getMax(int max, int current) {
+		return (current > max ? current : max);
 	}
 	
 }
