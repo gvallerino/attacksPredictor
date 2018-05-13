@@ -1,9 +1,7 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.model;
 
 import java.util.BitSet;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.AttackTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.RegionEnum;
@@ -30,8 +28,8 @@ public class TerroristAttack {
 	private List<Integer> values;
 	private int fitness;
 	
-	private BitSet valuesBinary = new BitSet(Constants.COUNT_BINARY_DATA_TYPE);
-	private Map<Integer, Integer> firstPositionsBinary = new HashMap<Integer, Integer>();
+	private BitSet valuesBinary = new BitSet(Constants.COUNT_BINARY_DATA_TYPE());
+	private int[] firstPositionsBinary = Constants.FIRST_POSITION_BINARY(); 
 	
 	//me quede en que tengo que elegir que, para cada atributo, que es lo mejor para el hijo. Por ejemplo, el año pondria un random. no me importa
 	//para los enums tengo que agregarle prioridad. para la cantidad de heridos y muertos elegiria el mayor (es mejor ataque).
@@ -40,26 +38,26 @@ public class TerroristAttack {
 		
 	}
 	
+	//TODO: sacar el mapa de firstPositionsBinary
 	public TerroristAttack (String id, List<Integer> values) {
 		this.id = id;
 		for (int i = 0; i < values.size(); i++) {
 			int value = values.get(i).intValue();
 			this.processFitness(value,i);
 			switch (i) {
-				case 0: this.year = new Integer(value); this.yearToBinary(value); break;
-				case 1: this.region = RegionEnum.getById(value); firstPositionsBinary.put(1, 9); this.regionToBinary(value); break;
-				case 2: this.multiple = new Boolean(value == 1); firstPositionsBinary.put(2, 21); break;
-				case 3: this.success = new Boolean(value == 1); firstPositionsBinary.put(3, 22); break;
-				case 4: this.suicide = new Boolean(value == 1); firstPositionsBinary.put(4, 23); break;
-				case 5: this.attackType = AttackTypeEnum.getById(value); firstPositionsBinary.put(5, 31) ;break;
-				case 6: this.targetType = TargetTypeEnum.getById(value); firstPositionsBinary.put(6, 53); break;
-				case 7: this.weaponType = WeaponTypeEnum.getById(value); firstPositionsBinary.put(7, 65); break;
-				case 8: this.amountKill = new Integer(value); firstPositionsBinary.put(8, 75); break;
-				case 9: this.amountWound = new Integer(value); break;
+				case 0: this.year = new Integer(value); this.amountToBinary(value, i); break;
+				case 1: this.region = RegionEnum.getById(value); this.typeToBinary(value, i); break;
+				case 2: this.multiple = new Boolean(value == 1); this.booleanToBinary(value, i); break;
+				case 3: this.success = new Boolean(value == 1); this.booleanToBinary(value, i); break;
+				case 4: this.suicide = new Boolean(value == 1); this.booleanToBinary(value, i); break;
+				case 5: this.attackType = AttackTypeEnum.getById(value); this.typeToBinary(value, i); break;
+				case 6: this.targetType = TargetTypeEnum.getById(value); this.typeToBinary(value, i); break;
+				case 7: this.weaponType = WeaponTypeEnum.getById(value); this.typeToBinary(value, i); break;
+				case 8: this.amountKill = new Integer(value); this.amountToBinary(value, i); break;
+				case 9: this.amountWound = new Integer(value); this.amountToBinary(value, i); break;
 			}
 		}
 		this.values = values;
-		printBinary();
 	}
 	
 	private void processFitness(int value, int i) {
@@ -79,20 +77,29 @@ public class TerroristAttack {
 	
 	private void printBinary() {
 		System.out.print("[");
-//		for (int i = 0; i < 9; i++) {
 		for (int i = 0; i < valuesBinary.size(); i++) {
 			System.out.print(valuesBinary.get(i) + " ");
 		}
 		System.out.println("]");
 	}
 	
-	private void yearToBinary(int year) {
-		int position = year % 9;
+	private void amountToBinary(int amount, int caso) {
+		int position = amount % Constants.COUNT_POSITION_BINARY[caso];
 		valuesBinary.flip(position);
 	}
 	
-	private void regionToBinary(int value) {
-		int initial = firstPositionsBinary.get(1);
+	private void typeToBinary(int value, int caso) {
+		this.flip(value, caso);
+	}
+	
+	private void booleanToBinary(int value, int caso){
+		if (value == 1) {
+			flip(value, caso);
+		}
+	}
+	
+	private void flip(int value, int caso) {
+		int initial = firstPositionsBinary[caso];
 		int position = initial + value - 1;
 		valuesBinary.flip(position);
 	}
@@ -115,6 +122,7 @@ public class TerroristAttack {
 
 	public void setYear(Integer year) {
 		this.year = year;
+		this.amountToBinary(year, 0);
 	}
 
 	public RegionEnum getRegion() {
@@ -195,6 +203,10 @@ public class TerroristAttack {
 	
 	public List<Integer> getValues() {
 		return this.values;
+	}
+	
+	public BitSet getBits() {
+		return this.valuesBinary;
 	}
 	
 	public boolean equals(TerroristAttack other) {
