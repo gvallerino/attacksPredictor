@@ -75,13 +75,13 @@ public class TerroristAttack {
 		System.out.println("]");
 	}
 	
-	private void printBinary() {
-		System.out.print("[");
-		for (int i = 0; i < valuesBinary.size(); i++) {
-			System.out.print(valuesBinary.get(i) + " ");
-		}
-		System.out.println("]");
-	}
+//	private void printBinary() {
+//		System.out.print("[");
+//		for (int i = 0; i < valuesBinary.size(); i++) {
+//			System.out.print(valuesBinary.get(i) + " ");
+//		}
+//		System.out.println("]");
+//	}
 	
 	private void amountToBinary(int amount, int caso) {
 		int position = amount % Constants.COUNT_POSITION_BINARY[caso];
@@ -94,7 +94,7 @@ public class TerroristAttack {
 	
 	private void booleanToBinary(int value, int caso){
 		if (value == 1) {
-			flip(value, caso);
+			flip(0, caso);
 		}
 	}
 	
@@ -131,6 +131,7 @@ public class TerroristAttack {
 
 	public void setRegion(RegionEnum region) {
 		this.region = region;
+		this.typeToBinary(region.id, 1);
 	}
 
 	public Boolean isMultiple() {
@@ -139,6 +140,8 @@ public class TerroristAttack {
 
 	public void setMultiple(Boolean multiple) {
 		this.multiple = multiple;
+		int value = multiple ? 1 : 0;
+		this.booleanToBinary(value, 2);
 	}
 
 	public Boolean isSuccess() {
@@ -147,6 +150,8 @@ public class TerroristAttack {
 
 	public void setSuccess(Boolean success) {
 		this.success = success;
+		int value = success ? 1 : 0;
+		this.booleanToBinary(value, 3);
 	}
 
 	public Boolean isSuicide() {
@@ -155,6 +160,8 @@ public class TerroristAttack {
 
 	public void setSuicide(Boolean suicide) {
 		this.suicide = suicide;
+		int value = suicide ? 1 : 0;
+		this.booleanToBinary(value, 4);
 	}
 
 	public AttackTypeEnum getAttackType() {
@@ -163,6 +170,7 @@ public class TerroristAttack {
 
 	public void setAttackType(AttackTypeEnum attackType) {
 		this.attackType = attackType;
+		this.typeToBinary(attackType.id, 5);
 	}
 
 	public TargetTypeEnum getTargetType() {
@@ -171,6 +179,7 @@ public class TerroristAttack {
 
 	public void setTargetType(TargetTypeEnum targetType) {
 		this.targetType = targetType;
+		this.typeToBinary(targetType.id, 6);
 	}
 
 	public WeaponTypeEnum getWeaponType() {
@@ -179,6 +188,7 @@ public class TerroristAttack {
 
 	public void setWeaponType(WeaponTypeEnum weaponType) {
 		this.weaponType = weaponType;
+		this.typeToBinary(weaponType.id, 7);
 	}
 
 	public Integer getAmountKill() {
