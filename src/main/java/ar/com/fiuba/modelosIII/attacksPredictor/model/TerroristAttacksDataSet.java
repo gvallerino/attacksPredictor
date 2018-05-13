@@ -16,8 +16,8 @@ public class TerroristAttacksDataSet {
 	private long size = 0L;
 	
 	//private Map<Integer, Integer> storeAmountKill = new HashMap<Integer, Integer>();
-	private int maxAmountKill = 0;
-	private int maxAmountWound = 0;
+	public static int maxAmountKill = 0;
+	public static int maxAmountWound = 0;
 	
 	private TerroristAttacksDataSet () {}
 	

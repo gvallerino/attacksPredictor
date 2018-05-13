@@ -108,6 +108,62 @@ public class TerroristAttackTest {
 		Assert.assertTrue(assertBit);
 	}
 	
+	@Test
+	public void testTerroristAttackBinaryAmountKills() {
+		boolean assertBit = true;
+		int firstPosition = Constants.FIRST_POSITION_BINARY()[8] - 1;
+		int maxKill = 10000;
+		int divisor = 1000; //1000 / 10
+		List<TerroristAttack> attacks = new ArrayList<>();
+		
+		for (int i = 0; i < maxKill; i++) {
+			TerroristAttack attack = new TerroristAttack();
+			attack.setAmountKill(i);
+			attacks.add(attack);
+		}
+		
+		for (TerroristAttack attack : attacks) {
+			BitSet bits = attack.getBits();
+			for (int i = 0; i < bits.size(); i++) {
+				int positionBitTrue = firstPosition + (attack.getAmountKill() / divisor);
+				if (i == positionBitTrue) {
+					assertBit  = assertBit && (bits.get(i) == true);
+				} else {
+					assertBit  = assertBit && (bits.get(i) == false);
+				}
+			}
+		}
+		Assert.assertTrue(assertBit);
+	}
+	
+	@Test
+	public void testTerroristAttackBinaryAmountWound() {
+		boolean assertBit = true;
+		int firstPosition = Constants.FIRST_POSITION_BINARY()[9] - 1;
+		int maxKill = 10000;
+		int divisor = 1000; //1000 / 10
+		List<TerroristAttack> attacks = new ArrayList<>();
+		
+		for (int i = 0; i < maxKill; i++) {
+			TerroristAttack attack = new TerroristAttack();
+			attack.setAmountWound(i);
+			attacks.add(attack);
+		}
+		
+		for (TerroristAttack attack : attacks) {
+			BitSet bits = attack.getBits();
+			for (int i = 0; i < bits.size(); i++) {
+				int positionBitTrue = firstPosition + (attack.getAmountWound() / divisor);
+				if (i == positionBitTrue) {
+					assertBit  = assertBit && (bits.get(i) == true);
+				} else {
+					assertBit  = assertBit && (bits.get(i) == false);
+				}
+			}
+		}
+		Assert.assertTrue(assertBit);
+	}
+	
 	private List<TerroristAttack>generateTerroristAttacksWithYear(int year) {
 		int yearMultiple = year;
 		List<TerroristAttack> attacks = new ArrayList<>();

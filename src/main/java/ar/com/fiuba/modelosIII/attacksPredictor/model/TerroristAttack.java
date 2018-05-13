@@ -45,7 +45,7 @@ public class TerroristAttack {
 			int value = values.get(i).intValue();
 			this.processFitness(value,i);
 			switch (i) {
-				case 0: this.year = new Integer(value); this.amountToBinary(value, i); break;
+				case 0: this.year = new Integer(value); this.yearToBinary(value); break;
 				case 1: this.region = RegionEnum.getById(value); this.typeToBinary(value, i); break;
 				case 2: this.multiple = new Boolean(value == 1); this.booleanToBinary(value, i); break;
 				case 3: this.success = new Boolean(value == 1); this.booleanToBinary(value, i); break;
@@ -53,8 +53,8 @@ public class TerroristAttack {
 				case 5: this.attackType = AttackTypeEnum.getById(value); this.typeToBinary(value, i); break;
 				case 6: this.targetType = TargetTypeEnum.getById(value); this.typeToBinary(value, i); break;
 				case 7: this.weaponType = WeaponTypeEnum.getById(value); this.typeToBinary(value, i); break;
-				case 8: this.amountKill = new Integer(value); this.amountToBinary(value, i); break;
-				case 9: this.amountWound = new Integer(value); this.amountToBinary(value, i); break;
+				case 8: this.amountKill = new Integer(value); this.amountKillsToBinary(value); break;
+				case 9: this.amountWound = new Integer(value); this.amountWoundToBinary(value); break;
 			}
 		}
 		this.values = values;
@@ -83,9 +83,23 @@ public class TerroristAttack {
 //		System.out.println("]");
 //	}
 	
-	private void amountToBinary(int amount, int caso) {
-		int position = amount % Constants.COUNT_POSITION_BINARY[caso];
+	private void yearToBinary(int year) {
+		int position = year % Constants.COUNT_POSITION_BINARY[0];
 		valuesBinary.flip(position);
+	}
+	
+	private void amountKillsToBinary(int amount) {
+		int numerador = (Constants.AMOUNT_KILLS_MAX > 0) ? Constants.AMOUNT_KILLS_MAX : 10000;
+		int divisor = numerador / Constants.COUNT_POSITION_BINARY[8];
+		int position = amount / divisor;
+		this.flip(position, 8);
+	}
+	
+	private void amountWoundToBinary(int amount) {
+		int numerador = (Constants.AMOUNT_WOUND_MAX > 0) ? Constants.AMOUNT_WOUND_MAX : 10000;
+		int divisor = numerador / Constants.COUNT_POSITION_BINARY[9];
+		int position = amount / divisor;
+		this.flip(position, 9);
 	}
 	
 	private void typeToBinary(int value, int caso) {
@@ -122,7 +136,7 @@ public class TerroristAttack {
 
 	public void setYear(Integer year) {
 		this.year = year;
-		this.amountToBinary(year, 0);
+		this.yearToBinary(year);
 	}
 
 	public RegionEnum getRegion() {
@@ -197,6 +211,7 @@ public class TerroristAttack {
 
 	public void setAmountKill(Integer amountKill) {
 		this.amountKill = amountKill;
+		this.amountKillsToBinary(amountKill);
 	}
 
 	public Integer getAmountWound() {
@@ -205,6 +220,7 @@ public class TerroristAttack {
 
 	public void setAmountWound(Integer amountWound) {
 		this.amountWound = amountWound;
+		this.amountWoundToBinary(amountWound);
 	}
 	
 	public int getFitness() {
