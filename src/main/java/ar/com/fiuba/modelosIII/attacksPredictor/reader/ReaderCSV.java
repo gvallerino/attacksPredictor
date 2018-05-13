@@ -22,6 +22,7 @@ public class ReaderCSV {
 	private static String PATH = "./src/main/java/resources/files/";
 	private static String FILE_NAME = "ataquesTerroristas.xlsx";
 	private TerroristAttacksDataSet store = TerroristAttacksDataSet.getInstance();
+	private Workbook workbook;
 	
 	public void loadFile() {
 		
@@ -32,7 +33,7 @@ public class ReaderCSV {
 		try {
 			
 			FileInputStream excelFile = new FileInputStream(new File(PATH + FILE_NAME));
-			Workbook workbook = new XSSFWorkbook(excelFile);
+			workbook = new XSSFWorkbook(excelFile);
 			Sheet datatypeSheet = workbook.getSheetAt(0);
 			Iterator<Row> iterator = datatypeSheet.iterator();
 			int id = 0;
