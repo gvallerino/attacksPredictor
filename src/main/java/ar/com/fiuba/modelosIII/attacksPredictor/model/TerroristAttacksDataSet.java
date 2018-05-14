@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 import ar.com.fiuba.modelosIII.attacksPredictor.reader.ReaderCSV;
 
 public class TerroristAttacksDataSet {
@@ -15,9 +16,8 @@ public class TerroristAttacksDataSet {
 	private List<TerroristAttack> storeList = new ArrayList<TerroristAttack>();
 	private long size = 0L;
 	
-	//private Map<Integer, Integer> storeAmountKill = new HashMap<Integer, Integer>();
-	public static int maxAmountKill = 0;
-	public static int maxAmountWound = 0;
+	private static int maxAmountKill = 0;
+	private static int maxAmountWound = 0;
 	
 	private TerroristAttacksDataSet () {}
 	
@@ -27,6 +27,8 @@ public class TerroristAttacksDataSet {
 			ReaderCSV reader = new ReaderCSV();
 			reader.loadFile();
 		}
+		Constants.AMOUNT_KILLS_MAX = maxAmountKill;
+		Constants.AMOUNT_WOUND_MAX = maxAmountWound;
 		return INSTANCE;
 	}
 	

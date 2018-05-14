@@ -4,7 +4,6 @@ import ar.com.fiuba.modelosIII.attacksPredictor.enums.AttackTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.RegionEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.TargetTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.WeaponTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
 
 public class Constants {
 
@@ -13,8 +12,8 @@ public class Constants {
 	public static final double PROBABILITY_MIN = 0.1D;
 	public static final int YEAR_MAX = 2016;
 	public static final int YEAR_MIN = 1970;
-	public static int AMOUNT_KILLS_MAX = TerroristAttacksDataSet.maxAmountKill;
-	public static int AMOUNT_WOUND_MAX = TerroristAttacksDataSet.maxAmountWound;
+	public static int AMOUNT_KILLS_MAX = 0;
+	public static int AMOUNT_WOUND_MAX = 0;
 	
 	public static final int COUNT_DIVIDE_YEARS = 9;
 	public static final int COUNT_DIVIDE_REGION = RegionEnum.size() - 1;

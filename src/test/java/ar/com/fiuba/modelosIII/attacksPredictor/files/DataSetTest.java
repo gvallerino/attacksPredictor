@@ -12,6 +12,7 @@ import ar.com.fiuba.modelosIII.attacksPredictor.enums.TargetTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.WeaponTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 import junit.framework.Assert;
 
 public class DataSetTest {
@@ -81,5 +82,15 @@ public class DataSetTest {
 		filters.add(filter3);
 		List<TerroristAttack> attacksFiltered = data.filter(filters);
 		Assert.assertEquals(attacksFiltered.size(), 13181);
+	}
+	
+	@Test
+	public void testNumberMaxKillsAmount() {
+		Assert.assertEquals(Constants.AMOUNT_KILLS_MAX, 1383);
+	}
+	
+	@Test
+	public void testNumberMaxWoundAmount() {
+		Assert.assertEquals(Constants.AMOUNT_WOUND_MAX, 7366);
 	}
 }
