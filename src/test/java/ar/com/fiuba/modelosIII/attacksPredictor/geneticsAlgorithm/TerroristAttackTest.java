@@ -114,7 +114,7 @@ public class TerroristAttackTest {
 		int firstPosition = Constants.FIRST_POSITION_BINARY()[8] - 1;
 		int maxKill = 10000;
 		int divisor = 1000; //1000 / 10
-		List<TerroristAttack> attacks = new ArrayList<>();
+		List<TerroristAttack> attacks = new ArrayList<TerroristAttack>();
 		
 		for (int i = 0; i < maxKill; i++) {
 			TerroristAttack attack = new TerroristAttack();
@@ -142,7 +142,7 @@ public class TerroristAttackTest {
 		int firstPosition = Constants.FIRST_POSITION_BINARY()[9] - 1;
 		int maxKill = 10000;
 		int divisor = 1000; //1000 / 10
-		List<TerroristAttack> attacks = new ArrayList<>();
+		List<TerroristAttack> attacks = new ArrayList<TerroristAttack>();
 		
 		for (int i = 0; i < maxKill; i++) {
 			TerroristAttack attack = new TerroristAttack();
@@ -166,7 +166,7 @@ public class TerroristAttackTest {
 	
 	private List<TerroristAttack>generateTerroristAttacksWithYear(int year) {
 		int yearMultiple = year;
-		List<TerroristAttack> attacks = new ArrayList<>();
+		List<TerroristAttack> attacks = new ArrayList<TerroristAttack>();
 		for (int i = 0; i < 9; i++) {
 			TerroristAttack attack = new TerroristAttack();
 			attack.setYear(yearMultiple);

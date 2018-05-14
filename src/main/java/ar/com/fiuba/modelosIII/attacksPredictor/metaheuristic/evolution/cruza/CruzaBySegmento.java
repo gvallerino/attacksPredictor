@@ -9,13 +9,15 @@ import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
 public class CruzaBySegmento extends Reproduction implements Borneable {
 	
+	private static CruzaBySegmento INSTANCE = null;
+	
 	private CruzaBySegmento() {}
 	
 	public static CruzaBySegmento getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new CruzaBySegmento();
 		}
-		return (CruzaBySegmento) INSTANCE;
+		return INSTANCE;
 	}
 
 	public TerroristAttack beBorn (TerroristAttack father, TerroristAttack mother) {
