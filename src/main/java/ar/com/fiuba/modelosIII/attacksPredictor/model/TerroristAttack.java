@@ -38,7 +38,11 @@ public class TerroristAttack {
 		
 	}
 	
-	//TODO: sacar el mapa de firstPositionsBinary
+	public TerroristAttack (String id, BitSet bits) {
+		this.id = id;
+		this.valuesBinary = bits;
+	}
+	
 	public TerroristAttack (String id, List<Integer> values) {
 		this.id = id;
 		for (int i = 0; i < values.size(); i++) {
@@ -75,13 +79,13 @@ public class TerroristAttack {
 		System.out.println("]");
 	}
 	
-//	private void printBinary() {
-//		System.out.print("[");
-//		for (int i = 0; i < valuesBinary.size(); i++) {
-//			System.out.print(valuesBinary.get(i) + " ");
-//		}
-//		System.out.println("]");
-//	}
+	public void printBinary() {
+		System.out.print("[");
+		for (int i = 0; i < valuesBinary.size(); i++) {
+			System.out.print(valuesBinary.get(i) + " ");
+		}
+		System.out.println("]");
+	}
 	
 	private void yearToBinary(int year) {
 		int position = year % Constants.COUNT_POSITION_BINARY[0];

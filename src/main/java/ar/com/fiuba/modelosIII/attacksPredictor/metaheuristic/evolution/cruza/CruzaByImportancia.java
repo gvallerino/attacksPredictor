@@ -12,6 +12,8 @@ import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
 public class CruzaByImportancia extends Reproduction implements Borneable {
+	
+	private static CruzaByImportancia INSTANCE = null;
 		
 	private CruzaByImportancia() {}
 	
@@ -19,7 +21,7 @@ public class CruzaByImportancia extends Reproduction implements Borneable {
 		if (INSTANCE == null) {
 			INSTANCE = new CruzaByImportancia();
 		}
-		return (CruzaByImportancia) INSTANCE;
+		return INSTANCE;
 	}
 
 	@Override
