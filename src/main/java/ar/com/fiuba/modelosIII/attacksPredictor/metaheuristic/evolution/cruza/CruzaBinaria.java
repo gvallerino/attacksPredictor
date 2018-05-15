@@ -5,7 +5,7 @@ import java.util.BitSet;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.Reproduction;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 
-public class CruzaBinaria extends Reproduction implements Borneable {
+public class CruzaBinaria extends Reproduction implements Cruzable {
 	
 	private static CruzaBinaria INSTANCE = null;
 
@@ -19,12 +19,12 @@ public class CruzaBinaria extends Reproduction implements Borneable {
 	}
 	
 	@Override
-	public TerroristAttack beBorn(TerroristAttack father, TerroristAttack mother) {
+	public TerroristAttack cruzar(TerroristAttack father, TerroristAttack mother) {
 		BitSet bitsFather = father.getBits();
 		BitSet bitsMother = mother.getBits();
 		BitSet bitsSon = (BitSet) bitsFather.clone();
 		bitsSon.xor(bitsMother);
-		TerroristAttack son = this.born(father,mother,bitsSon);
+		TerroristAttack son = this.cruzar(father,mother,bitsSon);
 		return son;
 	}
 

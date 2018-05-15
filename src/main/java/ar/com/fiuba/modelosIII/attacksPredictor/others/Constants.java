@@ -1,9 +1,9 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.others;
 
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.AttackTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.RegionEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.TargetTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.WeaponTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TargetTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
 
 public class Constants {
 
@@ -38,7 +38,7 @@ public class Constants {
 		return firstPositionsBinary;
 	}
 	
-	public static int COUNT_BINARY_DATA_TYPE () {
+	public static int COUNT_DATA_TYPE_BINARY () {
 		int acum = 0;
 		for (int i = 0; i < COUNT_DATA_TYPE; i++) {
 			acum += COUNT_POSITION_BINARY[i];

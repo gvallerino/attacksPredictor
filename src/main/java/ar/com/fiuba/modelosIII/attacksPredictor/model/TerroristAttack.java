@@ -3,10 +3,10 @@ package ar.com.fiuba.modelosIII.attacksPredictor.model;
 import java.util.BitSet;
 import java.util.List;
 
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.AttackTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.RegionEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.TargetTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.WeaponTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TargetTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
 public class TerroristAttack {
@@ -28,7 +28,7 @@ public class TerroristAttack {
 	private List<Integer> values;
 	private int fitness;
 	
-	private BitSet valuesBinary = new BitSet(Constants.COUNT_BINARY_DATA_TYPE());
+	private BitSet valuesBinary = new BitSet(Constants.COUNT_DATA_TYPE_BINARY());
 	private int[] firstPositionsBinary = Constants.FIRST_POSITION_BINARY(); 
 	
 	//me quede en que tengo que elegir que, para cada atributo, que es lo mejor para el hijo. Por ejemplo, el año pondria un random. no me importa
@@ -239,6 +239,10 @@ public class TerroristAttack {
 		return this.valuesBinary;
 	}
 	
+	public void setBits(BitSet bits) {
+		this.valuesBinary = bits;
+	}
+
 	public boolean equals(TerroristAttack other) {
 		return this.id.equalsIgnoreCase(other.getId());
 	}

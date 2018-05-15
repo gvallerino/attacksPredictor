@@ -3,15 +3,15 @@ package ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.AttackTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.RegionEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.TargetTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.WeaponTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TargetTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.Reproduction;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
-public class CruzaByImportancia extends Reproduction implements Borneable {
+public class CruzaByImportancia extends Reproduction implements Cruzable {
 	
 	private static CruzaByImportancia INSTANCE = null;
 		
@@ -25,7 +25,7 @@ public class CruzaByImportancia extends Reproduction implements Borneable {
 	}
 
 	@Override
-	public TerroristAttack beBorn(TerroristAttack father, TerroristAttack mother) {
+	public TerroristAttack cruzar(TerroristAttack father, TerroristAttack mother) {
 		
 		List<Integer> gen = new ArrayList<Integer>();
 		
@@ -48,7 +48,7 @@ public class CruzaByImportancia extends Reproduction implements Borneable {
 			}
 			gen.add(fitnessSon);
 		}
-		return this.born(father, mother, gen);
+		return this.cruzar(father, mother, gen);
 	}
 	
 	private Integer getGenYear(int fitnessFather, int fitnessMother) {

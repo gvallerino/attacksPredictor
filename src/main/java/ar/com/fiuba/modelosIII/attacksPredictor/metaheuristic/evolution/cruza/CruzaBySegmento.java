@@ -7,7 +7,7 @@ import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.Reproduc
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
-public class CruzaBySegmento extends Reproduction implements Borneable {
+public class CruzaBySegmento extends Reproduction implements Cruzable {
 	
 	private static CruzaBySegmento INSTANCE = null;
 	
@@ -20,7 +20,7 @@ public class CruzaBySegmento extends Reproduction implements Borneable {
 		return INSTANCE;
 	}
 
-	public TerroristAttack beBorn (TerroristAttack father, TerroristAttack mother) {
+	public TerroristAttack cruzar (TerroristAttack father, TerroristAttack mother) {
 		
 		int genMax = 0;
 		double genSup = 0;
@@ -37,6 +37,6 @@ public class CruzaBySegmento extends Reproduction implements Borneable {
 		genSon.addAll(genFather);
 		genSon.addAll(genMother);
 		
-		return this.born(father, mother, genSon);
+		return this.cruzar(father, mother, genSon);
 	}
 }

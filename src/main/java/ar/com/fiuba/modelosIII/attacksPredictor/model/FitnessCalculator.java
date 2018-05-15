@@ -1,9 +1,9 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.model;
 
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.AttackTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.RegionEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.TargetTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.WeaponTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TargetTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
 public abstract class FitnessCalculator {

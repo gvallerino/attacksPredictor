@@ -7,19 +7,19 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.BorneableEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.RegionEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.evolution.CruzaEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.Population;
-import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Borneable;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cruzable;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
-public class EvolutionTest {
+public class CruzaTest {
 	
 	private TerroristAttacksDataSet data = TerroristAttacksDataSet.getInstance();
 	private TerroristAttack filter;
-	private Borneable reproduction = null;
+	private Cruzable reproduction = null;
 	private Population population = new Population();
 	
 //	father.print();
@@ -35,10 +35,10 @@ public class EvolutionTest {
 	
 	@Test
 	public void sonTestBySegmento() {
-		reproduction = BorneableEnum.CRUZA_SEGMENTO.getBorn();
+		reproduction = CruzaEnum.CRUZA_SEGMENTO.getCruzable();
 		TerroristAttack father = data.getById("1");
 		TerroristAttack mother = data.getById("2");
-		TerroristAttack son = reproduction.beBorn(father, mother);
+		TerroristAttack son = reproduction.cruzar(father, mother);
 		
 		//TODO: Falta assert de la cruza
 		Assert.assertEquals(son.getId(), this.getIdCruza(father.getId(), mother.getId()));
@@ -46,10 +46,10 @@ public class EvolutionTest {
 	
 	@Test
 	public void sonTestByImportancia() {
-		reproduction = BorneableEnum.CRUZA_IMPORTANCIA.getBorn();
+		reproduction = CruzaEnum.CRUZA_IMPORTANCIA.getCruzable();
 		TerroristAttack father = data.getById("1");
 		TerroristAttack mother = data.getById("2");
-		TerroristAttack son = reproduction.beBorn(father, mother);
+		TerroristAttack son = reproduction.cruzar(father, mother);
 		
 		//TODO: Falta assert de la cruza
 		Assert.assertEquals(son.getId(), this.getIdCruza(father.getId(), mother.getId()));
@@ -57,10 +57,10 @@ public class EvolutionTest {
 	
 	@Test
 	public void sonTestByBinario() {
-		reproduction = BorneableEnum.CRUZA_BINARIA.getBorn();
+		reproduction = CruzaEnum.CRUZA_BINARIA.getCruzable();
 		TerroristAttack father = data.getById("1");
 		TerroristAttack mother = data.getById("2");
-		TerroristAttack son = reproduction.beBorn(father, mother);
+		TerroristAttack son = reproduction.cruzar(father, mother);
 		father.getBits().xor(mother.getBits());
 
 		Assert.assertArrayEquals(father.getBits().toByteArray(), son.getBits().toByteArray());
@@ -69,11 +69,11 @@ public class EvolutionTest {
 	
 	@Test
 	public void testBinaryShouldFatherBeInmutable() {
-		reproduction = BorneableEnum.CRUZA_BINARIA.getBorn();
+		reproduction = CruzaEnum.CRUZA_BINARIA.getCruzable();
 		TerroristAttack father = data.getById("1");
 		TerroristAttack mother = data.getById("2");
 		BitSet bitsCopyFather = (BitSet) father.getBits().clone();
-		reproduction.beBorn(father, mother);
+		reproduction.cruzar(father, mother);
 		Assert.assertArrayEquals(father.getBits().toByteArray(), bitsCopyFather.toByteArray());
 	}
 	

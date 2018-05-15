@@ -2,8 +2,8 @@ package ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 
-public interface Borneable {
+public interface Cruzable {
 	
-	TerroristAttack beBorn (TerroristAttack father, TerroristAttack mother);
+	TerroristAttack cruzar (TerroristAttack father, TerroristAttack mother);
 
 }

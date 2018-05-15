@@ -1,4 +1,4 @@
-package ar.com.fiuba.modelosIII.attacksPredictor.enums;
+package ar.com.fiuba.modelosIII.attacksPredictor.enums.model;
 
 public enum RegionEnum {
 

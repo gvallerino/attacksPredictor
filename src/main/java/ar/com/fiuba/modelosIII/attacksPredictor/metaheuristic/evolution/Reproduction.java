@@ -3,18 +3,18 @@ package ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution;
 import java.util.BitSet;
 import java.util.List;
 
-import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Borneable;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cruzable;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 
-public abstract class Reproduction implements Borneable {
+public abstract class Reproduction implements Cruzable {
 	
 	@Override
-	public TerroristAttack beBorn(TerroristAttack father, TerroristAttack mother) {
+	public TerroristAttack cruzar(TerroristAttack father, TerroristAttack mother) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	protected TerroristAttack born(TerroristAttack father, TerroristAttack mother, List<Integer> gen) {
+	protected TerroristAttack cruzar(TerroristAttack father, TerroristAttack mother, List<Integer> gen) {
 		String id = father.getId() + "-" + mother.getId();
 		TerroristAttack son = null;
 		if (gen != null) {
@@ -26,7 +26,7 @@ public abstract class Reproduction implements Borneable {
 		return son;
 	}
 	
-	protected TerroristAttack born(TerroristAttack father, TerroristAttack mother, BitSet gen) {
+	protected TerroristAttack cruzar(TerroristAttack father, TerroristAttack mother, BitSet gen) {
 		String id = father.getId() + "-" + mother.getId();
 		TerroristAttack son = null;
 		if (gen != null) {
