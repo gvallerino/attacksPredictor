@@ -11,6 +11,7 @@ import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cr
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cruzable;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
 public class GeneticAlgorithm {
 	
@@ -19,51 +20,83 @@ public class GeneticAlgorithm {
 	private static Cruzable cruzaPorImportancia = CruzaEnum.CRUZA_IMPORTANCIA.getCruzable();
 
 	public static void execute() {
-		//TerroristAttacksDataSet dataSet = TerroristAttacksDataSet.getInstance();
-		//List<TerroristAttack> dataList = dataSet.getAll();
 		
 		List<TerroristAttack> filter = createFilters();
 		Population population = new Population();
-		List<TerroristAttack> poblacion1 = population.populate(filter);
-		List<TerroristAttack> poblacion2 = population.populate(filter);
+		List<TerroristAttack> poblacion = population.populate(filter);
 		List<TerroristAttack> proximaPoblacion = new ArrayList<TerroristAttack>();
+
+		int generaciones = 20;
+		int repeticiones = 10000;
 		
-		printList(poblacion1);
-		printList(poblacion2);
-		
-		List<Double> prom1 = initListaPromedios();
-		List<Double> prom2 = initListaPromedios();
-		List<Double> prom3 = initListaPromedios();
-		
-		int max = poblacion1.size() > poblacion2.size() ? poblacion1.size() : poblacion2.size();
-		
-		for (int i = 0; i < max; i++) {
+		for (int generacion = 0; generacion < generaciones; generacion++) {
 			
-			TerroristAttack father = null;
-			TerroristAttack mother = null;
-			TerroristAttack son = null;
+//			List<Double> prom1 = initListaPromedios();
+//			List<Double> prom2 = initListaPromedios();
+			List<Double> prom3 = initListaPromedios();
 			
-			if (i< poblacion1.size()) {
-				father = poblacion1.get(i);
-				prom1 = sumarListas(prom1, father.getValues());
-			}
-			
-			if (i < poblacion2.size()) {
-				mother = poblacion2.get(i);
-				prom2 = sumarListas(prom2, mother.getValues());
-			}
-				 
-			if (father != null && mother != null) {
-				son = cruzaPorSegmento.cruzar(father, mother);
-				prom3 = sumarListas(prom3, son.getValues());
+			for (int i = 0; i < repeticiones; i++) {
+				TerroristAttack father = poblacion.get(Constants.getRandom(0, poblacion.size()));
+				TerroristAttack mother = poblacion.get(Constants.getRandom(0, poblacion.size()));
+				TerroristAttack son = cruzaPorImportancia.cruzar(father, mother);
 				proximaPoblacion.add(son);
+				
+//				prom1 = sumarListas(prom1, father.getValues());
+//				prom2 = sumarListas(prom2, mother.getValues());
+				prom3 = sumarListas(prom3, son.getValues());
 			}
+			
+//			printPromedio(prom1, repeticiones);
+//			printPromedio(prom2, repeticiones);
+			printPromedio(prom3, repeticiones);
+			System.out.println("Cambiando de generacion");
+			poblacion = proximaPoblacion;
+			proximaPoblacion = new ArrayList<TerroristAttack>();
 		}
 		
-		printList(proximaPoblacion);
-		printPromedio(prom1, poblacion1.size());
-		printPromedio(prom2, poblacion2.size());
-		printPromedio(prom3, proximaPoblacion.size());
+		
+//		List<TerroristAttack> filter = createFilters();
+//		Population population = new Population();
+//		List<TerroristAttack> poblacion1 = population.populate(filter);
+//		List<TerroristAttack> poblacion2 = population.populate(filter);
+//		List<TerroristAttack> proximaPoblacion = new ArrayList<TerroristAttack>();
+//		
+//		printList(poblacion1);
+//		printList(poblacion2);
+//		
+//		List<Double> prom1 = initListaPromedios();
+//		List<Double> prom2 = initListaPromedios();
+//		List<Double> prom3 = initListaPromedios();
+//		
+//		int max = poblacion1.size() > poblacion2.size() ? poblacion1.size() : poblacion2.size();
+//		
+//		for (int i = 0; i < max; i++) {
+//			
+//			TerroristAttack father = null;
+//			TerroristAttack mother = null;
+//			TerroristAttack son = null;
+//			
+//			if (i< poblacion1.size()) {
+//				father = poblacion1.get(i);
+//				prom1 = sumarListas(prom1, father.getValues());
+//			}
+//			
+//			if (i < poblacion2.size()) {
+//				mother = poblacion2.get(i);
+//				prom2 = sumarListas(prom2, mother.getValues());
+//			}
+//				 
+//			if (father != null && mother != null) {
+//				son = cruzaPorSegmento.cruzar(father, mother);
+//				prom3 = sumarListas(prom3, son.getValues());
+//				proximaPoblacion.add(son);
+//			}
+//		}
+//		
+//		printList(proximaPoblacion);
+//		printPromedio(prom1, poblacion1.size());
+//		printPromedio(prom2, poblacion2.size());
+//		printPromedio(prom3, proximaPoblacion.size());
 		
 	}
 	

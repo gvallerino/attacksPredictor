@@ -15,18 +15,18 @@ public class Constants {
 	public static int AMOUNT_KILLS_MAX = 0;
 	public static int AMOUNT_WOUND_MAX = 0;
 	
-	public static final int COUNT_DIVIDE_YEARS = 9;
-	public static final int COUNT_DIVIDE_REGION = RegionEnum.size() - 1;
-	public static final int COUNT_DIVIDE_MULTIPLE = 1;
-	public static final int COUNT_DIVIDE_SUCCESS = 1;
-	public static final int COUNT_DIVIDE_SUICIDE = 1;
-	public static final int COUNT_DIVIDE_ATTACK = AttackTypeEnum.size() - 1;
-	public static final int COUNT_DIVIDE_TARGET = TargetTypeEnum.size() - 1;
-	public static final int COUNT_DIVIDE_WEAPON = WeaponTypeEnum.size() - 1;
-	public static final int COUNT_DIVIDE_KILLS = 10;
-	public static final int COUNT_DIVIDE_WOUNDS = 10;
+	public static final int COUNT_BINARY_YEARS = 9;
+	public static final int COUNT_BINARY_REGION = RegionEnum.size() - 1;
+	public static final int COUNT_BINARY_MULTIPLE = 1;
+	public static final int COUNT_BINARY_SUCCESS = 1;
+	public static final int COUNT_BINARY_SUICIDE = 1;
+	public static final int COUNT_BINARY_ATTACK = AttackTypeEnum.size() - 1;
+	public static final int COUNT_BINARY_TARGET = TargetTypeEnum.size() - 1;
+	public static final int COUNT_BINARY_WEAPON = WeaponTypeEnum.size() - 1;
+	public static final int COUNT_BINARY_KILLS = 10;
+	public static final int COUNT_BINARY_WOUNDS = 10;
 	
-	public static final int[] COUNT_POSITION_BINARY = {COUNT_DIVIDE_YEARS, COUNT_DIVIDE_REGION, COUNT_DIVIDE_MULTIPLE, COUNT_DIVIDE_SUCCESS, COUNT_DIVIDE_SUICIDE, COUNT_DIVIDE_ATTACK, COUNT_DIVIDE_TARGET, COUNT_DIVIDE_WEAPON, COUNT_DIVIDE_KILLS, COUNT_DIVIDE_WOUNDS};
+	public static final int[] COUNT_POSITION_BINARY = {COUNT_BINARY_YEARS, COUNT_BINARY_REGION, COUNT_BINARY_MULTIPLE, COUNT_BINARY_SUCCESS, COUNT_BINARY_SUICIDE, COUNT_BINARY_ATTACK, COUNT_BINARY_TARGET, COUNT_BINARY_WEAPON, COUNT_BINARY_KILLS, COUNT_BINARY_WOUNDS};
 	
 	public static int[] FIRST_POSITION_BINARY () {
 		int[] firstPositionsBinary = new int [COUNT_DATA_TYPE]; 
@@ -44,6 +44,11 @@ public class Constants {
 			acum += COUNT_POSITION_BINARY[i];
 		}
 		return acum;
+	}
+	
+	public static int COUNT_DIVIDE_YEARS() {
+		int diff = YEAR_MAX - YEAR_MIN;
+		return diff / COUNT_BINARY_YEARS;
 	}
 	
 	public static int getRandom(int inf, int sup) {

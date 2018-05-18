@@ -24,7 +24,7 @@ public class TerroristAttack {
 	private Integer amountKill;
 	private Integer amountWound;
 	
-	private int[] fitnessValues = new int[Constants.COUNT_DATA_TYPE];
+	private List<Integer> fitnessValues;
 	private List<Integer> values;
 	private int fitness;
 	
@@ -47,7 +47,6 @@ public class TerroristAttack {
 		this.id = id;
 		for (int i = 0; i < values.size(); i++) {
 			int value = values.get(i).intValue();
-			this.processFitness(value,i);
 			switch (i) {
 				case 0: this.year = new Integer(value); this.yearToBinary(value); break;
 				case 1: this.region = RegionEnum.getById(value); this.typeToBinary(value, i); break;
@@ -62,12 +61,15 @@ public class TerroristAttack {
 			}
 		}
 		this.values = values;
+		this.processFitness();
 	}
 	
-	private void processFitness(int value, int i) {
-		int fitnessValue = FitnessCalculator.calculate(value, i);
-		fitness += fitnessValue;
-		fitnessValues[i] = fitnessValue;
+	private void processFitness() {
+		this.fitnessValues = FitnessCalculator.calculate(this.values);
+		this.fitness = 0;
+		for (Integer fit : fitnessValues) {
+			fitness += fit;
+		}
 	}
 	
 	public void print() {
@@ -88,7 +90,8 @@ public class TerroristAttack {
 	}
 	
 	private void yearToBinary(int year) {
-		int position = year % Constants.COUNT_POSITION_BINARY[0];
+		int numerador = year > Constants.YEAR_MIN ? year - Constants.YEAR_MIN : 0;
+		int position = numerador / Constants.COUNT_DIVIDE_YEARS();
 		valuesBinary.flip(position);
 	}
 	
@@ -123,7 +126,7 @@ public class TerroristAttack {
 	}
 	
 	public int getFitnessByProperty(int propertyPosition) {
-		return this.fitnessValues[propertyPosition];
+		return this.fitnessValues.get(propertyPosition);
 	}
 	
 	public String getId() {

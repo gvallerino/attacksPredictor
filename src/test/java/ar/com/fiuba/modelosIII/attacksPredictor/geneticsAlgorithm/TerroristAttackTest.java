@@ -171,7 +171,7 @@ public class TerroristAttackTest {
 			TerroristAttack attack = new TerroristAttack();
 			attack.setYear(yearMultiple);
 			attacks.add(attack);
-			yearMultiple += Constants.COUNT_DIVIDE_YEARS;
+			yearMultiple += Constants.COUNT_BINARY_YEARS;
 		}
 		return attacks;
 	}
