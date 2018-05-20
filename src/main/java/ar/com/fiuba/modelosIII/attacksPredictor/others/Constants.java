@@ -15,7 +15,7 @@ public class Constants {
 	public static int AMOUNT_KILLS_MAX = 0;
 	public static int AMOUNT_WOUND_MAX = 0;
 	
-	public static final int COUNT_BINARY_YEARS = 9;
+	public static final int COUNT_BINARY_YEARS = 10;
 	public static final int COUNT_BINARY_REGION = RegionEnum.size() - 1;
 	public static final int COUNT_BINARY_MULTIPLE = 1;
 	public static final int COUNT_BINARY_SUCCESS = 1;
@@ -48,7 +48,7 @@ public class Constants {
 	
 	public static int COUNT_DIVIDE_YEARS() {
 		int diff = YEAR_MAX - YEAR_MIN;
-		return diff / COUNT_BINARY_YEARS;
+		return (diff / COUNT_BINARY_YEARS) + 1;
 	}
 	
 	public static int getRandom(int inf, int sup) {

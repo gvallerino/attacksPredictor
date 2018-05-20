@@ -1,4 +1,4 @@
-package ar.com.fiuba.modelosIII.attacksPredictor.geneticsAlgorithm;
+package ar.com.fiuba.modelosIII.attacksPredictor.code;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -14,19 +14,20 @@ import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 import junit.framework.Assert;
 
-public class TerroristAttackTest {
+public class CodeToBinaryTest {
 	
 	@Test
 	public void testTerroristAttackBinaryYearWithRest() {
-		Assert.assertTrue(this.getAssertByYearAndRest(1970, 8));
-		Assert.assertTrue(this.getAssertByYearAndRest(1971, 0));
-		Assert.assertTrue(this.getAssertByYearAndRest(1972, 1));
-		Assert.assertTrue(this.getAssertByYearAndRest(1973, 2));
-		Assert.assertTrue(this.getAssertByYearAndRest(1974, 3));
-		Assert.assertTrue(this.getAssertByYearAndRest(1975, 4));
-		Assert.assertTrue(this.getAssertByYearAndRest(1976, 5));
-		Assert.assertTrue(this.getAssertByYearAndRest(1977, 6));
-		Assert.assertTrue(this.getAssertByYearAndRest(1978, 7));
+		Assert.assertTrue(this.getAssertByYearAndRest(1970, 0));
+		Assert.assertTrue(this.getAssertByYearAndRest(1975, 1));
+		Assert.assertTrue(this.getAssertByYearAndRest(1980, 2));
+		Assert.assertTrue(this.getAssertByYearAndRest(1985, 3));
+		Assert.assertTrue(this.getAssertByYearAndRest(1990, 4));
+		Assert.assertTrue(this.getAssertByYearAndRest(1995, 5));
+		Assert.assertTrue(this.getAssertByYearAndRest(2000, 6));
+		Assert.assertTrue(this.getAssertByYearAndRest(2005, 7));
+		Assert.assertTrue(this.getAssertByYearAndRest(2010, 8));
+		Assert.assertTrue(this.getAssertByYearAndRest(2015, 9));
 	}
 	
 	@Test
@@ -167,11 +168,11 @@ public class TerroristAttackTest {
 	private List<TerroristAttack>generateTerroristAttacksWithYear(int year) {
 		int yearMultiple = year;
 		List<TerroristAttack> attacks = new ArrayList<TerroristAttack>();
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < Constants.COUNT_DIVIDE_YEARS(); i++) {
 			TerroristAttack attack = new TerroristAttack();
 			attack.setYear(yearMultiple);
 			attacks.add(attack);
-			yearMultiple += Constants.COUNT_BINARY_YEARS;
+			yearMultiple ++;
 		}
 		return attacks;
 	}
