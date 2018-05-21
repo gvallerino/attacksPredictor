@@ -61,7 +61,7 @@ public class CodeToBinaryTest {
 	@Test
 	public void testTerroristAttackBinaryMultiple() {
 		boolean assertBit = true;
-		int positionBitTrue = Constants.FIRST_POSITION_BINARY()[2] - 1;
+		int positionBitTrue = Constants.FIRST_POSITION_BINARY()[2];
 		TerroristAttack attack = new TerroristAttack();
 		attack.setMultiple(true);
 		BitSet bits = attack.getBits();
@@ -78,7 +78,7 @@ public class CodeToBinaryTest {
 	@Test
 	public void testTerroristAttackBinarySuccess() {
 		boolean assertBit = true;
-		int positionBitTrue = Constants.FIRST_POSITION_BINARY()[3] - 1;
+		int positionBitTrue = Constants.FIRST_POSITION_BINARY()[3];
 		TerroristAttack attack = new TerroristAttack();
 		attack.setSuccess(true);
 		BitSet bits = attack.getBits();
@@ -95,7 +95,7 @@ public class CodeToBinaryTest {
 	@Test
 	public void testTerroristAttackBinarySuicide() {
 		boolean assertBit = true;
-		int positionBitTrue = Constants.FIRST_POSITION_BINARY()[4] - 1;
+		int positionBitTrue = Constants.FIRST_POSITION_BINARY()[4];
 		TerroristAttack attack = new TerroristAttack();
 		attack.setSuicide(true);
 		BitSet bits = attack.getBits();
@@ -112,9 +112,9 @@ public class CodeToBinaryTest {
 	@Test
 	public void testTerroristAttackBinaryAmountKills() {
 		boolean assertBit = true;
-		int firstPosition = Constants.FIRST_POSITION_BINARY()[8] - 1;
+		int firstPosition = Constants.FIRST_POSITION_BINARY()[8];
 		int maxKill = 10000;
-		int divisor = 1000; //1000 / 10
+		int divisor = Constants.AMOUNT_KILLS_MAX / Constants.COUNT_BINARY_KILLS; //1000 / 10
 		List<TerroristAttack> attacks = new ArrayList<TerroristAttack>();
 		
 		for (int i = 0; i < maxKill; i++) {
@@ -140,9 +140,9 @@ public class CodeToBinaryTest {
 	@Test
 	public void testTerroristAttackBinaryAmountWound() {
 		boolean assertBit = true;
-		int firstPosition = Constants.FIRST_POSITION_BINARY()[9] - 1;
+		int firstPosition = Constants.FIRST_POSITION_BINARY()[9];
 		int maxKill = 10000;
-		int divisor = 1000; //1000 / 10
+		int divisor = Constants.AMOUNT_WOUND_MAX / Constants.COUNT_BINARY_WOUNDS; //1000 / 10
 		List<TerroristAttack> attacks = new ArrayList<TerroristAttack>();
 		
 		for (int i = 0; i < maxKill; i++) {

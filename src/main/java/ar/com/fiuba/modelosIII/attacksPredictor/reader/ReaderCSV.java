@@ -21,7 +21,7 @@ public class ReaderCSV {
 	
 	private static String PATH = "./src/main/java/resources/files/";
 	private static String FILE_NAME = "ataquesTerroristas.xlsx";
-	private TerroristAttacksDataSet store = TerroristAttacksDataSet.getInstance();
+//	private TerroristAttacksDataSet store = TerroristAttacksDataSet.getInstance();
 	private Workbook workbook;
 	
 	public void loadFile() {
@@ -53,7 +53,8 @@ public class ReaderCSV {
 					}
 					TerroristAttack terroristAttack = new TerroristAttack(key, values);
 					//System.out.println("Guardando Ataque terrorista " + key);
-					store.save(key, terroristAttack);
+//					store.save(key, terroristAttack);
+					TerroristAttacksDataSet.save(key, terroristAttack);
 				}
 				id++;
 			}

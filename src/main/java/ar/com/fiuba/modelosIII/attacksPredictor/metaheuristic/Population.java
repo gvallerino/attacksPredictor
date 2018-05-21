@@ -44,6 +44,7 @@ public class Population {
 			int indexRandom = Constants.getRandom(0, population.size());
 			population.add(dataSetFiltered.get(indexRandom));
 		}
+		
 		return population;
 	}
 }

@@ -45,17 +45,25 @@ public abstract class DecodeBinary {
 	}
 	
 	private static Integer decodeKill(BitSet bits) {
-		int numerador = (Constants.AMOUNT_KILLS_MAX > 0) ? Constants.AMOUNT_KILLS_MAX : 10000;
-		int divisor = numerador / Constants.COUNT_POSITION_BINARY[8];
-		Integer amount = getPositionTrue(bits) * divisor;
-		return amount;
+		int positionTrue = getPositionTrue(bits);
+		if (positionTrue < 0) return 0;
+		int amountMax = (Constants.AMOUNT_KILLS_MAX > 0) ? Constants.AMOUNT_KILLS_MAX : 10000;
+		int range = amountMax / Constants.COUNT_POSITION_BINARY[8];
+		int inf = positionTrue * range;
+		int sup = (positionTrue + 1) * range;
+		int random = Constants.getRandom(inf, sup);
+		return random;
 	}
 	
 	private static Integer decodeWound(BitSet bits) {
-		int numerador = (Constants.AMOUNT_WOUND_MAX > 0) ? Constants.AMOUNT_WOUND_MAX : 10000;
-		int divisor = numerador / Constants.COUNT_POSITION_BINARY[9];
-		Integer amount = getPositionTrue(bits) * divisor;
-		return amount;
+		int positionTrue = getPositionTrue(bits);
+		if (positionTrue < 0) return 0;
+		int amountMax = (Constants.AMOUNT_WOUND_MAX > 0) ? Constants.AMOUNT_WOUND_MAX : 10000;
+		int range = amountMax / Constants.COUNT_POSITION_BINARY[9];
+		int inf = positionTrue * range;
+		int sup = (positionTrue + 1) * range;
+		int random = Constants.getRandom(inf, sup);
+		return random;
 	}
 	
 	

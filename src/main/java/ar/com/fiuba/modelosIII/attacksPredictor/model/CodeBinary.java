@@ -30,31 +30,31 @@ public abstract class CodeBinary {
 	
 	public static void codeAmountKills(BitSet bits,  int amount) {
 		int numerador = (Constants.AMOUNT_KILLS_MAX > 0) ? Constants.AMOUNT_KILLS_MAX : 10000;
-		int divisor = numerador / Constants.COUNT_POSITION_BINARY[8];
+		int divisor = numerador / Constants.COUNT_BINARY_KILLS;
 		int position = amount / divisor;
 		flip(bits, position, 8);
 	}
 	
 	public static void codeAmountWound(BitSet bits,  int amount) {
 		int numerador = (Constants.AMOUNT_WOUND_MAX > 0) ? Constants.AMOUNT_WOUND_MAX : 10000;
-		int divisor = numerador / Constants.COUNT_POSITION_BINARY[9];
+		int divisor = numerador / Constants.COUNT_BINARY_WOUNDS;
 		int position = amount / divisor;
 		flip(bits, position, 9);
 	}
 	
 	public static void codeByType(BitSet bits,  int value, int caso) {
+		value--;
 		flip(bits, value, caso);
 	}
 	
 	public static void codeBoolean(BitSet bits,  int value, int caso){
-		if (value == 1) {
-			flip(bits, 0, caso);
-		}
+		int position = Constants.FIRST_POSITION_BINARY()[caso];
+		bits.set(position, value == 1);
 	}
 	
 	private static void flip(BitSet bits, int value, int caso) {
 		int initial = Constants.FIRST_POSITION_BINARY()[caso];
-		int position = initial + value - 1;
+		int position = initial + value;
 		bits.flip(position);
 	}
 }
