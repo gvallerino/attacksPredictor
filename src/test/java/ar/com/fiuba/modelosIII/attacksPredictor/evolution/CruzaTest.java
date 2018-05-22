@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.evolution.CruzaEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.Population;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.PopulationRandom;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cruzable;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
@@ -20,7 +20,7 @@ public class CruzaTest {
 	private TerroristAttacksDataSet data = TerroristAttacksDataSet.getInstance();
 	private TerroristAttack filter;
 	private Cruzable reproduction = null;
-	private Population population = new Population();
+	private PopulationRandom population = new PopulationRandom();
 	
 //	father.print();
 //	mother.print();
@@ -87,7 +87,7 @@ public class CruzaTest {
 	@Test
 	public void populationSize() {
 		List<TerroristAttack> populate = population.populate(null);
-		double max = data.getSize() * Constants.PROBABILITY_MAX;
+		double max = data.getSize() * Constants.POPULATION_RANDOM_MAX;
 		Assert.assertTrue(populate.size() < max);
 	}
 	
@@ -100,7 +100,7 @@ public class CruzaTest {
 	@Test
 	public void populationSizeWithFilters() {
 		List<TerroristAttack> populate = population.populate(filter);
-		double max = data.filter(filter).size() * Constants.PROBABILITY_MAX;
+		double max = data.filter(filter).size() * Constants.POPULATION_RANDOM_MAX;
 		Assert.assertTrue(populate.size() < max);
 	}
 	

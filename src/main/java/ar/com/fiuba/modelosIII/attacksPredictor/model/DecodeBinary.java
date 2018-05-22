@@ -26,7 +26,7 @@ public abstract class DecodeBinary {
 	
 	private static Integer decodeYear(BitSet bits) {
 		int positionTrue = getPositionTrue(bits);
-		if (positionTrue == -1) positionTrue++;
+		if (positionTrue == -1) return 0;
 		int randomYear = Constants.getRandom(0,Constants.COUNT_DIVIDE_YEARS());
 		Integer year = Constants.YEAR_MIN + randomYear + (positionTrue * Constants.COUNT_DIVIDE_YEARS());
 		return year;
@@ -48,7 +48,7 @@ public abstract class DecodeBinary {
 		int positionTrue = getPositionTrue(bits);
 		if (positionTrue < 0) return 0;
 		int amountMax = (Constants.AMOUNT_KILLS_MAX > 0) ? Constants.AMOUNT_KILLS_MAX : 10000;
-		int range = amountMax / Constants.COUNT_POSITION_BINARY[8];
+		int range = amountMax / Constants.COUNT_BINARY_KILLS;
 		int inf = positionTrue * range;
 		int sup = (positionTrue + 1) * range;
 		int random = Constants.getRandom(inf, sup);
@@ -59,7 +59,7 @@ public abstract class DecodeBinary {
 		int positionTrue = getPositionTrue(bits);
 		if (positionTrue < 0) return 0;
 		int amountMax = (Constants.AMOUNT_WOUND_MAX > 0) ? Constants.AMOUNT_WOUND_MAX : 10000;
-		int range = amountMax / Constants.COUNT_POSITION_BINARY[9];
+		int range = amountMax / Constants.COUNT_BINARY_WOUNDS;
 		int inf = positionTrue * range;
 		int sup = (positionTrue + 1) * range;
 		int random = Constants.getRandom(inf, sup);

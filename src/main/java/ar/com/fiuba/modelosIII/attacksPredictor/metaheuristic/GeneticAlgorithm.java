@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.evolution.CruzaEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.evolution.MutationEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.CruzaBinaria;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cruzable;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.mutation.Mutation;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
@@ -18,11 +20,13 @@ public class GeneticAlgorithm {
 	private static Cruzable cruzaBinaria = CruzaEnum.CRUZA_BINARIA.getCruzable();
 	private static Cruzable cruzaPorSegmento = CruzaEnum.CRUZA_SEGMENTO.getCruzable();
 	private static Cruzable cruzaPorImportancia = CruzaEnum.CRUZA_IMPORTANCIA.getCruzable();
+	private static Mutation mutationBinary = MutationEnum.MUTACION_BINARIA.getMutation();
+	private static Mutation mutationValue = MutationEnum.MUTACION_POR_VALOR.getMutation();
 
 	public static void execute() {
 		
 		List<TerroristAttack> filter = createFilters();
-		Population population = new Population();
+		PopulationRandom population = new PopulationRandom();
 		List<TerroristAttack> poblacion = population.populate(filter);
 		List<TerroristAttack> proximaPoblacion = new ArrayList<TerroristAttack>();
 
@@ -32,18 +36,29 @@ public class GeneticAlgorithm {
 		for (int generacion = 0; generacion < generaciones; generacion++) {
 			
 			List<Double> prom3 = initListaPromedios();
+			System.out.print("Procesando Generacion: " + String.valueOf(generacion+1) + " => ");
 			
 			for (int i = 0; i < repeticiones; i++) {
-				TerroristAttack father = poblacion.get(Constants.getRandom(0, poblacion.size()));
-				TerroristAttack mother = poblacion.get(Constants.getRandom(0, poblacion.size()));
-				TerroristAttack son = cruzaBinaria.cruzar(father, mother);
+				
+				TerroristAttack son = null;
+				if (mutate()) {
+					//System.out.println("-------- MUTACION --------");
+					TerroristAttack terroristAttackToMutate = poblacion.get(Constants.getRandom(0, poblacion.size()));
+					son = mutationBinary.mutate(terroristAttackToMutate);
+//					son = mutationValue.mutate(terroristAttackToMutate);
+				} else {
+					TerroristAttack father = poblacion.get(Constants.getRandom(0, poblacion.size()));
+					TerroristAttack mother = poblacion.get(Constants.getRandom(0, poblacion.size()));
+					son = cruzaBinaria.cruzar(father, mother);
+//				TerroristAttack son = cruzaPorSegmento.cruzar(father, mother);
+				}
+				
 				proximaPoblacion.add(son);
 				
 				prom3 = sumarListas(prom3, son.getValues());
 			}
 			
 			printPromedio(prom3, repeticiones);
-			System.out.println("Cambiando de generacion");
 			poblacion = proximaPoblacion;
 			proximaPoblacion = new ArrayList<TerroristAttack>();
 		}
@@ -117,6 +132,15 @@ public class GeneticAlgorithm {
 		filters.addAll(createFilterArmasFuego());
 		filters.addAll(createFilterAsia());
 		return filters;
+	}
+	
+	private static boolean mutate() {
+		double random = 0;
+		while (random == 0) {
+			random = Constants.getRandom(0, 100);
+		}
+		//System.out.println(random);
+		return Constants.PORCENTAJE_MUTATION > random;
 	}
 	
 }

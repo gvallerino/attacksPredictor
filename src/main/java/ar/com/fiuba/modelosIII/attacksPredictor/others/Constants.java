@@ -6,10 +6,12 @@ import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TargetTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
 
 public class Constants {
+	
+	public static final double POPULATION_RANDOM_MAX = 0.2D;
+	public static final double POPULATION_RANDOM_MIN = 0.1D;
+	public static final double PORCENTAJE_MUTATION = 3;
 
 	public static final int COUNT_DATA_TYPE = 10;
-	public static final double PROBABILITY_MAX = 0.2D;
-	public static final double PROBABILITY_MIN = 0.1D;
 	public static final int YEAR_MAX = 2016;
 	public static final int YEAR_MIN = 1970;
 	public static int AMOUNT_KILLS_MAX = 1383; //1383
