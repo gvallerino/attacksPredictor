@@ -8,6 +8,7 @@ import ar.com.fiuba.modelosIII.attacksPredictor.enums.evolution.MutationEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.ManagerClusterRandom;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.CruzaBinaria;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cruzable;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.mutation.Mutation;
@@ -29,14 +30,15 @@ public class GeneticAlgorithm {
 		PopulationRandom population = new PopulationRandom();
 		List<TerroristAttack> poblacion = population.populate(filter);
 		List<TerroristAttack> proximaPoblacion = new ArrayList<TerroristAttack>();
-
+		ManagerClusterRandom managerCluster = new ManagerClusterRandom(poblacion);
+		managerCluster.printClusters();
 		int generaciones = 20;
-		int repeticiones = 10000;
+		int repeticiones = 1;
 		
 		for (int generacion = 0; generacion < generaciones; generacion++) {
 			
-			List<Double> prom3 = initListaPromedios();
-			System.out.print("Procesando Generacion: " + String.valueOf(generacion+1) + " => ");
+			//List<Double> prom3 = initListaPromedios();
+			System.out.println("Procesando Generacion: " + String.valueOf(generacion+1) + " => ");
 			
 			for (int i = 0; i < repeticiones; i++) {
 				
@@ -44,21 +46,24 @@ public class GeneticAlgorithm {
 				if (mutate()) {
 					//System.out.println("-------- MUTACION --------");
 					TerroristAttack terroristAttackToMutate = poblacion.get(Constants.getRandom(0, poblacion.size()));
-					son = mutationBinary.mutate(terroristAttackToMutate);
-//					son = mutationValue.mutate(terroristAttackToMutate);
+//					son = mutationBinary.mutate(terroristAttackToMutate);
+					son = mutationValue.mutate(terroristAttackToMutate);
 				} else {
 					TerroristAttack father = poblacion.get(Constants.getRandom(0, poblacion.size()));
 					TerroristAttack mother = poblacion.get(Constants.getRandom(0, poblacion.size()));
-					son = cruzaBinaria.cruzar(father, mother);
-//				TerroristAttack son = cruzaPorSegmento.cruzar(father, mother);
+//					son = cruzaBinaria.cruzar(father, mother);
+					son = cruzaPorSegmento.cruzar(father, mother);
 				}
 				
+				managerCluster.put(son);
 				proximaPoblacion.add(son);
 				
-				prom3 = sumarListas(prom3, son.getValues());
+				//prom3 = sumarListas(prom3, son.getValues());
 			}
 			
-			printPromedio(prom3, repeticiones);
+			//printPromedio(prom3, repeticiones);
+			managerCluster.updateCentroides(generacion);
+			managerCluster.printClusters();
 			poblacion = proximaPoblacion;
 			proximaPoblacion = new ArrayList<TerroristAttack>();
 		}

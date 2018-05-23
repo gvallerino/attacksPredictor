@@ -23,6 +23,9 @@ public enum AttackTypeEnum {
 	}
 	
 	public static AttackTypeEnum getById(int id) {
+		if (id >= AttackTypeEnum.values().length) {
+			return AttackTypeEnum.OTHER;
+		}
 		return AttackTypeEnum.values()[id];
 	}
 	
