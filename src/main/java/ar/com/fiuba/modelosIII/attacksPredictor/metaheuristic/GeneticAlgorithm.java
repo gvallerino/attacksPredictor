@@ -26,6 +26,8 @@ public class GeneticAlgorithm {
 
 	public static void execute() {
 		
+		System.out.println("Procesando Poblacion Inicial => ");
+
 		List<TerroristAttack> filter = createFilters();
 		PopulationRandom population = new PopulationRandom();
 		List<TerroristAttack> poblacion = population.populate(filter);
@@ -33,26 +35,34 @@ public class GeneticAlgorithm {
 		ManagerClusterRandom managerCluster = new ManagerClusterRandom(poblacion);
 		managerCluster.printClusters();
 		int generaciones = 20;
-		int repeticiones = 1;
+		int repeticiones = poblacion.size();
+		
+		System.out.println("Tamaño de generacion inicial: " + poblacion.size());
 		
 		for (int generacion = 0; generacion < generaciones; generacion++) {
 			
 			//List<Double> prom3 = initListaPromedios();
 			System.out.println("Procesando Generacion: " + String.valueOf(generacion+1) + " => ");
-			
+			int print = poblacion.size() / 100;
+			int porcentaje = 0;
 			for (int i = 0; i < repeticiones; i++) {
+				//System.out.print(".");
+				if (i % print == 0) {
+					System.out.print(" " + porcentaje + "%");
+					porcentaje += 1;
+				}
 				
 				TerroristAttack son = null;
 				if (mutate()) {
 					//System.out.println("-------- MUTACION --------");
 					TerroristAttack terroristAttackToMutate = poblacion.get(Constants.getRandom(0, poblacion.size()));
-//					son = mutationBinary.mutate(terroristAttackToMutate);
-					son = mutationValue.mutate(terroristAttackToMutate);
+					son = mutationBinary.mutate(terroristAttackToMutate);
+//					son = mutationValue.mutate(terroristAttackToMutate);
 				} else {
 					TerroristAttack father = poblacion.get(Constants.getRandom(0, poblacion.size()));
 					TerroristAttack mother = poblacion.get(Constants.getRandom(0, poblacion.size()));
-//					son = cruzaBinaria.cruzar(father, mother);
-					son = cruzaPorSegmento.cruzar(father, mother);
+					son = cruzaBinaria.cruzar(father, mother);
+//					son = cruzaPorSegmento.cruzar(father, mother);
 				}
 				
 				managerCluster.put(son);
@@ -61,6 +71,7 @@ public class GeneticAlgorithm {
 				//prom3 = sumarListas(prom3, son.getValues());
 			}
 			
+			System.out.println("Tamaño de generacion " + generacion + ": " + proximaPoblacion.size());
 			//printPromedio(prom3, repeticiones);
 			managerCluster.updateCentroides(generacion);
 			managerCluster.printClusters();

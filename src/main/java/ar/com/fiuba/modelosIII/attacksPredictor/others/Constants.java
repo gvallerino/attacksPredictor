@@ -1,5 +1,8 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.others;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TargetTypeEnum;
@@ -9,8 +12,8 @@ public class Constants {
 	
 	public static final int COUNT_CLUSTERS = 6;
 	
-	public static final double POPULATION_RANDOM_MAX = 1.0D;
-	public static final double POPULATION_RANDOM_MIN = 0.9D;
+	public static final double POPULATION_RANDOM_MAX = 0.015D;
+	public static final double POPULATION_RANDOM_MIN = 0.01D;
 	public static final double PORCENTAJE_MUTATION = 3;
 
 	public static final int COUNT_DATA_TYPE = 10;
@@ -62,4 +65,21 @@ public class Constants {
 		int valueReturned = inf + diffRandom;
 		return valueReturned;
 	}
+	
+	public static List<Double> toDouble(List<Integer> values) {
+		List<Double> doubles = new ArrayList<Double>();
+		if (values != null && !values.isEmpty()) {
+			if (values.size() == Constants.COUNT_DATA_TYPE) {
+				for (Integer value : values) {
+					doubles.add(new Double(value));
+				}
+			} else {
+				System.out.println("ERROR | Ha ocurrido un error de tamaño");
+			}
+		} else {
+			System.out.println("ERROR | No hay datos en los valores");
+		}
+		return doubles;
+	}
+	
 }

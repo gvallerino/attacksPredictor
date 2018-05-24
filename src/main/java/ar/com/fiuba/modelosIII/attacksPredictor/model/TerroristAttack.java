@@ -12,7 +12,7 @@ import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
 public class TerroristAttack {
 
-	private String id;
+	protected String id;
 	
 	private Integer year;
 	private RegionEnum region;
@@ -25,7 +25,7 @@ public class TerroristAttack {
 	private Integer amountKill;
 	private Integer amountWound;
 	
-	private List<Integer> values;
+	protected List<Integer> values;
 	private BitSet valuesBinary;
 	
 	private List<Integer> fitnessValues;
