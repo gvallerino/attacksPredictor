@@ -1,13 +1,11 @@
 package ar.com.fiuba.modelosIII.attacksPredictor;
 
-/**
- * Hello world!
- *
- */
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.GeneticAlgorithm;
+
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+    		GeneticAlgorithm.execute();
     }
 }

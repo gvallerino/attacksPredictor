@@ -16,14 +16,7 @@ public abstract class Reproduction implements Cruzable {
 	
 	protected TerroristAttack cruzar(TerroristAttack father, TerroristAttack mother, List<Integer> gen) {
 		String id = father.getId() + "-" + mother.getId();
-		TerroristAttack son = null;
-		if (gen != null) {
-			son = new TerroristAttack(id, gen);
-		} else {
-			son = new TerroristAttack();
-			son.setId(id);
-		}
-		return son;
+		return new TerroristAttack(id, gen);
 	}
 	
 	protected TerroristAttack cruzar(TerroristAttack father, TerroristAttack mother, BitSet gen) {

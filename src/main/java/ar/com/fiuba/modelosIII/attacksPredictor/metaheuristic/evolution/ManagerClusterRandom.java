@@ -40,25 +40,18 @@ public class ManagerClusterRandom {
 	public void updateCentroides(int generacion) {
 		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
 			List<TerroristAttack> attacks = store.get(i);
-			List<Double> promedio = initListaPromedios();
-			for (TerroristAttack attack : attacks) {
-				promedio = sumarListas(promedio, attack.getValues());
-			}
-//			List<Integer> newValues = new ArrayList<Integer>();
-//			for (Double value : promedio) {
-//				newValues.add(value.intValue());
-//			}
-			//String id = clusters.get(i).getId() + "_" + generacion;
-			//TerroristAttack newAttackCentroide = new TerroristAttack(id, promedio);
-			
-			clusters.put(i, promedio);
-			store.get(i).clear();
+			if (attacks.size() > 0) {
+				List<Double> promedio = calculatePromedio(attacks);
+				
+				clusters.put(i, promedio);
+				store.get(i).clear();
 //			store.get(i).add(newAttackCentroide);
+			}
 		}
 	}
 	
-	private double calculateDistance(TerroristAttack attack, List<Double> centroide) {
-		double module = 0;
+	private Double calculateDistance(TerroristAttack attack, List<Double> centroide) {
+		Double module = 0D;
 		for (int i = 0; i < Constants.COUNT_DATA_TYPE; i++) {
 			if (i != 1 && i != 5 && i!=6 && i != 7) {
 				double base = attack.getValues().get(i) - centroide.get(i);
@@ -68,6 +61,19 @@ public class ManagerClusterRandom {
 		}
 		module = Math.sqrt(module);
 		return module;
+	}
+	
+	private List<Double> calculatePromedio(List<TerroristAttack> attacks) {
+		List<Double> sumaTotal = initListaPromedios();
+		Double countTotal = (double) attacks.size();
+		for (TerroristAttack attack : attacks) {
+			sumaTotal = sumarListas(sumaTotal, attack.getValues());
+		}
+		List<Double> promedio = new ArrayList<Double>();
+		for (Double value : sumaTotal) {
+			promedio.add(value / countTotal);
+		}
+		return promedio;
 	}
 	
 	private List<Double> initListaPromedios() {
@@ -93,18 +99,22 @@ public class ManagerClusterRandom {
 	
 	public void printClusters() {
 		System.out.println("Clusters: ");
+		System.out.println("      |   year  | region  | multiple| success | suicide | attack  | target  | weapon  |  kills  |  wound  |");
 		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
-			System.out.print(i + "- "); print(clusters.get(i));
+			System.out.print(" " + i + " ->"); print(clusters.get(i));
 			System.out.println("");
 		}
 	}
 	
 	public void print(List<Double> lista) {
-		System.out.print("[ ");
+		System.out.print(" | ");
 		for (Double value : lista) {
-			System.out.print(value + "|");
+			String valueSingle = String.valueOf(value);
+			int number = valueSingle.split("\\.")[0].length();
+			int diff = Constants.COUNT_DIGITS_PRINT_CLUSTERS - number;
+			String valueStr = String.format("%." + diff + "f", value);
+			System.out.print(valueStr + " | ");
 		}
-		System.out.println("]");
 	}
 	
 }

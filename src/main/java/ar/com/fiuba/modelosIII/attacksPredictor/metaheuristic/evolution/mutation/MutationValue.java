@@ -1,8 +1,5 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.mutation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TargetTypeEnum;
@@ -25,9 +22,8 @@ public class MutationValue extends Mutation {
 
 	@Override
 	public TerroristAttack mutate(TerroristAttack terroristAttack) {
-		int positionToMutate = (int) (Math.random() * Constants.COUNT_DATA_TYPE);
-		List<Integer> values = new ArrayList<Integer>(terroristAttack.getValues());
-		Integer oldValue = values.remove(positionToMutate);
+		int positionToMutate = Constants.getRandom(0, Constants.COUNT_DATA_TYPE);
+		Integer oldValue = terroristAttack.getValues().get(positionToMutate);
 		Integer newValue = 0;
 		switch (positionToMutate) {
 			case 0: newValue = this.mutateYear(oldValue); break;
@@ -41,9 +37,9 @@ public class MutationValue extends Mutation {
 			case 8: newValue = this.mutateAmounts(oldValue); break;
 			case 9: newValue = this.mutateAmounts(oldValue); break;
 		}
-		values.add(positionToMutate, newValue);
-		String id = terroristAttack.getId();
-		return new TerroristAttack(id, values);
+		
+		terroristAttack.getValues().add(positionToMutate, newValue);
+		return terroristAttack;
 	}
 	
 	private Integer mutateYear(Integer oldValue) {
@@ -62,6 +58,9 @@ public class MutationValue extends Mutation {
 	}
 	
 	private Integer mutateEnum(Integer oldValue, int ordinal) {
+		if (ordinal == 1) {
+			return oldValue;
+		}
 		int enumRandom = Constants.getRandom(1, ordinal);
 		while (enumRandom == oldValue.intValue()) {
 			enumRandom = Constants.getRandom(1, ordinal);
@@ -70,7 +69,10 @@ public class MutationValue extends Mutation {
 	}
 	
 	private Integer mutateAmounts(Integer oldValue) {
-		int amountDouble = oldValue * 2;
+		int amountDouble = oldValue * 2; //TODO: revisar esto
+		if (amountDouble == 0) {
+			return oldValue;
+		}
 		int amountRandom = Constants.getRandom(0, amountDouble);
 		while (amountRandom == oldValue.intValue()) {
 			amountRandom = Constants.getRandom(0, amountDouble);
