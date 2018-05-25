@@ -12,14 +12,14 @@ public class TerroristAttacksDataSet {
 
 	private static TerroristAttacksDataSet INSTANCE;
 	
-	private Map<String, TerroristAttack> store = new HashMap<String, TerroristAttack>();
-	private List<TerroristAttack> storeList = new ArrayList<TerroristAttack>();
-	private long size = 0L;
+	private static Map<String, TerroristAttack> store ;
 	
 	private static int maxAmountKill = 0;
 	private static int maxAmountWound = 0;
 	
-	private TerroristAttacksDataSet () {}
+	private TerroristAttacksDataSet () {
+		store = new HashMap<String, TerroristAttack>();
+	}
 	
 	public static TerroristAttacksDataSet getInstance() {
 		if (INSTANCE == null) {
@@ -32,16 +32,10 @@ public class TerroristAttacksDataSet {
 		return INSTANCE;
 	}
 	
-	public void save(String id, TerroristAttack terroristAttack) {
+	public static void save(String id, TerroristAttack terroristAttack) {
 		store.put(id, terroristAttack);
-		storeList.add(terroristAttack);
-		size++;
-		
-		int amountKill = terroristAttack.getAmountKill();
-		int amountWound = terroristAttack.getAmountWound();
-		
-		maxAmountKill = this.getMax(maxAmountKill, amountKill);
-		maxAmountWound = this.getMax(maxAmountWound, amountWound);
+		maxAmountKill = getMax(maxAmountKill, terroristAttack.getAmountKill());
+		maxAmountWound = getMax(maxAmountWound, terroristAttack.getAmountWound());
 	}
 	
 	public TerroristAttack getById(String id) {
@@ -57,7 +51,7 @@ public class TerroristAttacksDataSet {
 	public List<TerroristAttack> filter(List<TerroristAttack> filter) {
 		
 		if (filter == null) 
-			return storeList;
+			return new ArrayList<TerroristAttack>(store.values());
 		
 		List<TerroristAttack> terroristAttacksFiltered = new ArrayList<TerroristAttack>();
 		
@@ -71,15 +65,15 @@ public class TerroristAttacksDataSet {
 		return terroristAttacksFiltered;
 	}
 	
-	public List<TerroristAttack> getAll() {
-		return this.storeList;
-	}
-	
 	public long getSize() {
-		return this.size;
+		return store.size();
 	}
 	
-	private int getMax(int max, int current) {
+	public List<TerroristAttack> getAll() {
+		return new ArrayList<TerroristAttack>(store.values());
+	}
+	
+	private static int getMax(int max, int current) {
 		return (current > max ? current : max);
 	}
 	

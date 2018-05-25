@@ -1,48 +1,64 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.model;
 
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TargetTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
+import java.util.ArrayList;
+import java.util.List;
+
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
 public abstract class FitnessCalculator {
 
-	//TODO: Verificar los que devuelven solo el value
-	//TODO: Verificar los important de cada enum
-	public static int calculate(int value, int position) {
-		switch (position) {
-			case 0: return calculateYearFitness(value);
-			case 1: return calculateRegionFitness(value);
-			case 2: return value;
-			case 3: return value;
-			case 4: return value;
-			case 5: return calculateAttackFitness(value);
-			case 6: return calculateTargetFitness(value);
-			case 7: return calculateWeaponFitness(value);
-			case 8: return value;
-			case 9: return value;
-		}
-		return 0;
+	//TODO: Faltaria agregar importancia de los enums (o no)
+	//TODO: Verificar nulls o numeros negativos
+	
+	public static List<Integer> calculate(List<Integer> values) {
+		List<Integer> fitness = new ArrayList<Integer>();
+		
+		int fitnessYear = calculateYearFitness(values.get(0));
+		int fitnessRegion = 0;
+		int fitnessMultiple = values.get(2) * 5;
+		int fitnessSuccess = values.get(3) * 10;
+		int fitnessSuicide = values.get(4) * 3;
+		int fitnessAttack = 0;
+		int fitnessTarget = 0;
+		int fitnessWeapon = 0;
+		int fitnessKill = calculateMounts(values.get(8), fitnessMultiple, fitnessSuccess, fitnessSuicide);
+		int fitnessWound = calculateMounts(values.get(9), fitnessMultiple, fitnessSuccess, fitnessSuicide);
+		
+		fitness.add(fitnessYear);
+		fitness.add(fitnessRegion);
+		fitness.add(fitnessMultiple);
+		fitness.add(fitnessSuccess);
+		fitness.add(fitnessSuicide);
+		fitness.add(fitnessAttack);
+		fitness.add(fitnessTarget);
+		fitness.add(fitnessWeapon);
+		fitness.add(fitnessKill);
+		fitness.add(fitnessWound);
+		
+		return fitness;
 	}
 	
 	private static int calculateYearFitness(int year) {
 		return (year - Constants.YEAR_MIN);
 	}
 	
-	private static int calculateRegionFitness(int regionId) {
-		return RegionEnum.getImportantById(regionId);
+	private static int calculateMounts(int mount, int fitnessMultiple, int fitnessSuccess, int fitnessSuicide) {
+		return (mount * fitnessMultiple) + (mount * fitnessSuccess) + (mount * fitnessSuicide);
 	}
 	
-	private static int calculateAttackFitness(int attackId) {
-		return AttackTypeEnum.getImportantById(attackId);
-	}
-	
-	private static int calculateTargetFitness(int targetId) {
-		return TargetTypeEnum.getImportantById(targetId);
-	}
-	
-	private static int calculateWeaponFitness(int weaponId) {
-		return WeaponTypeEnum.getImportantById(weaponId);
-	}
+//	private static int calculateRegionFitness(int regionId) {
+//		return RegionEnum.getImportantById(regionId);
+//	}
+//	
+//	private static int calculateAttackFitness(int attackId) {
+//		return AttackTypeEnum.getImportantById(attackId);
+//	}
+//	
+//	private static int calculateTargetFitness(int targetId) {
+//		return TargetTypeEnum.getImportantById(targetId);
+//	}
+//	
+//	private static int calculateWeaponFitness(int weaponId) {
+//		return WeaponTypeEnum.getImportantById(weaponId);
+//	}
 }

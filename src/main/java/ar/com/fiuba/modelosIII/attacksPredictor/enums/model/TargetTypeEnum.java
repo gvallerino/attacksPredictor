@@ -37,6 +37,9 @@ public enum TargetTypeEnum {
 	}
 	
 	public static TargetTypeEnum getById(int id) {
+		if (id >= TargetTypeEnum.values().length) {
+			return TargetTypeEnum.NOTHING;
+		}
 		return TargetTypeEnum.values()[id];
 	}
 	

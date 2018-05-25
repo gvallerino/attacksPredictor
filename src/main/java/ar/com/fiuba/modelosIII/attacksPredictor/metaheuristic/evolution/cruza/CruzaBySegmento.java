@@ -22,21 +22,30 @@ public class CruzaBySegmento extends Reproduction implements Cruzable {
 
 	public TerroristAttack cruzar (TerroristAttack father, TerroristAttack mother) {
 		
-		int genMax = 0;
-		double genSup = 0;
-		if (father.getFitness() > mother.getFitness()) {
-			genSup = father.getFitness();
-		} else {
-			genSup = mother.getFitness();
-		}
-		
-		genMax = (int) ((genSup / (father.getFitness() + mother.getFitness())) * Constants.COUNT_DATA_TYPE);
-		List<Integer> genFather = father.getValues().subList(0, genMax);
-		List<Integer> genMother = mother.getValues().subList(genMax, Constants.COUNT_DATA_TYPE);
 		List<Integer> genSon = new ArrayList<Integer>();
-		genSon.addAll(genFather);
-		genSon.addAll(genMother);
+		for (int i = 0; i < Constants.COUNT_DATA_TYPE; i++) {
+			Integer genFather = father.getValues().get(i);
+			Integer genMother = mother.getValues().get(i);
+			boolean applyGenFather = Constants.getRandom(0, 1) == 1;
+			Integer gen = applyGenFather ? genFather : genMother;
+			genSon.add(gen);
+		}
 		
 		return this.cruzar(father, mother, genSon);
 	}
 }
+
+//		int genMax = 0;
+//		double genSup = 0;
+//		if (father.getFitness() > mother.getFitness()) {
+//			genSup = father.getFitness();
+//		} else {
+//			genSup = mother.getFitness();
+//		}
+//		
+//		genMax = (int) ((genSup / (father.getFitness() + mother.getFitness())) * Constants.COUNT_DATA_TYPE);
+//		List<Integer> genFather = father.getValues().subList(0, genMax);
+//		List<Integer> genMother = mother.getValues().subList(genMax, Constants.COUNT_DATA_TYPE);
+//		List<Integer> genSon = new ArrayList<Integer>();
+//		genSon.addAll(genFather);
+//		genSon.addAll(genMother);

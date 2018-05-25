@@ -27,6 +27,9 @@ public enum WeaponTypeEnum {
 	}
 	
 	public static WeaponTypeEnum getById(int id) {
+		if (id >= WeaponTypeEnum.values().length) {
+			return WeaponTypeEnum.NOTHING;
+		}
 		return WeaponTypeEnum.values()[id];
 	}
 	
