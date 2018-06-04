@@ -14,9 +14,10 @@ public class Constants {
 	public static final int COUNT_GENERATIONS = 10;
 	public static final int COUNT_DIGITS_PRINT_CLUSTERS = 6;
 	
-	public static final double POPULATION_RANDOM_MAX = 0.9D;
-	public static final double POPULATION_RANDOM_MIN = 0.5D;
-	public static final double PORCENTAJE_MUTATION = 3;
+	public static final double POPULATION_RANDOM_MAX = 0.2D;
+	public static final double POPULATION_RANDOM_MIN = 0.1D;
+	public static final double POPULATION_EXACT = 34840D;
+	public static final double PORCENTAJE_MUTATION = 0;
 
 	public static final int COUNT_DATA_TYPE = 10;
 	public static final int YEAR_MAX = 2016;

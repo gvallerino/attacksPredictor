@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
-import ar.com.fiuba.modelosIII.attacksPredictor.reader.ReaderCSV;
+import ar.com.fiuba.modelosIII.attacksPredictor.reader.ManagementCSV;
 
 public class TerroristAttacksDataSet {
 
@@ -24,8 +24,8 @@ public class TerroristAttacksDataSet {
 	public static TerroristAttacksDataSet getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new TerroristAttacksDataSet();
-			ReaderCSV reader = new ReaderCSV();
-			reader.loadFile();
+			ManagementCSV reader = new ManagementCSV();
+			reader.read();
 		}
 		Constants.AMOUNT_KILLS_MAX = maxAmountKill;
 		Constants.AMOUNT_WOUND_MAX = maxAmountWound;

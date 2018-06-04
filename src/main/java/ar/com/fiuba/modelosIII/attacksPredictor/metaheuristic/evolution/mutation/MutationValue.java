@@ -38,6 +38,7 @@ public class MutationValue extends Mutation {
 			case 9: newValue = this.mutateAmounts(oldValue); break;
 		}
 		
+		terroristAttack.getValues().remove(positionToMutate);
 		terroristAttack.getValues().add(positionToMutate, newValue);
 		return terroristAttack;
 	}

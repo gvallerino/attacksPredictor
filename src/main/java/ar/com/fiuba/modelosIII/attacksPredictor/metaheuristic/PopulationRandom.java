@@ -22,14 +22,17 @@ public class PopulationRandom {
 	
 	public List<TerroristAttack> populate(List<TerroristAttack> filter) {
 		List<TerroristAttack> dataSetFiltered = dataSet.filter(filter);
-
-		Double limitSup = dataSetFiltered.size() * Constants.POPULATION_RANDOM_MAX;
-		Double limitInf = dataSetFiltered.size() * Constants.POPULATION_RANDOM_MIN;
-		
 		List<TerroristAttack> population = new ArrayList<TerroristAttack>();
-		Double limitRandom = (double) Constants.getRandom(limitInf.intValue(), limitSup.intValue());
+		Double limitRandom = Constants.POPULATION_EXACT;
 		
-		while(population.size() < limitRandom) {
+		if (limitRandom == 0) {
+			Double limitSup = dataSetFiltered.size() * Constants.POPULATION_RANDOM_MAX;
+			Double limitInf = dataSetFiltered.size() * Constants.POPULATION_RANDOM_MIN;
+			
+			limitRandom = (double) Constants.getRandom(limitInf.intValue(), limitSup.intValue());
+		}
+
+		while(population.size() <= limitRandom) {
 			int indexRandom = Constants.getRandom(0, population.size());
 			population.add(dataSetFiltered.get(indexRandom));
 		}

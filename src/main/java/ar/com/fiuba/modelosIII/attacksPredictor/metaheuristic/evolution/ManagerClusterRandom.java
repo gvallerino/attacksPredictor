@@ -4,6 +4,7 @@ import java.util.*;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
+import ar.com.fiuba.modelosIII.attacksPredictor.reader.ManagementCSV;
 
 public class ManagerClusterRandom {
 
@@ -95,6 +96,13 @@ public class ManagerClusterRandom {
 		}
 		return nuevaLista;
 		
+	}
+	
+	public void saveClusters() {
+		ManagementCSV.write("      |   year  | region  | multiple| success | suicide | attack  | target  | weapon  |  kills  |  wound  |\n");
+		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
+			ManagementCSV.write(i, clusters.get(i));
+		}
 	}
 	
 	public void printClusters() {

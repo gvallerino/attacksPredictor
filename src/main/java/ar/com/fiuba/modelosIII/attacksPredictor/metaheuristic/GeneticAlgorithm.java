@@ -15,6 +15,7 @@ import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.mutation
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
+import ar.com.fiuba.modelosIII.attacksPredictor.reader.ManagementCSV;
 
 public class GeneticAlgorithm {
 	
@@ -38,12 +39,11 @@ public class GeneticAlgorithm {
 		
 		System.out.println("\nTamaño de generaciones: " + poblacion.size());
 		System.out.println("Procesando Generacion Inicial  =>  "); 
-		managerCluster.printClusters();
+		//managerCluster.printClusters();
 		
 		for (int generacion = 0; generacion < generaciones; generacion++) {
 			
 			System.out.println("Procesando Generacion: " + String.valueOf(generacion+1) + " => ");
-			
 			for (int i = 0; i < repeticiones; i++) {
 
 				TerroristAttack son = null;
@@ -52,9 +52,13 @@ public class GeneticAlgorithm {
 					TerroristAttack terroristAttackToMutate = poblacion.get(Constants.getRandom(0, poblacion.size()));
 //					son = mutationBinary.mutate(terroristAttackToMutate);
 					son = mutationValue.mutate(terroristAttackToMutate);
+					//check(poblacion, "for mutate");
 				} else {
-					TerroristAttack father = poblacion.get(Constants.getRandom(0, poblacion.size()));
-					TerroristAttack mother = poblacion.get(Constants.getRandom(0, poblacion.size()));
+					//check(poblacion, "segunda for");
+					int pi = Constants.getRandom(0, poblacion.size());
+					int pj = Constants.getRandom(0, poblacion.size());
+					TerroristAttack father = poblacion.get(pi);
+					TerroristAttack mother = poblacion.get(pj);
 //					son = cruzaBinaria.cruzar(father, mother);
 					son = cruzaPorSegmento.cruzar(father, mother);
 				}
@@ -63,11 +67,20 @@ public class GeneticAlgorithm {
 			}
 			
 			managerCluster.updateCentroides(generacion);
+			managerCluster.saveClusters();
 			managerCluster.printClusters();
 			poblacion = proximaPoblacion;
 			proximaPoblacion = new ArrayList<TerroristAttack>();
 		}
-		
+		ManagementCSV.closeFile();
+	}
+	
+	private static void check(List<TerroristAttack> attacks, String dato) {
+		for (TerroristAttack attack : attacks) {
+			if (attack.getValues().size() > 10) {
+				System.out.println(dato + ": mayor a diez");
+			}
+		}
 	}
 	
 	private static List<TerroristAttack> createFilterAsia() {
@@ -107,6 +120,9 @@ public class GeneticAlgorithm {
 	}
 	
 	private static boolean mutate() {
+		if (Constants.PORCENTAJE_MUTATION == 0) {
+			return false;
+		}
 		double random = 0;
 		while (random == 0) {
 			random = Constants.getRandom(0, 100);
