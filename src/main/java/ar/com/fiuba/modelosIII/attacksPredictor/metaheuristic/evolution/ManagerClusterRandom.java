@@ -3,11 +3,12 @@ package ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution;
 import java.util.*;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.ClustersGrapher;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
-import ar.com.fiuba.modelosIII.attacksPredictor.reader.ManagementCSV;
+import ar.com.fiuba.modelosIII.attacksPredictor.reader.ManagementFile;
 
 public class ManagerClusterRandom {
-
+	
 	private Map<Integer, List<Double>> clusters;
 	private Map<Integer, List<TerroristAttack>> store;
 	
@@ -98,31 +99,15 @@ public class ManagerClusterRandom {
 		
 	}
 	
-	public void saveClusters() {
-		ManagementCSV.write("      |   year  | region  | multiple| success | suicide | attack  | target  | weapon  |  kills  |  wound  |\n");
-		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
-			ManagementCSV.write(i, clusters.get(i));
-		}
+	public void saveClusters(int generacion) {
+		ClustersGrapher.saveClusters(generacion, clusters);
+		ClustersGrapher.printClusters(clusters);
 	}
 	
-	public void printClusters() {
-		System.out.println("Clusters: ");
-		System.out.println("      |   year  | region  | multiple| success | suicide | attack  | target  | weapon  |  kills  |  wound  |");
-		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
-			System.out.print(" " + i + " ->"); print(clusters.get(i));
-			System.out.println("");
-		}
-	}
-	
-	public void print(List<Double> lista) {
-		System.out.print(" | ");
-		for (Double value : lista) {
-			String valueSingle = String.valueOf(value);
-			int number = valueSingle.split("\\.")[0].length();
-			int diff = Constants.COUNT_DIGITS_PRINT_CLUSTERS - number;
-			String valueStr = String.format("%." + diff + "f", value);
-			System.out.print(valueStr + " | ");
-		}
+	public void finalize() {
+		clusters = null;
+		store = null;
+		ManagementFile.closeFile();
 	}
 	
 }

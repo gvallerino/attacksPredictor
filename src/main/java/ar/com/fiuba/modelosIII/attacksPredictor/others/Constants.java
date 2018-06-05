@@ -17,7 +17,7 @@ public class Constants {
 	public static final double POPULATION_RANDOM_MAX = 0.2D;
 	public static final double POPULATION_RANDOM_MIN = 0.1D;
 	public static final double POPULATION_EXACT = 34840D;
-	public static final double PORCENTAJE_MUTATION = 0;
+	public static final double PORCENTAJE_MUTATION = 1;
 
 	public static final int COUNT_DATA_TYPE = 10;
 	public static final int YEAR_MAX = 2016;

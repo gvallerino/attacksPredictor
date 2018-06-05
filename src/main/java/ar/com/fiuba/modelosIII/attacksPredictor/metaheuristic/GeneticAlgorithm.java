@@ -3,19 +3,18 @@ package ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.data.ConfigurationsDataSet;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.evolution.CruzaEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.evolution.MutationEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.filters.TypeFilter;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.ManagerClusterRandom;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.CruzaBinaria;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cruzable;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.mutation.Mutation;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
-import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
-import ar.com.fiuba.modelosIII.attacksPredictor.reader.ManagementCSV;
 
 public class GeneticAlgorithm {
 	
@@ -28,8 +27,11 @@ public class GeneticAlgorithm {
 	public static void execute() {
 		System.out.println(" -----  COMENZANDO ALGORITMO GENETICO -----");
 		
-		List<TerroristAttack> filter = createFilters();
+		//TODO: Hacer una clase que inicialice todo
+		ConfigurationsDataSet.getInstance();
+		
 		PopulationRandom population = new PopulationRandom();
+		List<TerroristAttack> filter = getFilters();
 		List<TerroristAttack> poblacion = population.populate(filter);
 		
 		List<TerroristAttack> proximaPoblacion = new ArrayList<TerroristAttack>();
@@ -39,7 +41,6 @@ public class GeneticAlgorithm {
 		
 		System.out.println("\nTamaño de generaciones: " + poblacion.size());
 		System.out.println("Procesando Generacion Inicial  =>  "); 
-		//managerCluster.printClusters();
 		
 		for (int generacion = 0; generacion < generaciones; generacion++) {
 			
@@ -52,13 +53,9 @@ public class GeneticAlgorithm {
 					TerroristAttack terroristAttackToMutate = poblacion.get(Constants.getRandom(0, poblacion.size()));
 //					son = mutationBinary.mutate(terroristAttackToMutate);
 					son = mutationValue.mutate(terroristAttackToMutate);
-					//check(poblacion, "for mutate");
 				} else {
-					//check(poblacion, "segunda for");
-					int pi = Constants.getRandom(0, poblacion.size());
-					int pj = Constants.getRandom(0, poblacion.size());
-					TerroristAttack father = poblacion.get(pi);
-					TerroristAttack mother = poblacion.get(pj);
+					TerroristAttack father = poblacion.get(Constants.getRandom(0, poblacion.size()));
+					TerroristAttack mother = poblacion.get(Constants.getRandom(0, poblacion.size()));
 //					son = cruzaBinaria.cruzar(father, mother);
 					son = cruzaPorSegmento.cruzar(father, mother);
 				}
@@ -67,56 +64,51 @@ public class GeneticAlgorithm {
 			}
 			
 			managerCluster.updateCentroides(generacion);
-			managerCluster.saveClusters();
-			managerCluster.printClusters();
+			managerCluster.saveClusters(generacion);
 			poblacion = proximaPoblacion;
 			proximaPoblacion = new ArrayList<TerroristAttack>();
 		}
-		ManagementCSV.closeFile();
+		managerCluster.finalize();
 	}
 	
-	private static void check(List<TerroristAttack> attacks, String dato) {
-		for (TerroristAttack attack : attacks) {
-			if (attack.getValues().size() > 10) {
-				System.out.println(dato + ": mayor a diez");
-			}
-		}
-	}
+//	private static List<TerroristAttack> createFilterAsia() {
+//		List<TerroristAttack> filters = new ArrayList<TerroristAttack>();
+//		List<RegionEnum> regiones = new ArrayList<RegionEnum>();
+//		regiones.add(RegionEnum.CENTRAL_ASIA);
+//		regiones.add(RegionEnum.EAST_ASIA);
+//		regiones.add(RegionEnum.SOUTH_ASIA);
+//		regiones.add(RegionEnum.SOUTHEAST_ASIA);
+//		for (RegionEnum region : regiones) {
+//			TerroristAttack attack = new TerroristAttack();
+//			attack.setRegion(region);
+//			filters.add(attack);
+//		}
+//		return filters;
+//	}
+//	
+//	private static List<TerroristAttack> createFilterArmasFuego() {
+//		List<TerroristAttack> filters = new ArrayList<TerroristAttack>();
+//		List<WeaponTypeEnum> weapons = new ArrayList<WeaponTypeEnum>();
+//		weapons.add(WeaponTypeEnum.ARMAS_FUEGO);
+//		weapons.add(WeaponTypeEnum.EXPLOSIVOS);
+//		weapons.add(WeaponTypeEnum.INCENDIARIAS);
+//		for (WeaponTypeEnum weaponType : weapons) {
+//			TerroristAttack attack = new TerroristAttack();
+//			attack.setWeaponType(weaponType);
+//			filters.add(attack);
+//		}
+//		return filters;
+//	}
+//	
+//	private static List<TerroristAttack> createFilters() {
+//		List<TerroristAttack> filters = new ArrayList<TerroristAttack>();
+//		filters.addAll(createFilterArmasFuego());
+//		filters.addAll(createFilterAsia());
+//		return filters;
+//	}
 	
-	private static List<TerroristAttack> createFilterAsia() {
-		List<TerroristAttack> filters = new ArrayList<TerroristAttack>();
-		List<RegionEnum> regiones = new ArrayList<RegionEnum>();
-		regiones.add(RegionEnum.CENTRAL_ASIA);
-		regiones.add(RegionEnum.EAST_ASIA);
-		regiones.add(RegionEnum.SOUTH_ASIA);
-		regiones.add(RegionEnum.SOUTHEAST_ASIA);
-		for (RegionEnum region : regiones) {
-			TerroristAttack attack = new TerroristAttack();
-			attack.setRegion(region);
-			filters.add(attack);
-		}
-		return filters;
-	}
-	
-	private static List<TerroristAttack> createFilterArmasFuego() {
-		List<TerroristAttack> filters = new ArrayList<TerroristAttack>();
-		List<WeaponTypeEnum> weapons = new ArrayList<WeaponTypeEnum>();
-		weapons.add(WeaponTypeEnum.ARMAS_FUEGO);
-		weapons.add(WeaponTypeEnum.EXPLOSIVOS);
-		weapons.add(WeaponTypeEnum.INCENDIARIAS);
-		for (WeaponTypeEnum weaponType : weapons) {
-			TerroristAttack attack = new TerroristAttack();
-			attack.setWeaponType(weaponType);
-			filters.add(attack);
-		}
-		return filters;
-	}
-	
-	private static List<TerroristAttack> createFilters() {
-		List<TerroristAttack> filters = new ArrayList<TerroristAttack>();
-		filters.addAll(createFilterArmasFuego());
-		filters.addAll(createFilterAsia());
-		return filters;
+	private static List<TerroristAttack> getFilters() {
+		return TypeFilter.getInstance().applyFilters();
 	}
 	
 	private static boolean mutate() {
@@ -129,5 +121,13 @@ public class GeneticAlgorithm {
 		}
 		return Constants.PORCENTAJE_MUTATION > random;
 	}
+	
+//	private static void check(List<TerroristAttack> attacks, String dato) {
+//		for (TerroristAttack attack : attacks) {
+//			if (attack.getValues().size() > 10) {
+//				System.out.println(dato + ": mayor a diez");
+//			}
+//		}
+//	}
 	
 }

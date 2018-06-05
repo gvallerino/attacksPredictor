@@ -1,8 +1,10 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.reader;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,11 +19,12 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.data.ConfigurationsDataSet;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
-public class ManagementCSV {
+public class ManagementFile {
 	
 	//Reader
 	private static String PATH = "./src/main/java/resources/files/";
@@ -29,8 +32,12 @@ public class ManagementCSV {
 	private Workbook workbook;
 	
 	//Writer
-	private static String SEPARATOR = "\t";
+	private static String SEPARATOR = " | ";
 	private static FileWriter writer = null;
+	
+	//Properties
+	private static String SEPARATOR_PROPERTIES = "=";
+	private static String FILE_PROPERTIES = "configuration.properties";
 	
 	public void read() {
 		
@@ -76,6 +83,26 @@ public class ManagementCSV {
 		System.out.println("Ha finalizado el proceso de carga de datos en "+ ( time_end - time_start ) / 1000.0 +" segundos");
 	}
 	
+	public static void loadConfigurations() {
+		try {
+			FileReader file = new FileReader(new File(PATH + "properties/" + FILE_PROPERTIES));
+			BufferedReader buffer = new BufferedReader(file);
+			String lineFile;
+
+			while ((lineFile = buffer.readLine()) != null) {
+				String line = lineFile.replace(" ", "");
+				if (!line.equals("")) {
+					String[] keyValue = line.split(SEPARATOR_PROPERTIES);
+					ConfigurationsDataSet.put(keyValue[0], keyValue[1]);
+				}
+			}
+			buffer.close();
+			file.close();
+		} catch (Exception e) {
+			System.out.println("Error | Se produjo un error procesando el archivo properties " + e.getMessage());
+		}
+	}
+	
 	public static void write(Integer numberCluster, List<Double> data) {
 		try {
 			loadWriter();
@@ -103,13 +130,13 @@ public class ManagementCSV {
 	
 	private static String print(List<Double> lista) {
 		//System.out.print(" | ");
-		StringBuilder sb = new StringBuilder(" | ");
+		StringBuilder sb = new StringBuilder(SEPARATOR);
 		for (Double value : lista) {
 			String valueSingle = String.valueOf(value);
 			int number = valueSingle.split("\\.")[0].length();
 			int diff = Constants.COUNT_DIGITS_PRINT_CLUSTERS - number;
 			String valueStr = String.format("%." + diff + "f", value);
-			sb.append(valueStr).append(" | ");
+			sb.append(valueStr).append(SEPARATOR);
 		}
 		return sb.toString();
 	}
