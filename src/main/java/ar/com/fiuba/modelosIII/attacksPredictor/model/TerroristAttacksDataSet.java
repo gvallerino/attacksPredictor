@@ -24,8 +24,7 @@ public class TerroristAttacksDataSet {
 	public static TerroristAttacksDataSet getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new TerroristAttacksDataSet();
-			ManagementFile reader = new ManagementFile();
-			reader.read();
+			ManagementFile.read();
 		}
 		Constants.AMOUNT_KILLS_MAX = maxAmountKill;
 		Constants.AMOUNT_WOUND_MAX = maxAmountWound;

@@ -29,7 +29,7 @@ public class ManagementFile {
 	//Reader
 	private static String PATH = "./src/main/java/resources/files/";
 	private static String FILE_NAME = "ataquesTerroristas.xlsx";
-	private Workbook workbook;
+	private static Workbook workbook;
 	
 	//Writer
 	private static String SEPARATOR = " | ";
@@ -39,7 +39,7 @@ public class ManagementFile {
 	private static String SEPARATOR_PROPERTIES = "=";
 	private static String FILE_PROPERTIES = "configuration.properties";
 	
-	public void read() {
+	public static void read() {
 		
 		System.out.println("Comenzando el proceso de carga de datos...");
 		long time_start, time_end;
@@ -91,7 +91,7 @@ public class ManagementFile {
 
 			while ((lineFile = buffer.readLine()) != null) {
 				String line = lineFile.replace(" ", "");
-				if (!line.equals("")) {
+				if (!"".equals(line) && !"#".equals(String.valueOf(line.charAt(0))) && line.contains(SEPARATOR_PROPERTIES)) {
 					String[] keyValue = line.split(SEPARATOR_PROPERTIES);
 					ConfigurationsDataSet.put(keyValue[0], keyValue[1]);
 				}

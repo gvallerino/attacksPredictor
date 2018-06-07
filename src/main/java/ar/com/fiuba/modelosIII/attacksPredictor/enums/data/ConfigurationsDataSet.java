@@ -1,12 +1,10 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.enums.data;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import ar.com.fiuba.modelosIII.attacksPredictor.reader.ManagementFile;
 
 public class ConfigurationsDataSet {
 
@@ -21,7 +19,6 @@ public class ConfigurationsDataSet {
 	public static ConfigurationsDataSet getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new ConfigurationsDataSet();
-			ManagementFile.loadConfigurations();
 		}
 		return INSTANCE;
 	}

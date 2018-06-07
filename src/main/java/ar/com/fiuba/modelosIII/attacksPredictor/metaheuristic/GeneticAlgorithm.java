@@ -27,9 +27,6 @@ public class GeneticAlgorithm {
 	public static void execute() {
 		System.out.println(" -----  COMENZANDO ALGORITMO GENETICO -----");
 		
-		//TODO: Hacer una clase que inicialice todo
-		ConfigurationsDataSet.getInstance();
-		
 		PopulationRandom population = new PopulationRandom();
 		List<TerroristAttack> filter = getFilters();
 		List<TerroristAttack> poblacion = population.populate(filter);
