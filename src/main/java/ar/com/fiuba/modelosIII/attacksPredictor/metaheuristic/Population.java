@@ -7,7 +7,7 @@ import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
-public class PopulationRandom {
+public class Population {
 
 	private TerroristAttacksDataSet dataSet = TerroristAttacksDataSet.getInstance();
 	

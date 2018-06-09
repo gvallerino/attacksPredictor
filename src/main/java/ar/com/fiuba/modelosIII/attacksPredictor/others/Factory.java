@@ -9,6 +9,7 @@ public class Factory {
 	public static void makeEnviorement() {
 		ConfigurationsDataSet.getInstance();
 		ManagementFile.loadConfigurations();
+		ClustersGrapher.loadConfiguration();
 		TerroristAttacksDataSet.getInstance();
 	}
 

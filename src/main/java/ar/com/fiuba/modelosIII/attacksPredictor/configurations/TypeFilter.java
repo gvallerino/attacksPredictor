@@ -1,4 +1,4 @@
-package ar.com.fiuba.modelosIII.attacksPredictor.filters;
+package ar.com.fiuba.modelosIII.attacksPredictor.configurations;
 
 import java.util.ArrayList;
 import java.util.List;
