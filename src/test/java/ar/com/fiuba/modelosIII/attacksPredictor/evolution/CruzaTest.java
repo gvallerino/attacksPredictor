@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.evolution.CruzaEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.PopulationRandom;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.Population;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cruzable;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
@@ -20,7 +20,7 @@ public class CruzaTest {
 	private TerroristAttacksDataSet data = TerroristAttacksDataSet.getInstance();
 	private TerroristAttack filter;
 	private Cruzable reproduction = null;
-	private PopulationRandom population = new PopulationRandom();
+	private Population population = new Population();
 	
 //	father.print();
 //	mother.print();
