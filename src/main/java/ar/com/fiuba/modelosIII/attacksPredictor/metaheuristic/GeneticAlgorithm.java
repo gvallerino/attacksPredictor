@@ -33,7 +33,7 @@ public class GeneticAlgorithm {
 		
 		for (int generacion = 0; generacion < generaciones; generacion++) {
 			
-			System.out.println("Procesando Generacion: " + String.valueOf(generacion+1) + " => ");
+			System.out.println("Procesando Generacion: " + String.valueOf(generacion) + " => ");
 			for (int i = 0; i < repeticiones; i++) {
 
 				TerroristAttack son = null;

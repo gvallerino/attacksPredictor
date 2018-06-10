@@ -24,7 +24,24 @@ public class ManagerClusterRandom {
 			storeList.add(cluster);
 			store.put(i, storeList);
 		}
+		
 	}
+	
+//	private void loadClusters() {
+//		List<Integer> values = new ArrayList<Integer> ();
+//		values.add(2008);
+//		values.add(8);
+//		values.add(0);
+//		values.add(0);
+//		values.add(0);
+//		values.add(3);
+//		values.add(14);
+//		values.add(6);
+//		values.add(0);
+//		values.add(1);
+//		
+//		
+//	}
 	
 	public void put(TerroristAttack attack) {
 		double distance = calculateDistance(attack, clusters.get(0));
@@ -44,10 +61,7 @@ public class ManagerClusterRandom {
 			List<TerroristAttack> attacks = store.get(i);
 			if (attacks.size() > 0) {
 				List<Double> promedio = calculatePromedio(attacks);
-				
 				clusters.put(i, promedio);
-				store.get(i).clear();
-//			store.get(i).add(newAttackCentroide);
 			}
 		}
 	}
@@ -55,11 +69,11 @@ public class ManagerClusterRandom {
 	private Double calculateDistance(TerroristAttack attack, List<Double> centroide) {
 		Double module = 0D;
 		for (int i = 0; i < Constants.COUNT_DATA_TYPE; i++) {
-			//if (i != 1 && i != 5 && i!=6 && i != 7) {
+			if (i != 1 && i != 5 && i!=6 && i != 7) {
 				double base = attack.getValues().get(i) - centroide.get(i);
 				double potencia = Math.pow(base, 2);
 				module += potencia;
-			//}
+			}
 		}
 		module = Math.sqrt(module);
 		return module;
@@ -100,8 +114,21 @@ public class ManagerClusterRandom {
 	}
 	
 	public void saveClusters(int generacion) {
-		ClustersGrapher.saveClusters(generacion, clusters);
-		ClustersGrapher.printClusters(clusters);
+		int total = getCountDataTotal();
+		ClustersGrapher.saveClusters(generacion, clusters, store, total);
+		ClustersGrapher.printClusters(clusters, store, total);
+		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
+			store.get(i).clear();
+		}
+	}
+	
+	private Integer getCountDataTotal() {
+		Integer total = 0;
+		
+		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
+			total += store.get(i).size();
+		}
+		return total;
 	}
 	
 	public void finalize() {

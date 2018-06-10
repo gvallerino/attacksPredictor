@@ -3,18 +3,18 @@ package ar.com.fiuba.modelosIII.attacksPredictor.enums.model;
 public enum WeaponTypeEnum {
 
 	NOTHING(0, "-", 0),
-	BIOLOGICO(1, "Biologico", 1),
-	QUIMICO(2, "Quimico", 2),
-	RADIOACTIVO(3, "Radioactivo", 3),
-	NUCLEAR(4, "Nuclear", 4),
-	ARMAS_FUEGO(5, "Armas de fuego", 5),
-	EXPLOSIVOS(6, "Explosivos/Bombas/Dinamita", 6),
-	ARMAS_FALSAS(7, "Armas falsas", 7),
-	INCENDIARIAS(8, "Incendiarias", 8),
-	CUERPO_A_CUERPO(9, "Cuerpo a cuerpo", 9),
-	VEHICULO(10, "Vehículo", 10),
-	SABOTAJE(11, "Equipamento de sabotaje", 11),
-	OTROS(12, "Otros", 12);
+	BIOLOGICO(1, "Biologico", 10),
+	QUIMICO(2, "Quimico", 9),
+	RADIOACTIVO(3, "Radioactivo", 11),
+	NUCLEAR(4, "Nuclear", 12),
+	ARMAS_FUEGO(5, "Armas de fuego", 7),
+	EXPLOSIVOS(6, "Explosivos/Bombas/Dinamita", 8),
+	ARMAS_FALSAS(7, "Armas falsas", 2),
+	INCENDIARIAS(8, "Incendiarias", 6),
+	CUERPO_A_CUERPO(9, "Cuerpo a cuerpo", 5),
+	VEHICULO(10, "Vehículo", 4),
+	SABOTAJE(11, "Equipamento de sabotaje", 3),
+	OTROS(12, "Otros", 1);
 	
 	public int id;
 	public String description;
