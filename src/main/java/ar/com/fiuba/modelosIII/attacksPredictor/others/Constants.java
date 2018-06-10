@@ -69,6 +69,22 @@ public class Constants {
 		return valueReturned;
 	}
 	
+	public static boolean getRandom(double probability){
+		if (probability == 0) {
+			return false;
+		}
+		double random = 0;
+		while (random == 0) {
+			random = Constants.getRandom(0, 100);
+		}
+		return probability > random;
+	}
+	
+	public static int choice(int value1, int value2, double probability) {
+		boolean isValue1 = Constants.getRandom(probability);
+		return isValue1 ? value1 : value2;
+	}
+	
 	public static List<Double> toDouble(List<Integer> values) {
 		List<Double> doubles = new ArrayList<Double>();
 		if (values != null && !values.isEmpty()) {

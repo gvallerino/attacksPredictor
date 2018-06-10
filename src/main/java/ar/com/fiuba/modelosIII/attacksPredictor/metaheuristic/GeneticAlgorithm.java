@@ -17,7 +17,7 @@ public class GeneticAlgorithm {
 	private static Mutation mutation = TypeEvolution.getMutation();
 
 	public static void execute() {
-		System.out.println(" -----  COMENZANDO ALGORITMO GENETICO -----");
+		System.out.println("\n -----  COMENZANDO ALGORITMO GENETICO -----");
 		
 		Population population = new Population();
 		List<TerroristAttack> filter = getFilters();
@@ -63,14 +63,7 @@ public class GeneticAlgorithm {
 	}
 	
 	private static boolean mutate() {
-		if (Constants.PORCENTAJE_MUTATION == 0) {
-			return false;
-		}
-		double random = 0;
-		while (random == 0) {
-			random = Constants.getRandom(0, 100);
-		}
-		return Constants.PORCENTAJE_MUTATION > random;
+		return Constants.getRandom(Constants.PORCENTAJE_MUTATION);
 	}
 	
 }

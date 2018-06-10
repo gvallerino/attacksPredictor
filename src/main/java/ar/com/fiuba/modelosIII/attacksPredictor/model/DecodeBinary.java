@@ -26,7 +26,7 @@ public abstract class DecodeBinary {
 	
 	private static Integer decodeYear(BitSet bits) {
 		int positionTrue = getPositionTrue(bits);
-		if (positionTrue == -1) return 0;
+		if (positionTrue == -1) return Constants.getRandom(Constants.YEAR_MIN, Constants.YEAR_MAX);
 		int randomYear = Constants.getRandom(0,Constants.COUNT_DIVIDE_YEARS());
 		Integer year = Constants.YEAR_MIN + randomYear + (positionTrue * Constants.COUNT_DIVIDE_YEARS());
 		return year;

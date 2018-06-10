@@ -55,11 +55,11 @@ public class ManagerClusterRandom {
 	private Double calculateDistance(TerroristAttack attack, List<Double> centroide) {
 		Double module = 0D;
 		for (int i = 0; i < Constants.COUNT_DATA_TYPE; i++) {
-			if (i != 1 && i != 5 && i!=6 && i != 7) {
+			//if (i != 1 && i != 5 && i!=6 && i != 7) {
 				double base = attack.getValues().get(i) - centroide.get(i);
 				double potencia = Math.pow(base, 2);
 				module += potencia;
-			}
+			//}
 		}
 		module = Math.sqrt(module);
 		return module;
