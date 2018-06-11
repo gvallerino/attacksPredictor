@@ -10,6 +10,7 @@ import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TargetTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
 public class TypeFilter {
 	
@@ -46,28 +47,28 @@ public class TypeFilter {
 //	}
 	
 	private void processFilters() {
-		List<Integer> filters = ConfigurationsDataSet.getAllByKey("regionType");
+		List<Integer> filters = ConfigurationsDataSet.getPositionsByKey("regionType");
 		if (!filters.isEmpty()) {
 			for (Integer position : filters) {
 				regionFilters.add(RegionEnum.getById(position));
 			}
 		}
 		
-		filters = ConfigurationsDataSet.getAllByKey("attackType");
+		filters = ConfigurationsDataSet.getPositionsByKey("attackType");
 		if (!filters.isEmpty()) {
 			for (Integer position : filters) {
 				attackTypeFilters.add(AttackTypeEnum.getById(position));
 			}
 		}
 		
-		filters = ConfigurationsDataSet.getAllByKey("targetType");
+		filters = ConfigurationsDataSet.getPositionsByKey("targetType");
 		if (!filters.isEmpty()) {
 			for (Integer position : filters) {
 				targetTypeFilters.add(TargetTypeEnum.getById(position));
 			}
 		}
 		
-		filters = ConfigurationsDataSet.getAllByKey("weaponType");
+		filters = ConfigurationsDataSet.getPositionsByKey("weaponType");
 		if (!filters.isEmpty()) {
 			for (Integer position : filters) {
 				weaponTypeFilters.add(WeaponTypeEnum.getById(position));
@@ -113,4 +114,5 @@ public class TypeFilter {
 		
 		return filtersType;
 	}
+	
 }

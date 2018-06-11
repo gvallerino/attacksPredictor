@@ -23,14 +23,18 @@ public class Population {
 	public List<TerroristAttack> populate(List<TerroristAttack> filter) {
 		List<TerroristAttack> dataSetFiltered = dataSet.filter(filter);
 		List<TerroristAttack> population = new ArrayList<TerroristAttack>();
-		Double limitRandom = Constants.POPULATION_EXACT;
 		
-		if (limitRandom == 0) {
-			Double limitSup = dataSetFiltered.size() * Constants.POPULATION_RANDOM_MAX;
-			Double limitInf = dataSetFiltered.size() * Constants.POPULATION_RANDOM_MIN;
-			
-			limitRandom = (double) Constants.getRandom(limitInf.intValue(), limitSup.intValue());
+		//Population exact
+		if (Constants.POPULATION_EXACT == 0) {
+			Constants.POPULATION_EXACT = dataSetFiltered.size();
+			return dataSetFiltered;
 		}
+		
+		//Population random
+		Double limitSup = dataSetFiltered.size() * Constants.POPULATION_RANDOM_MAX;
+		Double limitInf = dataSetFiltered.size() * Constants.POPULATION_RANDOM_MIN;
+		
+		Double limitRandom = (double) Constants.getRandom(limitInf.intValue(), limitSup.intValue());
 
 		while(population.size() <= limitRandom) {
 			int indexRandom = Constants.getRandom(0, population.size());

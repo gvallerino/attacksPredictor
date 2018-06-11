@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.hssf.record.ContinueRecord;
+
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 import ar.com.fiuba.modelosIII.attacksPredictor.reader.ManagementFile;
 
@@ -52,13 +54,36 @@ public class TerroristAttacksDataSet {
 		if (filter == null) 
 			return new ArrayList<TerroristAttack>(store.values());
 		
+		Map<String, Boolean> typeFilters = new HashMap<String, Boolean>();
+		for (TerroristAttack attackFilter : filter) {
+			if(attackFilter.getId() != null) typeFilters.put("id", Boolean.TRUE);
+			if(attackFilter.getRegion() != null) typeFilters.put("region", Boolean.TRUE);
+			if(attackFilter.isMultiple() != null) typeFilters.put("multiple", Boolean.TRUE);
+			if(attackFilter.isSuccess() != null) typeFilters.put("success", Boolean.TRUE);
+			if(attackFilter.isSuicide() != null) typeFilters.put("suicide", Boolean.TRUE);
+			if(attackFilter.getAttackType() != null) typeFilters.put("attack", Boolean.TRUE);
+			if(attackFilter.getTargetType() != null) typeFilters.put("target", Boolean.TRUE);
+			if(attackFilter.getWeaponType() != null) typeFilters.put("weapon", Boolean.TRUE);
+			if(attackFilter.getAmountKill() != null) typeFilters.put("kill", Boolean.TRUE);
+			if(attackFilter.getAmountWound() != null) typeFilters.put("wound", Boolean.TRUE);
+		}
+		
+		int countTypesFilters = 0;
+		for (Boolean value : typeFilters.values()) {
+			if (value) countTypesFilters++;
+		}
+		
 		List<TerroristAttack> terroristAttacksFiltered = new ArrayList<TerroristAttack>();
 		
 		for (TerroristAttack attack : store.values()) {
+			int countOks = 0;
 			for (TerroristAttack attackFilter : filter) {
 				if (!terroristAttacksFiltered.contains(attack) && attack.match(attackFilter)) {
-					terroristAttacksFiltered.add(attack);
+					countOks++;
 				}
+			}
+			if(countOks == countTypesFilters) {
+				terroristAttacksFiltered.add(attack);
 			}
 		}
 		return terroristAttacksFiltered;

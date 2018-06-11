@@ -10,14 +10,14 @@ import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
 
 public class Constants {
 	
-	public static final int COUNT_CLUSTERS = 6;
-	public static final int COUNT_GENERATIONS = 20;
-	public static final int COUNT_DIGITS_PRINT_CLUSTERS = 6;
+	public static int COUNT_CLUSTERS;
+	public static int COUNT_GENERATIONS;
+	public static double POPULATION_RANDOM_MAX;
+	public static double POPULATION_RANDOM_MIN;
+	public static double POPULATION_EXACT; // 34840D
+	public static double PORCENTAJE_MUTATION;
 	
-	public static final double POPULATION_RANDOM_MAX = 0.2D;
-	public static final double POPULATION_RANDOM_MIN = 0.1D;
-	public static final double POPULATION_EXACT = 0; // 34840D
-	public static final double PORCENTAJE_MUTATION = 3;
+	public static final int COUNT_DIGITS_PRINT_CLUSTERS = 6;
 
 	public static final int COUNT_DATA_TYPE = 10;
 	public static final int YEAR_MAX = 2016;

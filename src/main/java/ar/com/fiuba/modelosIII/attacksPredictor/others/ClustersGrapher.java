@@ -14,7 +14,7 @@ public class ClustersGrapher {
 	private final static String SEPARATOR = "|";
 	
 	public static void loadConfiguration() {
-		valuesToView = ConfigurationsDataSet.getAllByKey("view");
+		valuesToView = ConfigurationsDataSet.getPositionsByKey("view");
 		valuesToView.add(10);
 	}
 	

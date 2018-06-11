@@ -25,7 +25,7 @@ public class TypeEvolution {
 	}
 	
 	private static int getIdByProperty(String property) {
-		List<Integer> cruzas = ConfigurationsDataSet.getAllByKey(property);
+		List<Integer> cruzas = ConfigurationsDataSet.getPositionsByKey(property);
 		int id = 0;
 		if (!cruzas.isEmpty()) {
 			id = cruzas.get(0);

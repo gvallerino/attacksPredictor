@@ -242,5 +242,4 @@ public class TerroristAttack {
 		return id && year && region && multiple && success && suicide && attackType && targetType && weaponType && amountKill && amountWound;
 	}
   
-	
 }
