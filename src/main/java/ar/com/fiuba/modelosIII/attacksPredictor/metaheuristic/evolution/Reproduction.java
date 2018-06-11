@@ -1,23 +1,34 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution;
 
-import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.List;
 
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cruzable;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
-import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
-public class Reproduction implements Borneable {
-
-	public TerroristAttack beBorn (TerroristAttack father, TerroristAttack mother) {
-		
-		int genMax = (father.getFitness() > mother.getFitness()) ? father.getFitness() : mother.getFitness();
-		List<Integer> genFather = father.getValues().subList(0, genMax);
-		List<Integer> genMother = mother.getValues().subList(genMax, Constants.COUNT_DATA_TYPE);
-		List<Integer> genSon = new ArrayList<Integer>();
-		genSon.addAll(genFather);
-		genSon.addAll(genMother);
+public abstract class Reproduction implements Cruzable {
+	
+	@Override
+	public TerroristAttack cruzar(TerroristAttack father, TerroristAttack mother) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	protected TerroristAttack cruzar(TerroristAttack father, TerroristAttack mother, List<Integer> gen) {
 		String id = father.getId() + "-" + mother.getId();
-		TerroristAttack son = new TerroristAttack(id, genSon);
+		return new TerroristAttack(id, gen);
+	}
+	
+	protected TerroristAttack cruzar(TerroristAttack father, TerroristAttack mother, BitSet gen) {
+		String id = father.getId() + "-" + mother.getId();
+		TerroristAttack son = null;
+		if (gen != null) {
+			son = new TerroristAttack(id, gen);
+		} else {
+			son = new TerroristAttack();
+			son.setId(id);
+		}
 		return son;
 	}
+
 }

@@ -6,12 +6,13 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.AttackTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.RegionEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.TargetTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.WeaponTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TargetTypeEnum;
+import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 import junit.framework.Assert;
 
 public class DataSetTest {
@@ -81,5 +82,15 @@ public class DataSetTest {
 		filters.add(filter3);
 		List<TerroristAttack> attacksFiltered = data.filter(filters);
 		Assert.assertEquals(attacksFiltered.size(), 13181);
+	}
+	
+	@Test
+	public void testNumberMaxKillsAmount() {
+		Assert.assertEquals(Constants.AMOUNT_KILLS_MAX, 1383);
+	}
+	
+	@Test
+	public void testNumberMaxWoundAmount() {
+		Assert.assertEquals(Constants.AMOUNT_WOUND_MAX, 7366);
 	}
 }

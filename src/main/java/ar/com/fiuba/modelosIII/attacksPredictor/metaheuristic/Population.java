@@ -22,23 +22,39 @@ public class Population {
 	
 	public List<TerroristAttack> populate(List<TerroristAttack> filter) {
 		List<TerroristAttack> dataSetFiltered = dataSet.filter(filter);
-		double proba = Constants.PROBABILITY_MAX;
-		double limitSup = dataSetFiltered.size() * Constants.PROBABILITY_MAX;
-		double limitInf = dataSetFiltered.size() * Constants.PROBABILITY_MIN;
-		
 		List<TerroristAttack> population = new ArrayList<TerroristAttack>();
-		while (limitInf > population.size()) {
-			for (TerroristAttack attack : dataSetFiltered) {
-				double random = Math.random();
-				boolean include = (proba >= random);
-				if (include) {
-					if ((population.size() + 1) > limitSup) {
-						return population;
-					}
-					population.add(attack);
-				}
-			}
+		
+		//Population exact
+		if (Constants.POPULATION_EXACT == 0) {
+			Constants.POPULATION_EXACT = dataSetFiltered.size();
+			return dataSetFiltered;
 		}
+		
+		//Population random
+		Double limitSup = dataSetFiltered.size() * Constants.POPULATION_RANDOM_MAX;
+		Double limitInf = dataSetFiltered.size() * Constants.POPULATION_RANDOM_MIN;
+		
+		Double limitRandom = (double) Constants.getRandom(limitInf.intValue(), limitSup.intValue());
+
+		while(population.size() <= limitRandom) {
+			int indexRandom = Constants.getRandom(0, population.size());
+			population.add(dataSetFiltered.get(indexRandom));
+		}
+		
 		return population;
 	}
 }
+
+
+/*while (limitInf > population.size()) {
+for (TerroristAttack attack : dataSetFiltered) {
+	double random = Math.random();
+	boolean include = (proba >= random);
+	if (include) {
+		if ((population.size() + 1) > limitSup) {
+			return population;
+		}
+		population.add(attack);
+	}
+}
+}*/
