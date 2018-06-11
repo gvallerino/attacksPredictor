@@ -16,6 +16,7 @@ public class Constants {
 	public static double POPULATION_RANDOM_MIN;
 	public static double POPULATION_EXACT; // 34840D
 	public static double PORCENTAJE_MUTATION;
+	public static boolean CONSIDER_TYPES;
 	
 	public static final int COUNT_DIGITS_PRINT_CLUSTERS = 6;
 

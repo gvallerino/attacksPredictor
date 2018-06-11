@@ -44,17 +44,3 @@ public class Population {
 		return population;
 	}
 }
-
-
-/*while (limitInf > population.size()) {
-for (TerroristAttack attack : dataSetFiltered) {
-	double random = Math.random();
-	boolean include = (proba >= random);
-	if (include) {
-		if ((population.size() + 1) > limitSup) {
-			return population;
-		}
-		population.add(attack);
-	}
-}
-}*/
