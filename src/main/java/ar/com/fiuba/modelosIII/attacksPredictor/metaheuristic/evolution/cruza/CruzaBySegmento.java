@@ -23,12 +23,22 @@ public class CruzaBySegmento extends Reproduction implements Cruzable {
 	public TerroristAttack cruzar (TerroristAttack father, TerroristAttack mother) {
 		
 		List<Integer> genSon = new ArrayList<Integer>();
+		/*
 		for (int i = 0; i < Constants.COUNT_DATA_TYPE; i++) {
 			Integer genFather = father.getValues().get(i);
 			Integer genMother = mother.getValues().get(i);
 			boolean applyGenFather = Constants.getRandom(0, 1) == 1;
 			Integer gen = applyGenFather ? genFather : genMother;
 			genSon.add(gen);
+		}*/
+		for (int i = 0; i < 5; i++) {
+			Integer genFather = father.getValues().get(i);
+			genSon.add(genFather);
+		}
+		
+		for (int i = 5; i < 10; i++) {
+			Integer genMother = mother.getValues().get(i);
+			genSon.add(genMother);
 		}
 		
 		return this.cruzar(father, mother, genSon);
