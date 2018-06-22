@@ -7,10 +7,8 @@ import ar.com.fiuba.modelosIII.attacksPredictor.enums.data.ConfigurationsDataSet
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TargetTypeEnum;
-import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
-import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
 public class TypeFilter {
 	
@@ -47,28 +45,59 @@ public class TypeFilter {
 //	}
 	
 	private void processFilters() {
-		List<Integer> filters = ConfigurationsDataSet.getPositionsByKey("regionType");
+		List<Integer> filtersType = ConfigurationsDataSet.getPositionsByKey("filtersType");
+		for (Integer position : filtersType) {
+			if (position.intValue() == 0) {
+				processCommonFilters();
+			}
+			if (position.intValue() == 1) {
+				processIndividualFilters();
+			}
+		}
+		
+	}
+	
+	private void processCommonFilters() {
+		List<Integer> filters = ConfigurationsDataSet.getPositionsByKey("common.regionType");
+		if (!filters.isEmpty()) {
+			addCommonRegionTypeFilters(filters);
+		}
+		
+		filters = ConfigurationsDataSet.getPositionsByKey("common.weaponType");
+		if (!filters.isEmpty()) {
+			addCommonWeaponTypeFilters(filters);
+		}
+		
+		filters = ConfigurationsDataSet.getPositionsByKey("common.targetType");
+		if (!filters.isEmpty()) {
+			addCommonTargetTypeFilters(filters);
+		}
+		
+	}
+	
+	private void processIndividualFilters() {
+		List<Integer> filters = ConfigurationsDataSet.getPositionsByKey("filters.regionType");
 		if (!filters.isEmpty()) {
 			for (Integer position : filters) {
 				regionFilters.add(RegionEnum.getById(position));
 			}
 		}
 		
-		filters = ConfigurationsDataSet.getPositionsByKey("attackType");
+		filters = ConfigurationsDataSet.getPositionsByKey("filters.attackType");
 		if (!filters.isEmpty()) {
 			for (Integer position : filters) {
 				attackTypeFilters.add(AttackTypeEnum.getById(position));
 			}
 		}
 		
-		filters = ConfigurationsDataSet.getPositionsByKey("targetType");
+		filters = ConfigurationsDataSet.getPositionsByKey("filters.targetType");
 		if (!filters.isEmpty()) {
 			for (Integer position : filters) {
 				targetTypeFilters.add(TargetTypeEnum.getById(position));
 			}
 		}
 		
-		filters = ConfigurationsDataSet.getPositionsByKey("weaponType");
+		filters = ConfigurationsDataSet.getPositionsByKey("filters.weaponType");
 		if (!filters.isEmpty()) {
 			for (Integer position : filters) {
 				weaponTypeFilters.add(WeaponTypeEnum.getById(position));
@@ -115,4 +144,85 @@ public class TypeFilter {
 		return filtersType;
 	}
 	
+	private void addCommonRegionTypeFilters(List<Integer> filters) {
+		for (Integer position : filters) {
+			switch(position.intValue()) {
+				case 0: regionFilters.add(RegionEnum.NORTH_AMERICA);
+						break;
+				
+				case 1: regionFilters.add(RegionEnum.NORTH_AMERICA);
+						regionFilters.add(RegionEnum.CENTRAL_AMERICA);
+						regionFilters.add(RegionEnum.SOUTH_AMERICA);
+						break;
+						
+				case 2: regionFilters.add(RegionEnum.CENTRAL_ASIA);
+						regionFilters.add(RegionEnum.EAST_ASIA);
+						regionFilters.add(RegionEnum.SOUTH_ASIA);
+						regionFilters.add(RegionEnum.SOUTHEAST_ASIA);
+						break;
+						
+				case 3: regionFilters.add(RegionEnum.EASTERN_EUROPE);
+						regionFilters.add(RegionEnum.WESTERN_EUROPE);
+						break;
+			}
+		}
+	}
+	
+	
+	private void addCommonWeaponTypeFilters(List<Integer> filters) {
+		for (Integer position : filters) {
+			switch(position) {
+				case 0: weaponTypeFilters.add(WeaponTypeEnum.ARMAS_FUEGO);
+						weaponTypeFilters.add(WeaponTypeEnum.EXPLOSIVOS);
+						weaponTypeFilters.add(WeaponTypeEnum.INCENDIARIAS);
+						break;
+				
+				case 1: weaponTypeFilters.add(WeaponTypeEnum.ARMAS_FALSAS);
+						weaponTypeFilters.add(WeaponTypeEnum.CUERPO_A_CUERPO);
+						weaponTypeFilters.add(WeaponTypeEnum.VEHICULO);
+						weaponTypeFilters.add(WeaponTypeEnum.SABOTAJE);
+						weaponTypeFilters.add(WeaponTypeEnum.OTROS);
+						break;
+						
+				case 2: weaponTypeFilters.add(WeaponTypeEnum.BIOLOGICO);
+						weaponTypeFilters.add(WeaponTypeEnum.QUIMICO);
+						weaponTypeFilters.add(WeaponTypeEnum.RADIOACTIVO);
+						weaponTypeFilters.add(WeaponTypeEnum.NUCLEAR);
+						break;
+			}
+		}
+	}
+	
+	private void addCommonTargetTypeFilters(List<Integer> filters) {
+		for (Integer position : filters) {
+			switch(position) {
+				case 0: targetTypeFilters.add(TargetTypeEnum.GOBIERNO_DIPLOMATICOS);
+						targetTypeFilters.add(TargetTypeEnum.GOBIERNO_GENERAL);
+						targetTypeFilters.add(TargetTypeEnum.MILITAR);
+						targetTypeFilters.add(TargetTypeEnum.GRUPOS_POLITICOS);
+						targetTypeFilters.add(TargetTypeEnum.POLICIA);
+						targetTypeFilters.add(TargetTypeEnum.TERRORISTAS);
+						break;
+				
+				case 1: targetTypeFilters.add(TargetTypeEnum.CIVILES_Y_PROPIEDADES);
+						targetTypeFilters.add(TargetTypeEnum.NEGOCIOS);
+						targetTypeFilters.add(TargetTypeEnum.ABORTO);
+						targetTypeFilters.add(TargetTypeEnum.AERONAVES_AEROPUERTOS); 
+						targetTypeFilters.add(TargetTypeEnum.INSTITUCIONES_EDUCACIONALES); 
+						targetTypeFilters.add(TargetTypeEnum.NGO);
+						targetTypeFilters.add(TargetTypeEnum.COMIDA_AGUA);
+						targetTypeFilters.add(TargetTypeEnum.INSTITUCIONES_RELIGIOSAS);
+						targetTypeFilters.add(TargetTypeEnum.PERIODISTAS);
+						targetTypeFilters.add(TargetTypeEnum.TELECOMUNICACION);
+						targetTypeFilters.add(TargetTypeEnum.UTILIDADES);
+						targetTypeFilters.add(TargetTypeEnum.TURISTAS);
+						targetTypeFilters.add(TargetTypeEnum.TRANSPORTE);
+						targetTypeFilters.add(TargetTypeEnum.EMPTY);
+						targetTypeFilters.add(TargetTypeEnum.OTROS);
+						targetTypeFilters.add(TargetTypeEnum.NOTHING);
+						targetTypeFilters.add(TargetTypeEnum.MARITIMO);
+						break;
+			}
+		}
+	}
 }

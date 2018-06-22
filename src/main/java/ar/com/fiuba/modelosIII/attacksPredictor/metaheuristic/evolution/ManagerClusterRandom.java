@@ -11,6 +11,7 @@ public class ManagerClusterRandom {
 	
 	private Map<Integer, List<Double>> clusters;
 	private Map<Integer, List<TerroristAttack>> store;
+	private static Double inercia = 0D;
 	
 	public ManagerClusterRandom (List<TerroristAttack> population) {
 		clusters = new HashMap<Integer, List<Double>>();
@@ -53,6 +54,7 @@ public class ManagerClusterRandom {
 				keyMin = i;
 			}
 		}
+		inercia += Math.pow(minDistance, 2);
 		store.get(keyMin).add(attack);
 	}
 	
@@ -135,6 +137,14 @@ public class ManagerClusterRandom {
 		clusters = null;
 		store = null;
 		ManagementFile.closeFile();
+	}
+	
+	public void restartInercia() {
+		inercia = 0D;
+	}
+	
+	public void printInercia() {
+		System.out.println("La inercia para " + Constants.COUNT_CLUSTERS + " es: " + inercia);
 	}
 	
 }
