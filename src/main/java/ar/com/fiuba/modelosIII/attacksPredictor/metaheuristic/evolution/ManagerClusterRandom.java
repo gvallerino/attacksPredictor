@@ -11,11 +11,12 @@ public class ManagerClusterRandom {
 	
 	private Map<Integer, List<Double>> clusters;
 	private Map<Integer, List<TerroristAttack>> store;
-	private static Double inercia = 0D;
+	private Map<Integer, Double> inercias;
 	
 	public ManagerClusterRandom (List<TerroristAttack> population) {
 		clusters = new HashMap<Integer, List<Double>>();
 		store = new HashMap<Integer, List<TerroristAttack>>();
+		inercias = new HashMap<Integer, Double>();
 		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
 			int random = Constants.getRandom(0, population.size());
 			TerroristAttack cluster = population.get(random);
@@ -24,6 +25,7 @@ public class ManagerClusterRandom {
 			List<TerroristAttack> storeList = new ArrayList<TerroristAttack>();
 			storeList.add(cluster);
 			store.put(i, storeList);
+			inercias.put(i, 0D);
 		}
 		
 	}
@@ -54,7 +56,9 @@ public class ManagerClusterRandom {
 				keyMin = i;
 			}
 		}
-		inercia += Math.pow(minDistance, 2);
+		//Double inerciaActual = Math.pow(minDistance, 2);
+		Double inerciaActualizada = inercias.get(keyMin) + minDistance;
+		inercias.put(keyMin, inerciaActualizada);
 		store.get(keyMin).add(attack);
 	}
 	
@@ -117,8 +121,8 @@ public class ManagerClusterRandom {
 	
 	public void saveClusters(int generacion) {
 		int total = getCountDataTotal();
-		ClustersGrapher.saveClusters(generacion, clusters, store, total);
-		ClustersGrapher.printClusters(clusters, store, total);
+		ClustersGrapher.saveClusters(generacion, clusters, store, total, inercias);
+		ClustersGrapher.printClusters(clusters, store, total, inercias);
 		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
 			store.get(i).clear();
 		}
@@ -140,12 +144,19 @@ public class ManagerClusterRandom {
 	}
 	
 	public void restartInercia() {
-		inercia = 0D;
+		inercias.clear();
+		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
+			inercias.put(i, 0D);
+		}
 	}
 	
-	public void printInercia(int generacion) {
+	public void printInercia() {
+		Double inercia = 0D;
+		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
+			inercia += inercias.get(i);
+		}
 		Double inerciaPromedio = inercia / Constants.COUNT_CLUSTERS;
-		System.out.println("La inercia para la generacion " + generacion + " es: " + inerciaPromedio + "\n");
+		System.out.println("La inercia promedio es: " + inerciaPromedio.longValue() + "\n");
 	}
 	
 }

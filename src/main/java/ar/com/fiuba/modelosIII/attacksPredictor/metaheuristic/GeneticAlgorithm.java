@@ -53,7 +53,7 @@ public class GeneticAlgorithm {
 			}
 			managerCluster.updateCentroides(generacion);
 			managerCluster.saveClusters(generacion);
-			managerCluster.printInercia(generacion);
+			managerCluster.printInercia();
 			poblacion = proximaPoblacion;
 			proximaPoblacion = new ArrayList<TerroristAttack>();
 		}
