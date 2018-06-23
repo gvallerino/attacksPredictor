@@ -31,7 +31,7 @@ public class GeneticAlgorithm {
 		System.out.println("Procesando Generacion Inicial  =>  "); 
 		
 		for (int generacion = 0; generacion < generaciones; generacion++) {
-			//managerCluster.restartInercia();
+			managerCluster.restartInercia();
 			System.out.println("Procesando Generacion: " + String.valueOf(generacion) + " => ");
 			int repeticiones = poblacion.size();
 			for (int i = 0; i < repeticiones-1; i++) {
@@ -51,13 +51,13 @@ public class GeneticAlgorithm {
 				managerCluster.put(son);
 				proximaPoblacion.add(son);
 			}
-			managerCluster.printInercia();
 			managerCluster.updateCentroides(generacion);
 			managerCluster.saveClusters(generacion);
+			managerCluster.printInercia(generacion);
 			poblacion = proximaPoblacion;
 			proximaPoblacion = new ArrayList<TerroristAttack>();
 		}
-		managerCluster.printInercia();
+		//managerCluster.printInercia(Constants.COUNT_GENERATIONS - 1);
 		managerCluster.finalize();
 	}
 	

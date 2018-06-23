@@ -196,31 +196,31 @@ public class TypeFilter {
 	private void addCommonTargetTypeFilters(List<Integer> filters) {
 		for (Integer position : filters) {
 			switch(position) {
-				case 0: targetTypeFilters.add(TargetTypeEnum.GOBIERNO_DIPLOMATICOS);
-						targetTypeFilters.add(TargetTypeEnum.GOBIERNO_GENERAL);
-						targetTypeFilters.add(TargetTypeEnum.MILITAR);
-						targetTypeFilters.add(TargetTypeEnum.GRUPOS_POLITICOS);
+				case 0: targetTypeFilters.add(TargetTypeEnum.GOBIERNO_GENERAL);
 						targetTypeFilters.add(TargetTypeEnum.POLICIA);
+						targetTypeFilters.add(TargetTypeEnum.MILITAR);
+						targetTypeFilters.add(TargetTypeEnum.GOBIERNO_DIPLOMATICOS);
 						targetTypeFilters.add(TargetTypeEnum.TERRORISTAS);
+						targetTypeFilters.add(TargetTypeEnum.GRUPOS_POLITICOS);
 						break;
 				
-				case 1: targetTypeFilters.add(TargetTypeEnum.CIVILES_Y_PROPIEDADES);
-						targetTypeFilters.add(TargetTypeEnum.NEGOCIOS);
+				case 1: targetTypeFilters.add(TargetTypeEnum.NEGOCIOS);
 						targetTypeFilters.add(TargetTypeEnum.ABORTO);
 						targetTypeFilters.add(TargetTypeEnum.AERONAVES_AEROPUERTOS); 
 						targetTypeFilters.add(TargetTypeEnum.INSTITUCIONES_EDUCACIONALES); 
-						targetTypeFilters.add(TargetTypeEnum.NGO);
 						targetTypeFilters.add(TargetTypeEnum.COMIDA_AGUA);
-						targetTypeFilters.add(TargetTypeEnum.INSTITUCIONES_RELIGIOSAS);
 						targetTypeFilters.add(TargetTypeEnum.PERIODISTAS);
+						targetTypeFilters.add(TargetTypeEnum.MARITIMO);
+						targetTypeFilters.add(TargetTypeEnum.NGO);
+						targetTypeFilters.add(TargetTypeEnum.OTROS);
+						targetTypeFilters.add(TargetTypeEnum.CIVILES_Y_PROPIEDADES);
+						targetTypeFilters.add(TargetTypeEnum.INSTITUCIONES_RELIGIOSAS);
 						targetTypeFilters.add(TargetTypeEnum.TELECOMUNICACION);
-						targetTypeFilters.add(TargetTypeEnum.UTILIDADES);
 						targetTypeFilters.add(TargetTypeEnum.TURISTAS);
 						targetTypeFilters.add(TargetTypeEnum.TRANSPORTE);
+						targetTypeFilters.add(TargetTypeEnum.UTILIDADES);
 						targetTypeFilters.add(TargetTypeEnum.EMPTY);
-						targetTypeFilters.add(TargetTypeEnum.OTROS);
 						targetTypeFilters.add(TargetTypeEnum.NOTHING);
-						targetTypeFilters.add(TargetTypeEnum.MARITIMO);
 						break;
 			}
 		}

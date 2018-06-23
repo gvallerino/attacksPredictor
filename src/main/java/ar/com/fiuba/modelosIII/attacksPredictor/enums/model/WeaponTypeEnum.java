@@ -13,7 +13,7 @@ public enum WeaponTypeEnum {
 	INCENDIARIAS(8, "Incendiarias", 6),
 	CUERPO_A_CUERPO(9, "Cuerpo a cuerpo", 5),
 	VEHICULO(10, "Vehículo", 4),
-	SABOTAJE(11, "Equipamento de sabotaje", 3),
+	SABOTAJE(11, "Equipamento de sabotaje - Demolicion de propiedades", 3),
 	OTROS(12, "Otros", 1);
 	
 	public int id;

@@ -143,8 +143,9 @@ public class ManagerClusterRandom {
 		inercia = 0D;
 	}
 	
-	public void printInercia() {
-		System.out.println("La inercia para " + Constants.COUNT_CLUSTERS + " es: " + inercia);
+	public void printInercia(int generacion) {
+		Double inerciaPromedio = inercia / Constants.COUNT_CLUSTERS;
+		System.out.println("La inercia para la generacion " + generacion + " es: " + inerciaPromedio + "\n");
 	}
 	
 }
