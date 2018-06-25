@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.hssf.record.ContinueRecord;
-
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 import ar.com.fiuba.modelosIII.attacksPredictor.reader.ManagementFile;
 
@@ -46,7 +44,7 @@ public class TerroristAttacksDataSet {
 	public List<TerroristAttack> filter(TerroristAttack filter) {
 		List<TerroristAttack> filterList = new ArrayList<TerroristAttack>();
 		filterList.add(filter);
-		return this.filter(filterList);
+		return this.filter(1, filterList);
 	}
 	
 	public List<TerroristAttack> filter(List<TerroristAttack> filter) {
@@ -57,6 +55,7 @@ public class TerroristAttacksDataSet {
 		Map<String, Boolean> typeFilters = new HashMap<String, Boolean>();
 		for (TerroristAttack attackFilter : filter) {
 			if(attackFilter.getId() != null) typeFilters.put("id", Boolean.TRUE);
+			if(attackFilter.getYear() != null) typeFilters.put("year", Boolean.TRUE);
 			if(attackFilter.getRegion() != null) typeFilters.put("region", Boolean.TRUE);
 			if(attackFilter.isMultiple() != null) typeFilters.put("multiple", Boolean.TRUE);
 			if(attackFilter.isSuccess() != null) typeFilters.put("success", Boolean.TRUE);
@@ -73,6 +72,10 @@ public class TerroristAttacksDataSet {
 			if (value) countTypesFilters++;
 		}
 		
+		return this.filter(countTypesFilters, filter);
+	}
+	
+	private List<TerroristAttack> filter(int countTypesFilters, List<TerroristAttack> filter) {
 		List<TerroristAttack> terroristAttacksFiltered = new ArrayList<TerroristAttack>();
 		
 		for (TerroristAttack attack : store.values()) {

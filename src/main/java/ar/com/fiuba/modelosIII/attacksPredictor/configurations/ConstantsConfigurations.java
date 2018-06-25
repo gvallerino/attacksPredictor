@@ -28,5 +28,6 @@ public class ConstantsConfigurations {
 		}
 		
 		Constants.PORCENTAJE_MUTATION = Double.parseDouble(values.get("mutation.porcentaje"));
+		Constants.CONSIDER_TYPES = Boolean.parseBoolean(values.get("considerTypes"));
 	}
 }

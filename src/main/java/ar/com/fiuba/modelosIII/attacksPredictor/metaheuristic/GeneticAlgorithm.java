@@ -26,15 +26,15 @@ public class GeneticAlgorithm {
 		List<TerroristAttack> proximaPoblacion = new ArrayList<TerroristAttack>();
 		ManagerClusterRandom managerCluster = new ManagerClusterRandom(poblacion);
 		int generaciones = Constants.COUNT_GENERATIONS;
-		int repeticiones = poblacion.size();
 		
 		System.out.println("\nTamaño de generaciones: " + poblacion.size());
 		System.out.println("Procesando Generacion Inicial  =>  "); 
 		
 		for (int generacion = 0; generacion < generaciones; generacion++) {
-			
+			managerCluster.restartInercia();
 			System.out.println("Procesando Generacion: " + String.valueOf(generacion) + " => ");
-			for (int i = 0; i < repeticiones; i++) {
+			int repeticiones = poblacion.size();
+			for (int i = 0; i < repeticiones-1; i++) {
 
 				TerroristAttack son = null;
 				if (mutate()) {
@@ -44,17 +44,20 @@ public class GeneticAlgorithm {
 				} else {
 					TerroristAttack father = poblacion.get(Constants.getRandom(0, poblacion.size()));
 					TerroristAttack mother = poblacion.get(Constants.getRandom(0, poblacion.size()));
+					//TerroristAttack father = poblacion.get(i);
+					//TerroristAttack mother = poblacion.get(i+1);
 					son = cruza.cruzar(father, mother);
 				}
 				managerCluster.put(son);
 				proximaPoblacion.add(son);
 			}
-			
 			managerCluster.updateCentroides(generacion);
 			managerCluster.saveClusters(generacion);
+			managerCluster.printInercia();
 			poblacion = proximaPoblacion;
 			proximaPoblacion = new ArrayList<TerroristAttack>();
 		}
+		//managerCluster.printInercia(Constants.COUNT_GENERATIONS - 1);
 		managerCluster.finalize();
 	}
 	

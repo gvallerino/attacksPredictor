@@ -11,10 +11,12 @@ public class ManagerClusterRandom {
 	
 	private Map<Integer, List<Double>> clusters;
 	private Map<Integer, List<TerroristAttack>> store;
+	private Map<Integer, Double> inercias;
 	
 	public ManagerClusterRandom (List<TerroristAttack> population) {
 		clusters = new HashMap<Integer, List<Double>>();
 		store = new HashMap<Integer, List<TerroristAttack>>();
+		inercias = new HashMap<Integer, Double>();
 		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
 			int random = Constants.getRandom(0, population.size());
 			TerroristAttack cluster = population.get(random);
@@ -23,6 +25,7 @@ public class ManagerClusterRandom {
 			List<TerroristAttack> storeList = new ArrayList<TerroristAttack>();
 			storeList.add(cluster);
 			store.put(i, storeList);
+			inercias.put(i, 0D);
 		}
 		
 	}
@@ -53,6 +56,9 @@ public class ManagerClusterRandom {
 				keyMin = i;
 			}
 		}
+		//Double inerciaActual = Math.pow(minDistance, 2);
+		Double inerciaActualizada = inercias.get(keyMin) + minDistance;
+		inercias.put(keyMin, inerciaActualizada);
 		store.get(keyMin).add(attack);
 	}
 	
@@ -69,7 +75,7 @@ public class ManagerClusterRandom {
 	private Double calculateDistance(TerroristAttack attack, List<Double> centroide) {
 		Double module = 0D;
 		for (int i = 0; i < Constants.COUNT_DATA_TYPE; i++) {
-			if (i != 1 && i != 5 && i!=6 && i != 7) {
+			if (Constants.CONSIDER_TYPES || i != 1 && i != 5 && i!=6 && i != 7) {
 				double base = attack.getValues().get(i) - centroide.get(i);
 				double potencia = Math.pow(base, 2);
 				module += potencia;
@@ -115,8 +121,8 @@ public class ManagerClusterRandom {
 	
 	public void saveClusters(int generacion) {
 		int total = getCountDataTotal();
-		ClustersGrapher.saveClusters(generacion, clusters, store, total);
-		ClustersGrapher.printClusters(clusters, store, total);
+		ClustersGrapher.saveClusters(generacion, clusters, store, total, inercias);
+		ClustersGrapher.printClusters(clusters, store, total, inercias);
 		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
 			store.get(i).clear();
 		}
@@ -135,6 +141,22 @@ public class ManagerClusterRandom {
 		clusters = null;
 		store = null;
 		ManagementFile.closeFile();
+	}
+	
+	public void restartInercia() {
+		inercias.clear();
+		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
+			inercias.put(i, 0D);
+		}
+	}
+	
+	public void printInercia() {
+		Double inercia = 0D;
+		for (int i = 0; i < Constants.COUNT_CLUSTERS; i++) {
+			inercia += inercias.get(i);
+		}
+		Double inerciaPromedio = inercia / Constants.COUNT_CLUSTERS;
+		System.out.println("La inercia promedio es: " + inerciaPromedio.longValue() + "\n");
 	}
 	
 }
