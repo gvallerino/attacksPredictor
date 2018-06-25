@@ -24,6 +24,13 @@ public class CruzaByImportancia extends Reproduction implements Cruzable {
 		return INSTANCE;
 	}
 
+	//@Override
+	public TerroristAttack cruzar2(TerroristAttack father, TerroristAttack mother) {
+		List<Integer> gen = new ArrayList<Integer>();
+		gen = (father.getFitness() > mother.getFitness()) ? father.getValues() : mother.getValues();
+		return this.cruzar(father, mother, gen);
+	}
+	
 	@Override
 	public TerroristAttack cruzar(TerroristAttack father, TerroristAttack mother) {
 		
@@ -68,7 +75,8 @@ public class CruzaByImportancia extends Reproduction implements Cruzable {
 //			return 1;
 //		}
 //		return 0;
-		if (fitnessFather + fitnessMother > 0) return 1;
+		if (fitnessFather + fitnessMother > 1) return 1;
+		if (fitnessFather + fitnessMother > 0) return (Constants.getRandom(0, 100) > 50 ? 1 : 0);
 		return 0;
 	}
 	
@@ -78,22 +86,22 @@ public class CruzaByImportancia extends Reproduction implements Cruzable {
 	
 	private Integer getGenAttack(AttackTypeEnum father, AttackTypeEnum mother) {
 		AttackTypeEnum attack = (father.isMoreImportant(mother) ? father : mother);
-		return attack.id;
+		return father.id;
 	}
 	
 	private Integer getGenTarget(TargetTypeEnum father, TargetTypeEnum mother) {
 		TargetTypeEnum target = (father.isMoreImportant(mother) ? father : mother);
-		return target.id;
+		return father.id;
 	}
 	
 	private Integer getGenWeapon(WeaponTypeEnum father, WeaponTypeEnum mother) {
 		WeaponTypeEnum weapon = (father.isMoreImportant(mother) ? father : mother);
-		return weapon.id;
+		return father.id;
 	}
 	
 	private Integer getGenRegion(RegionEnum father, RegionEnum mother) {
 		RegionEnum region = (father.isMoreImportant(mother) ? father : mother);
-		return region.id;
+		return father.id;
 	}
 	
 }
