@@ -13,8 +13,8 @@ public abstract class FitnessCalculator {
 	public static List<Integer> calculate(List<Integer> values) {
 		List<Integer> fitness = new ArrayList<Integer>();
 		
-		int fitnessYear = values.get(0);
-		//int fitnessYear = calculateYearFitness(values.get(0));
+		//int fitnessYear = values.get(0);
+		int fitnessYear = calculateYearFitness(values.get(0));
 		int fitnessRegion = 0;
 		int fitnessMultiple = values.get(2);
 		int fitnessSuccess = values.get(3);

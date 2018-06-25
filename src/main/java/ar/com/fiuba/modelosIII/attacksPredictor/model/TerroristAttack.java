@@ -10,7 +10,7 @@ import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TargetTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
-public class TerroristAttack {
+public class TerroristAttack implements Comparable<TerroristAttack> {
 
 	protected String id;
 	
@@ -240,6 +240,13 @@ public class TerroristAttack {
 		boolean amountKill = other.getAmountKill() == null || this.amountKill.equals(other.getAmountKill());
 		boolean amountWound = other.getAmountWound() == null || this.amountWound.equals(other.getAmountWound());
 		return id && year && region && multiple && success && suicide && attackType && targetType && weaponType && amountKill && amountWound;
+	}
+
+	@Override
+	public int compareTo(TerroristAttack other) {
+		if(this.fitness > other.getFitness()) return -1;
+		if(this.fitness < other.getFitness()) return 1;
+		return 0;
 	}
   
 }
