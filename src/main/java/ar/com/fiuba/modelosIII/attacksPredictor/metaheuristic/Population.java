@@ -31,6 +31,9 @@ public class Population {
 		}
 		
 		//Population random
+		if (dataSetFiltered == null || dataSetFiltered.isEmpty()) {
+			return dataSetFiltered;
+		}
 		Double limitSup = dataSetFiltered.size() * Constants.POPULATION_RANDOM_MAX;
 		Double limitInf = dataSetFiltered.size() * Constants.POPULATION_RANDOM_MIN;
 		

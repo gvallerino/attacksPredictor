@@ -1,14 +1,17 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.evolution;
 
+import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.evolution.MutationEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.mutation.Mutation;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Factory;
 import junit.framework.Assert;
 
 public class MutationTest {
@@ -16,11 +19,16 @@ public class MutationTest {
 	private TerroristAttacksDataSet data = TerroristAttacksDataSet.getInstance();
 	private Mutation mutationValue = MutationEnum.MUTACION_POR_VALOR.getMutation();
 	private Mutation mutationBinary = MutationEnum.MUTACION_BINARIA.getMutation();
+	
+	@Before
+	public void setup() {
+		Factory.makeEnviorement();
+	}
 
 	@Test
 	public void testCountMutateValueShouldBeOne() {
 		TerroristAttack attack = data.getById("1");
-		List<Integer> beforeValues = attack.getValues();
+		List<Integer> beforeValues = new ArrayList<Integer>(attack.getValues());
 		TerroristAttack attackMutated = mutationValue.mutate(attack);
 		List<Integer> afterValues = attackMutated.getValues();
 		

@@ -12,6 +12,7 @@ public class Constants {
 	
 	public static int COUNT_CLUSTERS;
 	public static int COUNT_GENERATIONS;
+	public static int COUNT_GENERATIONS_MAX = 10;
 	public static double POPULATION_RANDOM_MAX;
 	public static double POPULATION_RANDOM_MIN;
 	public static double POPULATION_EXACT; // 34840D
@@ -94,10 +95,10 @@ public class Constants {
 					doubles.add(new Double(value));
 				}
 			} else {
-				System.out.println("ERROR | Ha ocurrido un error de tamaño");
+				Logger.printError("Ha ocurrido un error de tamño de listas.");
 			}
 		} else {
-			System.out.println("ERROR | No hay datos en los valores");
+			Logger.printError("No hay datos en los valores de la lista");
 		}
 		return doubles;
 	}

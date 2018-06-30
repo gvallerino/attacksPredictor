@@ -13,6 +13,7 @@ import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Factory;
 import junit.framework.Assert;
 
 public class DataSetTest {
@@ -26,6 +27,7 @@ public class DataSetTest {
 	
 	@Before
 	public void setup() {
+		Factory.makeEnviorement();
 		filter = new TerroristAttack();
 		filter1 = new TerroristAttack();
 		filter2 = new TerroristAttack();

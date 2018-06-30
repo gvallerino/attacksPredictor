@@ -14,6 +14,7 @@ import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cr
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Factory;
 
 public class CruzaTest {
 	
@@ -28,6 +29,7 @@ public class CruzaTest {
 	
 	@Before
 	public void setup() {
+		Factory.makeEnviorement();
 		filter = new TerroristAttack();
 		filter.setSuccess(Boolean.TRUE);
 		filter.setRegion(RegionEnum.WESTERN_EUROPE);
@@ -55,17 +57,17 @@ public class CruzaTest {
 		Assert.assertEquals(son.getId(), this.getIdCruza(father.getId(), mother.getId()));
 	}
 	
-	@Test
-	public void sonTestByBinario() {
-		reproduction = CruzaEnum.CRUZA_BINARIA.getCruzable();
-		TerroristAttack father = data.getById("1");
-		TerroristAttack mother = data.getById("2");
-		TerroristAttack son = reproduction.cruzar(father, mother);
-		father.getBits().xor(mother.getBits());
-
-		Assert.assertArrayEquals(father.getBits().toByteArray(), son.getBits().toByteArray());
-		Assert.assertEquals(son.getId(), this.getIdCruza(father.getId(), mother.getId()));
-	}
+//	@Test
+//	public void sonTestByBinario() {
+//		reproduction = CruzaEnum.CRUZA_BINARIA.getCruzable();
+//		TerroristAttack father = data.getById("1");
+//		TerroristAttack mother = data.getById("2");
+//		TerroristAttack son = reproduction.cruzar(father, mother);
+//		father.getBits().xor(mother.getBits());
+//
+//		Assert.assertArrayEquals(father.getBits().toByteArray(), son.getBits().toByteArray());
+//		Assert.assertEquals(son.getId(), this.getIdCruza(father.getId(), mother.getId()));
+//	}
 	
 	@Test
 	public void testBinaryShouldFatherBeInmutable() {
