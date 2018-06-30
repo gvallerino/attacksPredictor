@@ -2,15 +2,22 @@ package ar.com.fiuba.modelosIII.attacksPredictor.evolution;
 
 import java.util.BitSet;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.RegionEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Factory;
 import junit.framework.Assert;
 
 public class DecodeToIntegerTest {
+	
+	@Before
+	public void setup() {
+		Factory.makeEnviorement();
+	}
 
 	@Test
 	public void testCodeBinaryToYearShouldCorrectly() {

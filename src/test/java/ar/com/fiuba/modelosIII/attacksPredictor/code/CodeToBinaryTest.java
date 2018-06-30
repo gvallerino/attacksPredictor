@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.AttackTypeEnum;
@@ -12,9 +13,15 @@ import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.TargetTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.model.WeaponTypeEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Factory;
 import junit.framework.Assert;
 
 public class CodeToBinaryTest {
+	
+	@Before
+	public void setup() {
+		Factory.makeEnviorement();
+	}
 	
 	@Test
 	public void testTerroristAttackBinaryYearWithRest() {
