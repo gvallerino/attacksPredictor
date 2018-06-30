@@ -62,12 +62,12 @@ public abstract class GeneticAlgorithm {
 	protected static void printHeader(String type, int sizePoblacion) {
 		Logger.printHeader("comenzando algoritmo genético "+ type);
 		Logger.printEnter();
-		Logger.print("Tamaño de generaciones: " + sizePoblacion + " ataques terroristas.");
+		Logger.print("Tamaño de la población: " + sizePoblacion + " ataques terroristas.");
 		Logger.printEnter();
 	}
 	
 	protected static void printGeneration(int generacion) {
-		Logger.print("Procesando Generacion: " + (generacion + 1) + " => ");
+		Logger.print("Procesando Generación: " + (generacion + 1) + " => ");
 	}
 	
 }

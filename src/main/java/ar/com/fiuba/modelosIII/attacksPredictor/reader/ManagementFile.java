@@ -69,8 +69,6 @@ public class ManagementFile {
 						values.add(value);
 					}
 					TerroristAttack terroristAttack = new TerroristAttack(key, values);
-					//System.out.println("Guardando Ataque terrorista " + key);
-//					store.save(key, terroristAttack);
 					TerroristAttacksDataSet.save(key, terroristAttack);
 				}
 				id++;
@@ -82,7 +80,7 @@ public class ManagementFile {
             e.printStackTrace();
         }
 		time_end = System.currentTimeMillis();
-		Logger.print("Ha finalizado el proceso de carga de datos en "+ ( time_end - time_start ) / 1000.0 +" segundos \n");
+		Logger.print("Ha finalizado el proceso de carga de datos en "+ ( time_end - time_start ) / 1000.0 +" segundos. \n");
 	}
 	
 	public static void loadConfigurations() {
@@ -102,7 +100,7 @@ public class ManagementFile {
 			buffer.close();
 			file.close();
 		} catch (Exception e) {
-			System.out.println("Error | Se produjo un error procesando el archivo properties " + e.getMessage());
+			Logger.printError("Se produjo un error procesando el archivo properties: " + e.getMessage());
 		}
 	}
 	
@@ -111,7 +109,7 @@ public class ManagementFile {
 			loadWriter();
 			writeLine(numberCluster, data);
 		} catch (Exception e) {
-			System.out.println("ERROR | Se produjo un error almacenando el csv" + e.getMessage());
+			Logger.printError("Se produjo un error almacenando el csv: " + e.getMessage());
 		} 
 	}
 	
@@ -120,7 +118,7 @@ public class ManagementFile {
 			loadWriter();
 			writer.append(header);
 		} catch (Exception e) {
-			System.out.println("ERROR | Se produjo un error almacenando el csv" + e.getMessage());
+			Logger.printError("Se produjo un error almacenando el csv: " + e.getMessage());
 		} 
 	}
 	
@@ -132,7 +130,6 @@ public class ManagementFile {
     }
 	
 	private static String print(List<Double> lista) {
-		//System.out.print(" | ");
 		StringBuilder sb = new StringBuilder(SEPARATOR);
 		for (Double value : lista) {
 			String valueSingle = String.valueOf(value);
@@ -151,7 +148,7 @@ public class ManagementFile {
 			try {
 				writer = new FileWriter(csvFile);
 			} catch (IOException e) {
-				System.out.println("ERROR | Se produjo un error al abrir el csv" + e.getMessage());
+				Logger.printError("Se produjo un error al abrir el csv: " + e.getMessage());
 			}
 		}
 	}
@@ -160,7 +157,7 @@ public class ManagementFile {
 		try {
 			writer.close();
 		} catch (IOException e) {
-			System.out.println("ERROR | Se produjo un error al cerrar el csv" + e.getMessage());
+			Logger.printError("Se produjo un error al cerrar el csv: " + e.getMessage());
 		}
 	}
 	
@@ -174,7 +171,7 @@ public class ManagementFile {
 		String hours =  String.format("%02d",cal.get(Calendar.HOUR_OF_DAY));
 		String minutes =  String.format("%02d",cal.get(Calendar.MINUTE));
 		String seconds =  String.format("%02d",cal.get(Calendar.SECOND));
-		return year + month + day + "_" + hours + ":" + minutes + ":" + seconds;
+		return year + month + day + "_" + hours + "." + minutes + "." + seconds;
 	}
 	
 }

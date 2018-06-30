@@ -5,6 +5,7 @@ import java.util.*;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.ClustersGrapher;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Logger;
 import ar.com.fiuba.modelosIII.attacksPredictor.reader.ManagementFile;
 
 public class ManagerClusterRandom {
@@ -112,7 +113,7 @@ public class ManagerClusterRandom {
 			try {
 				nuevaLista.add(listaDeSuma.get(i) + listaAsumar.get(i));
 			} catch (Exception e) {
-				System.out.println("error");
+				Logger.printError("Se produjo un error al sumar las listas");
 			}
 		}
 		return nuevaLista;
@@ -156,7 +157,9 @@ public class ManagerClusterRandom {
 			inercia += inercias.get(i);
 		}
 		Double inerciaPromedio = inercia / Constants.COUNT_CLUSTERS;
-		System.out.println("La inercia promedio es: " + inerciaPromedio.longValue() + "\n");
+		
+		Logger.print("La inercia promedio es: " + inerciaPromedio.longValue());
+		Logger.printEnter();
 	}
 	
 }

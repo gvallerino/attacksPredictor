@@ -27,7 +27,6 @@ public enum RegionEnum {
 	}
 	
 	public static RegionEnum getById(int id) {
-		//System.out.println(id);
 		if (id >= RegionEnum.values().length) {
 			return RegionEnum.OTHER;
 		}

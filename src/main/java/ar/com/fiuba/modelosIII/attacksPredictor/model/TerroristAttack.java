@@ -82,22 +82,22 @@ public class TerroristAttack implements Comparable<TerroristAttack> {
 		}
 	}
 	
-	public void print() {
-		System.out.print("TA: " + this.getId() + " -> ");
-		System.out.print("[ ");
-		for (Integer value : values) {
-			System.out.print(value + " ");
-		}
-		System.out.println("]");
-	}
-	
-	public void printBinary() {
-		System.out.print("[");
-		for (int i = 0; i < valuesBinary.size(); i++) {
-			System.out.print(valuesBinary.get(i) + " ");
-		}
-		System.out.println("]");
-	}
+//	public void print() {
+//		System.out.print("TA: " + this.getId() + " -> ");
+//		System.out.print("[ ");
+//		for (Integer value : values) {
+//			System.out.print(value + " ");
+//		}
+//		System.out.println("]");
+//	}
+//	
+//	public void printBinary() {
+//		System.out.print("[");
+//		for (int i = 0; i < valuesBinary.size(); i++) {
+//			System.out.print(valuesBinary.get(i) + " ");
+//		}
+//		System.out.println("]");
+//	}
 	
 	
 	

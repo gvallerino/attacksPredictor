@@ -95,10 +95,10 @@ public class Constants {
 					doubles.add(new Double(value));
 				}
 			} else {
-				System.out.println("ERROR | Ha ocurrido un error de tamaño");
+				Logger.printError("Ha ocurrido un error de tamño de listas.");
 			}
 		} else {
-			System.out.println("ERROR | No hay datos en los valores");
+			Logger.printError("No hay datos en los valores de la lista");
 		}
 		return doubles;
 	}

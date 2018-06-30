@@ -35,4 +35,9 @@ public abstract class Logger {
 	public static void printEnter() {
 		System.out.print("\n");
 	}
+	
+	public static void printError(String text) {
+		text = "ERROR | " + text;
+		print(text);
+	}
 }
