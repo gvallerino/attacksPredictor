@@ -23,6 +23,7 @@ import ar.com.fiuba.modelosIII.attacksPredictor.enums.data.ConfigurationsDataSet
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttacksDataSet;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Logger;
 
 public class ManagementFile {
 	
@@ -41,12 +42,13 @@ public class ManagementFile {
 	
 	public static void read() {
 		
-		System.out.println("Comenzando el proceso de carga de datos...");
+		Logger.printHeader("procesando carga de datos");
+		Logger.print("Comenzando la carga de datos...");
+		
 		long time_start, time_end;
 		time_start = System.currentTimeMillis();
 		
 		try {
-			
 			FileInputStream excelFile = new FileInputStream(new File(PATH + "input/" + FILE_NAME));
 			workbook = new XSSFWorkbook(excelFile);
 			Sheet datatypeSheet = workbook.getSheetAt(0);
@@ -80,10 +82,11 @@ public class ManagementFile {
             e.printStackTrace();
         }
 		time_end = System.currentTimeMillis();
-		System.out.println("Ha finalizado el proceso de carga de datos en "+ ( time_end - time_start ) / 1000.0 +" segundos");
+		Logger.print("Ha finalizado el proceso de carga de datos en "+ ( time_end - time_start ) / 1000.0 +" segundos \n");
 	}
 	
 	public static void loadConfigurations() {
+		
 		try {
 			FileReader file = new FileReader(new File(PATH + "properties/" + FILE_PROPERTIES));
 			BufferedReader buffer = new BufferedReader(file);

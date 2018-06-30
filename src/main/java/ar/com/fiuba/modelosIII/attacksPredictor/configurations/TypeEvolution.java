@@ -7,20 +7,21 @@ import ar.com.fiuba.modelosIII.attacksPredictor.enums.evolution.CruzaEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.enums.evolution.MutationEnum;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cruzable;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.mutation.Mutation;
+import ar.com.fiuba.modelosIII.attacksPredictor.others.Logger;
 
 public class TypeEvolution {
 
 	public static Cruzable getCruza() {
 		int id = getIdByProperty("cruza");
 		CruzaEnum cruzaEnum = CruzaEnum.getById(id);
-		System.out.println(cruzaEnum.getDescription() + " cargada con éxito.");
+		Logger.print(cruzaEnum.getDescription() + " cargada con éxito.");
 		return cruzaEnum.getCruzable();
 	}
 	
 	public static Mutation getMutation() {
 		int id = getIdByProperty("mutacion");
 		MutationEnum mutationEnum = MutationEnum.getById(id);
-		System.out.println(mutationEnum.getDescription() + " cargada con éxito.");
+		Logger.print(mutationEnum.getDescription() + " cargada con éxito.");
 		return mutationEnum.getMutation();
 	}
 	

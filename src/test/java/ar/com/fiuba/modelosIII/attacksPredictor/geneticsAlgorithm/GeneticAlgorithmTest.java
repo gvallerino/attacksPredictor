@@ -2,12 +2,12 @@ package ar.com.fiuba.modelosIII.attacksPredictor.geneticsAlgorithm;
 
 import org.junit.Test;
 
-import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.GeneticAlgorithm;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.GeneticAlgorithmRandom;
 
 public class GeneticAlgorithmTest {
 
 	@Test
 	public void geneticAlgorithmTest() {
-		GeneticAlgorithm.execute();
+		GeneticAlgorithmRandom.execute();
 	}
 }
