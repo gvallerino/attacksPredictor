@@ -13,7 +13,6 @@ public class GeneticAlgorithmElite extends GeneticAlgorithm {
 		
 		loadConfigurations();
 		loadPopulation();
-		Collections.sort(poblacion);
 		
 		loadManagerCluster();
 		loadCountGenerations();
@@ -22,6 +21,7 @@ public class GeneticAlgorithmElite extends GeneticAlgorithm {
 		
 		for (int generacion = 0; generacion < cantidadGeneraciones; generacion++) {
 			
+			Collections.sort(poblacion);
 			List<TerroristAttack> proximaPoblacion = new ArrayList<TerroristAttack>();
 			printGeneration(generacion);
 			managerCluster.restartInercia();

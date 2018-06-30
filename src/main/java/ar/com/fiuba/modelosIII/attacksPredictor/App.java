@@ -9,7 +9,7 @@ public class App
     public static void main (String[] args)
     {
     		Factory.makeEnviorement();
-    		GeneticAlgorithmRandom.execute();
-//    		GeneticAlgorithmElite.execute();
+//    		GeneticAlgorithmRandom.execute();
+    		GeneticAlgorithmElite.execute();
     }
 }
