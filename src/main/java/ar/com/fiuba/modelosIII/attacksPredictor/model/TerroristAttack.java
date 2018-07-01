@@ -28,8 +28,8 @@ public class TerroristAttack implements Comparable<TerroristAttack> {
 	protected List<Integer> values;
 	private BitSet valuesBinary;
 	
-	private List<Integer> fitnessValues;
-	private int fitness;
+	private List<Double> fitnessValues;
+	private double fitness;
 	
 	//me quede en que tengo que elegir que, para cada atributo, que es lo mejor para el hijo. Por ejemplo, el año pondria un random. no me importa
 	//para los enums tengo que agregarle prioridad. para la cantidad de heridos y muertos elegiria el mayor (es mejor ataque).
@@ -37,7 +37,7 @@ public class TerroristAttack implements Comparable<TerroristAttack> {
 	public TerroristAttack() {
 		this.values = new ArrayList<Integer>();
 		this.valuesBinary = new BitSet(Constants.COUNT_DATA_TYPE_BINARY());
-		this.fitnessValues = new ArrayList<Integer>();
+		this.fitnessValues = new ArrayList<Double>();
 	}
 	
 	public TerroristAttack (String id, BitSet bits) {
@@ -77,7 +77,7 @@ public class TerroristAttack implements Comparable<TerroristAttack> {
 	private void processFitness() {
 		this.fitnessValues = FitnessCalculator.calculate(this.values);
 		this.fitness = 0;
-		for (Integer fit : fitnessValues) {
+		for (Double fit : fitnessValues) {
 			fitness += fit;
 		}
 	}
@@ -101,7 +101,7 @@ public class TerroristAttack implements Comparable<TerroristAttack> {
 	
 	
 	
-	public int getFitnessByProperty(int propertyPosition) {
+	public double getFitnessByProperty(int propertyPosition) {
 		return this.fitnessValues.get(propertyPosition);
 	}
 	
@@ -206,7 +206,7 @@ public class TerroristAttack implements Comparable<TerroristAttack> {
 		CodeBinary.codeAmountWound(this.valuesBinary, amountWound);
 	}
 	
-	public int getFitness() {
+	public double getFitness() {
 		return this.fitness;
 	}
 	

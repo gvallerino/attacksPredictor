@@ -1,14 +1,14 @@
 package ar.com.fiuba.modelosIII.attacksPredictor.enums.evolution;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.Cruzable;
-import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.CruzaByImportancia;
+import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.CruzaByAptitud;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.CruzaBySegmento;
 import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.cruza.CruzaBinaria;
 
 public enum CruzaEnum {
 	
 	CRUZA_BINARIA (0, "Cruza Binaria", CruzaBinaria.getInstance()),
-	CRUZA_IMPORTANCIA (1, "Cruza por Importancia", CruzaByImportancia.getInstance()),
+	CRUZA_APTITUD (1, "Cruza por Aptitud", CruzaByAptitud.getInstance()),
 	CRUZA_SEGMENTO (2, "Cruza por Segmento", CruzaBySegmento.getInstance());
 	
 	private int id;

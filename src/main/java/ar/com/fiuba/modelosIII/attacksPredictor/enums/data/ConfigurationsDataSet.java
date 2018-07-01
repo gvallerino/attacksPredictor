@@ -69,6 +69,7 @@ public class ConfigurationsDataSet {
 				visiteKey = true;
 			}
 		}
+		if (keyReturned.length() == 0) return null;
 		return keyReturned.toString().substring(1);
 	}
 }

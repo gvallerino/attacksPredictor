@@ -11,15 +11,15 @@ import ar.com.fiuba.modelosIII.attacksPredictor.metaheuristic.evolution.Reproduc
 import ar.com.fiuba.modelosIII.attacksPredictor.model.TerroristAttack;
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
-public class CruzaByImportancia extends Reproduction implements Cruzable {
+public class CruzaByAptitud extends Reproduction implements Cruzable {
 	
-	private static CruzaByImportancia INSTANCE = null;
+	private static CruzaByAptitud INSTANCE = null;
 		
-	private CruzaByImportancia() {}
+	private CruzaByAptitud() {}
 	
-	public static CruzaByImportancia getInstance() {
+	public static CruzaByAptitud getInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new CruzaByImportancia();
+			INSTANCE = new CruzaByAptitud();
 		}
 		return INSTANCE;
 	}
@@ -37,8 +37,8 @@ public class CruzaByImportancia extends Reproduction implements Cruzable {
 		List<Integer> gen = new ArrayList<Integer>();
 		
 		for (int i = 0; i < Constants.COUNT_DATA_TYPE; i++) {
-			int fitnessFather = father.getFitnessByProperty(i);
-			int fitnessMother = mother.getFitnessByProperty(i);
+			double fitnessFather = father.getFitnessByProperty(i);
+			double fitnessMother = mother.getFitnessByProperty(i);
 			Integer genSon = 0;
 			
 			switch (i) {
@@ -69,7 +69,7 @@ public class CruzaByImportancia extends Reproduction implements Cruzable {
 //		return (fitnessFather > fitnessMother ? fitnessFather : fitnessMother);
 //	}
 
-	private Integer getGenBoolean(int fitnessFather, int fitnessMother) {
+	private Integer getGenBoolean(double fitnessFather, double fitnessMother) {
 //		int fitnessSum = fitnessFather + fitnessMother;
 //		if (fitnessSum == 1) {
 //			return 1;

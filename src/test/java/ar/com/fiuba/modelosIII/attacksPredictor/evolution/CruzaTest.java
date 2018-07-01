@@ -48,7 +48,7 @@ public class CruzaTest {
 	
 	@Test
 	public void sonTestByImportancia() {
-		reproduction = CruzaEnum.CRUZA_IMPORTANCIA.getCruzable();
+		reproduction = CruzaEnum.CRUZA_APTITUD.getCruzable();
 		TerroristAttack father = data.getById("1");
 		TerroristAttack mother = data.getById("2");
 		TerroristAttack son = reproduction.cruzar(father, mother);

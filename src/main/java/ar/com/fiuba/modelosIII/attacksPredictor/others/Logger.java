@@ -6,13 +6,14 @@ public abstract class Logger {
 
 	public static void printHeader(String header) {
 		try {
-			int resto = header.length() % 2 == 0 ? 0 : 1;
-			int diff = ((longMaxHeader - header.length()) + resto) / 2;
+			int diff = longMaxHeader - header.length();
+			int resto = diff % 2 == 0 ? 0 : 1;
+			int diffTotal = diff / 2;
 			StringBuilder headerSB = new StringBuilder();
 			headerSB.append("\n -----  ");
-			headerSB.append(getCharsWhite(diff));
+			headerSB.append(getCharsWhite(diffTotal+resto));
 			headerSB.append(header.toUpperCase());
-			headerSB.append(getCharsWhite(diff));
+			headerSB.append(getCharsWhite(diffTotal));
 			headerSB.append("  -----\n");
 			System.out.println(headerSB.toString());
 		} catch (Exception e) {

@@ -2,41 +2,42 @@ package ar.com.fiuba.modelosIII.attacksPredictor.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import ar.com.fiuba.modelosIII.attacksPredictor.others.Constants;
 
 public abstract class FitnessCalculator {
 
-	//TODO: Faltaria agregar importancia de los enums (o no)
-	//TODO: Verificar nulls o numeros negativos
-	
-	public static List<Integer> calculate(List<Integer> values) {
-		List<Integer> fitness = new ArrayList<Integer>();
+	public static List<Double> calculate(List<Integer> values) {
+		List<Double> fitness = new ArrayList<Double>();
+		Map<String, String> configurations = FitnessConfiguration.getConfigurations();
 		
-		//int fitnessYear = values.get(0);
-		int fitnessYear = calculateYearFitness(values.get(0));
-		int fitnessRegion = 0;
-		int fitnessMultiple = values.get(2);
-		int fitnessSuccess = values.get(3);
-		int fitnessSuicide = values.get(4);
-		int fitnessAttack = 0;
-		int fitnessTarget = 0;
-		int fitnessWeapon = 0;
-		int fitnessKill = values.get(8);
-		//int fitnessKill = calculateMounts(values.get(8), fitnessMultiple, fitnessSuccess, fitnessSuicide);
-		int fitnessWound = values.get(9);
-		//int fitnessWound = calculateMounts(values.get(9), fitnessMultiple, fitnessSuccess, fitnessSuicide);
+		double fitnessYear = calculateYearFitness(values.get(0)) * Double.valueOf(configurations.get("year"));
+		double fitnessRegion = 1 *  Double.valueOf(configurations.get("region"));
+		double fitnessMultiple = values.get(2) * Double.valueOf(configurations.get("multiple"));
+		double fitnessSuccess = values.get(3) * Double.valueOf(configurations.get("success"));
+		double fitnessSuicide = values.get(4) * Double.valueOf(configurations.get("suicide"));
+		double fitnessAttack = 1 * Double.valueOf(configurations.get("attack"));
+		double fitnessTarget = 1 * Double.valueOf(configurations.get("target"));
+		double fitnessWeapon = 1 * Double.valueOf(configurations.get("weapon"));
+		double fitnessKill = values.get(8) * Double.valueOf(configurations.get("kills"));
+		double fitnessWound = values.get(9) * Double.valueOf(configurations.get("wound"));
 		
-		fitness.add((int) Math.pow(fitnessYear,2));
-		fitness.add((int) Math.pow(fitnessRegion,2));
-		fitness.add((int) Math.pow(fitnessMultiple,2));
-		fitness.add((int) Math.pow(fitnessSuccess,2));
-		fitness.add((int) Math.pow(fitnessSuicide,2));
-		fitness.add((int) Math.pow(fitnessAttack,2));
-		fitness.add((int) Math.pow(fitnessTarget,2));
-		fitness.add((int) Math.pow(fitnessWeapon,2));
-		fitness.add((int) Math.pow(fitnessKill,2));
-		fitness.add((int) Math.pow(fitnessWound,2));
+		int potencia = Integer.valueOf(configurations.get("potencia"));
+
+		//double fitnessKill = calculateMounts(values.get(8), fitnessMultiple, fitnessSuccess, fitnessSuicide);
+		//double fitnessWound = calculateMounts(values.get(9), fitnessMultiple, fitnessSuccess, fitnessSuicide);
+		
+		fitness.add(Math.pow(fitnessYear,potencia));
+		fitness.add(Math.pow(fitnessRegion,potencia));
+		fitness.add(Math.pow(fitnessMultiple,potencia));
+		fitness.add(Math.pow(fitnessSuccess,potencia));
+		fitness.add(Math.pow(fitnessSuicide,potencia));
+		fitness.add(Math.pow(fitnessAttack,potencia));
+		fitness.add(Math.pow(fitnessTarget,potencia));
+		fitness.add(Math.pow(fitnessWeapon,potencia));
+		fitness.add(Math.pow(fitnessKill,potencia));
+		fitness.add(Math.pow(fitnessWound,potencia));
 		
 		return fitness;
 	}
@@ -45,10 +46,10 @@ public abstract class FitnessCalculator {
 		return (year - Constants.YEAR_MIN);
 	}
 	
-	private static int calculateMounts(int mount, int fitnessMultiple, int fitnessSuccess, int fitnessSuicide) {
-		return (mount * fitnessMultiple) + (mount * fitnessSuccess) + (mount * fitnessSuicide);
-	}
-	
+//	private static int calculateMounts(int mount, int fitnessMultiple, int fitnessSuccess, int fitnessSuicide) {
+//		return (mount * fitnessMultiple) + (mount * fitnessSuccess) + (mount * fitnessSuicide);
+//	}
+//	
 //	private static int calculateRegionFitness(int regionId) {
 //		return RegionEnum.getImportantById(regionId);
 //	}
