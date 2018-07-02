@@ -31,22 +31,6 @@ public class ManagerClusterRandom {
 		
 	}
 	
-//	private void loadClusters() {
-//		List<Integer> values = new ArrayList<Integer> ();
-//		values.add(2008);
-//		values.add(8);
-//		values.add(0);
-//		values.add(0);
-//		values.add(0);
-//		values.add(3);
-//		values.add(14);
-//		values.add(6);
-//		values.add(0);
-//		values.add(1);
-//		
-//		
-//	}
-	
 	public void put(TerroristAttack attack) {
 		double distance = calculateDistance(attack, clusters.get(0));
 		double minDistance = distance;

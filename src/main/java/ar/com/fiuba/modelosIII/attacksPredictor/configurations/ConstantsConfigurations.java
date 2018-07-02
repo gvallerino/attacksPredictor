@@ -13,7 +13,7 @@ public class ConstantsConfigurations {
 		Constants.COUNT_GENERATIONS = Integer.parseInt(values.get("generations"));
 		
 		Boolean useExact = Boolean.parseBoolean(values.get("exactPopulation.active"));
-		Boolean useRandom = Boolean.parseBoolean(values.get("randomPopulation.active"));
+		Boolean useRandom = Boolean.parseBoolean(values.get("partialPopulation.active"));
 		
 		if (useExact) {
 			Constants.POPULATION_EXACT = 0D;
@@ -23,8 +23,8 @@ public class ConstantsConfigurations {
 		
 		if (useRandom) {
 			Constants.POPULATION_EXACT = -1D;
-			Constants.POPULATION_RANDOM_MAX = Double.parseDouble(values.get("randomPopulation.rangeMax")) / 100D;
-			Constants.POPULATION_RANDOM_MIN = Double.parseDouble(values.get("randomPopulation.rangeMin")) / 100D;
+			Constants.POPULATION_RANDOM_MAX = Double.parseDouble(values.get("partialPopulation.rangeMax")) / 100D;
+			Constants.POPULATION_RANDOM_MIN = Double.parseDouble(values.get("partialPopulation.rangeMin")) / 100D;
 		}
 		
 		Constants.PORCENTAJE_MUTATION = Double.parseDouble(values.get("mutation.porcentaje"));
